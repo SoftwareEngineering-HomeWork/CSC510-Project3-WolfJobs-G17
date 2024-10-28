@@ -23,7 +23,7 @@ type FormValues = {
   address: string;
   role: string;
   skills: string;
-  phonenumber: string;
+  phonenumber: number;
   availability: string;
   gender: string;
   hours: string;

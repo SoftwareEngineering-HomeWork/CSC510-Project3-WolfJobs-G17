@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
       default: "",
     },
     phonenumber: {
-      type: String,
+      type: Number,
       default: "",
     },
     hours: {
