@@ -184,7 +184,7 @@ const ProfileEdit = ({ props }: { props: any }) => {
             />
             <TextField
               label="Phone number"
-              type="text"
+              type="number"
               {...register("phonenumber")}
               error={!!errors.phonenumber}
               helperText={errors.phonenumber?.message}
