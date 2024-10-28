@@ -567,7 +567,19 @@ module.exports.verifyOtp = async function (req, res) {
 
 module.exports.extractSkills = async (req, res) => {
   try {
+    const { description } = req.body;
+
+    if (!description && description.length() === 0) {
+      res.send(200).send({ message: "Invalid text!!" });
+    }
+
+    // Implementing skills extraction
+    const skills = [];
+
+    // Extracting skills
     
+
+    res.status(200).send({ skills });
   } catch {
     res.status(500).send({ message: "Internal server error!!" });
   }
