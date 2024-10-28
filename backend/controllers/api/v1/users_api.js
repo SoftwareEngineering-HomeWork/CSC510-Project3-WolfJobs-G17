@@ -565,4 +565,10 @@ module.exports.verifyOtp = async function (req, res) {
   }
 };
 
-
+module.exports.extractSkills = async (req, res) => {
+  try {
+    
+  } catch {
+    res.status(500).send({ message: "Internal server error!!" });
+  }
+}
