@@ -100,8 +100,16 @@ const LoginPage = () => {
               </Button>
             </Stack>
           </form>
-          <div className="mx-auto"></div>
-          <br />
+          <div className="flex justify-end mt-2">
+            <p
+              className="text-[#656565] cursor-pointer text-sm"
+              onClick={() => {
+                navigate("/forgot-password");
+              }}
+            >
+              Forgot Password?
+            </p>
+          </div>
           <div className="mv-1 border-t mx-16" />
           <div className="flex justify-center">
             <p className="-mt-3 bg-white px-3 text-[#CCCCCC]">OR</p>
