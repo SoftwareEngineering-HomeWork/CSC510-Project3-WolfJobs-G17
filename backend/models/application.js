@@ -27,7 +27,7 @@ const applicationSchema = new mongoose.Schema({
     default: "",
   },
   phonenumber: {
-    type: String,
+    type: Number,
     default: "",
   },
   managerid: {
