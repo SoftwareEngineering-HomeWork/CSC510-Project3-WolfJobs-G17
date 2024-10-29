@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { getFormBody } from "./apiUtils";
-import { loginURL, signupURL } from "../api/constants";
+import { loginURL, signupURL, forgotPasswordURL } from "../api/constants";
 
 export async function login(email: string, password: string, navigate: any) {
   const url = loginURL;
@@ -19,6 +19,26 @@ export async function login(email: string, password: string, navigate: any) {
         return;
       }
       toast.error("Login Failed");
+    });
+}
+
+export function sendForgotPasswordEmail(email: string, navigate: any) {
+  const url = forgotPasswordURL;
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: getFormBody({ email }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        toast.success("Password reset link sent to email");
+        navigate("/login");
+      } else {
+        toast.error("Failed to send password reset link");
+      }
     });
 }
 
