@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { sendForgotPasswordEmail } from "../../deprecateded/auth";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
