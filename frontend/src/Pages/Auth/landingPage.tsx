@@ -4,39 +4,40 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div className="flex justify-around items-center">
+    <div className="w-1/3">
     <div
-      className="absolute w-[523px] h-[96px] left-[62px] top-[269px] font-semibold text-[40px] leading-[48px] text-black"
+      className="font-semibold text-[40px] leading-[48px] text-black"
     >
       We understand that being a student can be{" "}
       <span style={{ color: "#FF5353" }}>challenging.</span>
     </div>
 
     <div
-      className="absolute w-[550px] h-[72px] left-[62px] top-[383px] font-normal text-[20px] leading-[24px] text-[#666666]"
+      className="font-normal text-[20px] leading-[24px] text-[#666666] my-4"
     >
       Join our dynamic team right here on campus. Earn, learn, and be part of
       the community that powers your daily essentials. Apply now and shape
       your campus experience!
     </div>
-
+    <div className="flex items-center gap-5 py-2">
     <button
       onClick={(e) => {
         e.preventDefault();
         navigate("/register");
       }}
       type="button"
-      className="absolute w-[223px] h-[54px] left-[62px] top-[501px] bg-[#FF5353] rounded-[10px] flex items-center justify-center"
+      className="flex-1 px-12 py-4 font-semibold text-[20px] leading-[24px] text-white bg-[#FF5353] rounded-[10px] flex items-center justify-center hover:bg-[#ff5366]"
     >
-      <p
-        className="font-semibold text-[20px] leading-[24px] text-white m-0"
-      >
+      {/* <p
+        className=""
+      > */}
         Sign Up
-      </p>
+      {/* </p> */}
     </button>
 
     <p
-      className="absolute w-[29px] h-[30px] left-[308px] top-[513px] font-poppins font-medium text-[20px] leading-[30px] text-center text-[#8C8D90]"
+      className="font-poppins font-medium text-[20px] leading-[30px] text-center text-[#8C8D90]"
     >
       OR
     </p>
@@ -47,25 +48,28 @@ const LandingPage = () => {
         navigate("/login");
       }}
       type="button"
-      className="box-border absolute w-[223px] h-[54px] left-[359px] top-[501px] bg-white border border-[#656565] rounded-[10px]"
+      className="flex-1 px-12 py-4 bg-white border border-[#656565] rounded-[10px] font-semibold text-[20px] leading-[24px] m-0 text-[#656565] hover:border-[#ff5353] hover:text-[#ff5353]"
     >
-      <p
-        className="font-semibold text-[20px] leading-[24px] m-0 text-[#656565]"
-      >
+      {/* <p
+        className=" hover:text-[#ff5353]"
+      > */}
         Login
-      </p>
+      {/* </p> */}
     </button>
-
-    <div
-      className="absolute w-[735px] h-[752px] left-[669px] top-[121px] mix-blend-multiply"
-    >
-      <img src="/images/landingpage_image1.png" alt="Landing Page Image" />
     </div>
+    </div>
+    <div className="flex justify-between items-center relative">
+    {/* <div
+      className="w-[735px] h-[752px] -top-16 -left-[560px] absolute -z-10"
+    >
+      <img className="w-full h-full object-cover" src="/images/landingpage_image1.png" alt="Landing Page Image" />
+    </div> */}
 
     <div
-      className="absolute w-[420px] h-[640px] left-[612px] top-[167px]"
+      className="w-[420px] h-[640px]"
     >
-      <img src="/images/landingpage_image2.png" alt="Landing Page Image" />
+      <img className="w-full h-full object-cover" src="/images/landingpage_image2.png" alt="Landing Page Image" />
+    </div>
     </div>
   </div>
   );
