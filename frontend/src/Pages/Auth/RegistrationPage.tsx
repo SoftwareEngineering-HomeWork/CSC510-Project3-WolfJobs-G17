@@ -57,8 +57,8 @@ const RegistrationPage = () => {
   return (
     <>
       <div className="mx-auto bg-slate-50 content flex flex-col justify-center items-center">
-        <div className=" p-4  border rounded bg-white">
-          <div className="text-xl justify-center text-black mb-4 ">
+        <div className="p-4 border rounded bg-white">
+          <div className="text-xl justify-center text-black mb-4">
             Create New Account
           </div>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -107,6 +107,10 @@ const RegistrationPage = () => {
                 type="password"
                 {...register("password", {
                   required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
                 })}
                 error={!!errors.password}
                 helperText={errors.password?.message}
@@ -125,7 +129,7 @@ const RegistrationPage = () => {
                 label="Confirm password"
                 type="password"
                 {...register("confirmPassword", {
-                  required: "Password is required",
+                  required: "Confirmation is required",
                   validate: (val: string) => {
                     if (watch("password") !== val) {
                       return "Passwords don't match";
@@ -150,6 +154,10 @@ const RegistrationPage = () => {
                 type="text"
                 {...register("skills", {
                   required: "Skills is required",
+                  maxLength: {
+                    value: 100, // Optional: Add a character limit
+                    message: "Skills must be less than 100 characters",
+                  },
                 })}
                 error={!!errors.skills}
                 helperText={errors.skills?.message}
@@ -181,12 +189,12 @@ const RegistrationPage = () => {
               </FormControl>
               {role === "Manager" && (
                 <FormControl>
-                  <InputLabel id="affiliation-id">Role</InputLabel>
+                  <InputLabel id="affiliation-id">Affiliation</InputLabel>
                   <Select
                     value={affilation}
                     labelId="affiliation-id"
-                    label="Role"
-                    id="role"
+                    label="Affiliation"
+                    id="affiliation"
                     onChange={(e: SelectChangeEvent) => {
                       setAffiliation(e.target.value);
                     }}
