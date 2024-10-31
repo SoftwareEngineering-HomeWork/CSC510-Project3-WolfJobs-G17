@@ -7,7 +7,7 @@
 [![Issues](https://img.shields.io/github/issues/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
 [![Issues Closed](https://img.shields.io/github/issues-closed/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
 ![last commit](https://img.shields.io/github/last-commit/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)
-![Lines of code](https://tokei.rs/b1/github/deepr41/wolfjobs)
+![Lines of code](https://tokei.rs/b1/github/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)
 [![Repo-size](https://img.shields.io/github/repo-size/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
 [![file_count](https://img.shields.io/github/directory-file-count/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
 [![language_count](https://img.shields.io/github/languages/count/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
