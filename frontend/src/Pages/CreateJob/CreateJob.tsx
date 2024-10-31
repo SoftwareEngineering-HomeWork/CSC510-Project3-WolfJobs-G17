@@ -12,6 +12,8 @@ import {
   TextField,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 type FormValues = {
   role: string;
@@ -21,6 +23,8 @@ type FormValues = {
   requiredSkills: string;
   description: string;
 };
+
+let description: string | null = null;
 
 const CreateJob = () => {
   const navigate = useNavigate();
@@ -38,13 +42,28 @@ const CreateJob = () => {
   });
 
   const onJobDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const description = e.target.value;
+    description = e.target.value;
 
     if (description && description.length > 0) {
       setShowExtractJobButton(true);
     } else {
       setShowExtractJobButton(false);
     }
+  }
+
+  const extractSkills = () => {
+    axios
+      .post("http://localhost:8000/api/v1/users/extractSkills", {
+        description
+      })
+      .then((res) => {
+        if (res.status !== 200) {
+          toast.error("Error fetching applications");
+          return;
+        } else {
+          setRequiredSkills(res.data.skills);
+        }
+      });
   }
 
   const { register, handleSubmit, formState } = form;
@@ -205,7 +224,9 @@ const CreateJob = () => {
                         textTransform: "none",
                         fontSize: "16px",
                         minWidth: "200px",
-                      }}>
+                      }}
+                      onClick={extractSkills}
+                    >
                       Extract & Autofill Skills
                     </Button>
                   )
