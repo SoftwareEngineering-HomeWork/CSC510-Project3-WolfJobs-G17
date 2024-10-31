@@ -569,17 +569,23 @@ module.exports.extractSkills = async (req, res) => {
   try {
     const { description } = req.body;
 
-    if (!description && description.length() === 0) {
-      res.send(200).send({ message: "Invalid text!!" });
+    if (!description || description.length() === 0) {
+      return res.send(200).send({ message: "Invalid text!!" });
     }
 
-    // Implementing skills extraction
+    // Extracting skills
     const skills = [];
 
-    // Extracting skills
-    
+    // Format skills
+    const formattedSkills = "";
+    for (let i = 0; i < skills.length; i++) {
+      formattedSkills += skills[i];
+      if (i != skills.length - 1) {
+        formattedSkills += ", ";
+      }
+    }
 
-    res.status(200).send({ skills });
+    res.status(200).send({ skills: formattedSkills });
   } catch {
     res.status(500).send({ message: "Internal server error!!" });
   }
