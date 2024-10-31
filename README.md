@@ -201,7 +201,7 @@ Your app is ready to be deployed!
 ## Iteration 3:
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/vineel31"><img src="https://avatars.githubusercontent.com/vineel31" width="100px;" alt=""/><br /><b>Sai Vineel Reddy</b></a></td>
+    <td align="center"><a href="https://github.com/vineel31"><img src="https://avatars.githubusercontent.com/vineel31" width="100px;" alt=""/><br /><b>Sai Vineel Reddy Marreddy</b></a></td>
     <td align="center"><a href="https://github.com/konetichandrakant"><img src="https://avatars.githubusercontent.com/konetichandrakant" width="100px;" alt=""/><br /><b>Chandrakanth Koneti</b></a><br /></td>
     <td align="center"><a href="https://github.com/UddharshV"><img src="https://avatars.githubusercontent.com/UddharshV" width="100px;" alt=""/><br /><b> Uddharsh Vasili</b></a><br /></td>
   </tr>
