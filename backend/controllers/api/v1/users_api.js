@@ -50,6 +50,43 @@ module.exports.createSession = async function (req, res) {
   }
 };
 
+
+module.exports.forgotPassword = async function (req, res) {
+  console.log(req);
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    // Create a reset token
+    const token = jwt.sign({ id: user._id }, jwtSecret);
+
+    // Create the reset link with the correct URL
+    const resetLink = `http://127.0.0.1:5173/reset-password?token=${token}`; // Updated with your frontend URL
+
+    // Send email with nodemailer
+    await transporter.sendMail({
+      from: 'smarred@ncsu.edu',
+      to: user.email,
+      subject: "Password Reset Request",
+      html: `<p>You requested a password reset. Click the link below to reset your password:</p>
+             <a href="${resetLink}">Reset Password</a>`,
+    });
+
+    return res.status(200).json({
+      message: "Password reset link has been sent to your email",
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
 module.exports.createHistory = async function (req, res) {
   try {
     let history = await History.create({
