@@ -26,7 +26,7 @@ const ResumeDropzone: React.FC<ResumeDropzoneProps> = ({ onFileUpload }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone(dropzoneOptions);
 
   return (
-    <div {...getRootProps()} className="flex items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer">
+    <div {...getRootProps()} className="flex items-center justify-center w-full h-64 border-2 border-[#FF5353] border-dashed rounded-lg cursor-pointer">
       <input {...getInputProps()} />
       {
         isDragActive ?

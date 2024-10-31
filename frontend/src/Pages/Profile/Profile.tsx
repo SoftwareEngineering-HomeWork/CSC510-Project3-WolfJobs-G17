@@ -25,15 +25,17 @@ const Profile = () => {
   return (
     <>
       <div
-        className="flex flex-col items-center justify-center bg-gray-50 "
+        className="flex flex-col items-center justify-center bg-gray-50 gap-2"
         style={{ height: "calc(100vh - 72px)" }}
       >
         <div
-          className="flex flex-col p-4 py-4 pb-20 m-6 mx-10 overflow-y-scroll bg-white rounded-xl"
+          className="flex flex-col p-4 py-4 pb-20 m-6 mx-10 overflow-y-auto bg-white rounded-xl gap-2"
           style={{ width: `${widthCard}` }}
         >
+          <div className="flex items-center justify-between">
+          <div className="my-2 text-2xl text-[#FF5353] font-semibold border-b">PROFILE</div>
           <div
-            className="relative h-0"
+            className="h-0"
             style={{ left: `calc(${widthCard} - 60px)`, top: "9px" }}
           >
             {editMode ? (
@@ -52,9 +54,10 @@ const Profile = () => {
               />
             )}
           </div>
-          <div className="my-2 text-xl border-b">Profile</div>
-          {!editMode && (
-            <>
+          </div>
+          <div>
+          {!editMode ? (
+            <div className="flex flex-col gap-2">
               <div>
                 <span className="text-lg">Name: </span>
                 <span className="text-gray-500">{name || " -- "}</span>
@@ -103,9 +106,9 @@ const Profile = () => {
                 <span className="text-lg">Hours: </span>
                 <span className="text-gray-500">{hours || " -- "}</span>
               </div> */}
-            </>
-          )}
-          {editMode && (
+            </div>
+          ):
+          (
             <ProfileEdit
               props={{
                 name,
@@ -121,6 +124,8 @@ const Profile = () => {
               }}
             />
           )}
+          </div>
+          
         </div>
       </div>
     </>
