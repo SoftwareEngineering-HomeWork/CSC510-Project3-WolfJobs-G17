@@ -12,7 +12,7 @@
 [![file_count](https://img.shields.io/github/directory-file-count/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
 [![language_count](https://img.shields.io/github/languages/count/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
 [![Downloads](https://img.shields.io/github/downloads/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/total)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
-[![Top Language](https://img.shields.io/github/languages/top/deepr41/wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
+[![Top Language](https://img.shields.io/github/languages/top/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
 [![DOI](https://zenodo.org/badge/429097663.svg)](https://zenodo.org/badge/latestdoi/429097663)
 [![Release](https://img.shields.io/github/v/release/deepr41/wolfjobs)](https://gitHub.com/deepr41/Wolfjobs)
 [![codecov](https://codecov.io/gh/deepr41/WolfJobs/graph/badge.svg?token=RH472ZM4PT)](https://codecov.io/gh/deepr41/WolfJobs)
