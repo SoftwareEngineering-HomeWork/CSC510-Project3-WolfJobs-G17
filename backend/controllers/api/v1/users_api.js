@@ -9,7 +9,7 @@ const AuthOtp = require("../../../models/authOtp");
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const crypto = require('crypto');
 
-//const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 const nodemailer = require("nodemailer");
 
@@ -28,23 +28,24 @@ module.exports.createSession = async function (req, res) {
   try {
     let user = await User.findOne({ email: req.body.email });
     res.set("Access-Control-Allow-Origin", "*");
-    if (!user || user.password != req.body.password) {
-      return res.json(422, {
+    console.log(bcrypt.compare(req.body.password, user.password));
+    if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
+      return res.status(422).json({
         message: "Invalid username or password",
       });
     }
     res.set("Access-Control-Allow-Origin", "*");
-    return res.json(200, {
+    return res.status(200).json({
       message: "Sign In Successful, here is your token, please keep it safe",
       data: {
         token: jwt.sign(user.toJSON(), "wolfjobs", { expiresIn: "100000" }),
-        user: user,
+        user,
       },
       success: true,
     });
   } catch (err) {
     console.log("*******", err);
-    return res.json(500, {
+    return res.status(500).json({
       message: "Internal Server Error",
     });
   }
@@ -91,8 +92,6 @@ module.exports.resetPassword = async function (req, res) {
   try {
     const { token, newPassword } = req.body;
 
-    console.log(token);
-
     if (!token) {
       return res.status(400).json({
         message: "Token is required",
@@ -101,7 +100,6 @@ module.exports.resetPassword = async function (req, res) {
 
     // Verify the token
     const decoded = jwt.verify(token, jwtSecret);
-    console.log(decoded);
     const user = await User.findById(decoded.id);
 
     if (!user) {
@@ -110,8 +108,9 @@ module.exports.resetPassword = async function (req, res) {
       });
     }
 
-    // Hash the new password (make sure to hash it properly before saving)
-    user.password = newPassword; // Replace this with proper hashing
+    // Hash the new password
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedNewPassword; // Replace with hashed password
     await user.save();
 
     return res.status(200).send({
@@ -155,64 +154,51 @@ module.exports.createHistory = async function (req, res) {
 
 module.exports.signUp = async function (req, res) {
   try {
-    if (req.body.password != req.body.confirm_password) {
-      return res.json(422, {
-        message: "Passwords donot match",
+    if (req.body.password !== req.body.confirm_password) {
+      return res.status(422).json({
+        message: "Passwords do not match",
       });
     }
 
-    User.findOne({ email: req.body.email }, function (err, user) {
-      if (user) {
-        res.set("Access-Control-Allow-Origin", "*");
-        return res.json(200, {
-          message: "Sign Up Successful, here is your token, plz keep it safe",
+    // Check if the user already exists
+    let user = await User.findOne({ email: req.body.email });
+    if (user) {
+      res.set("Access-Control-Allow-Origin", "*");
+      return res.status(200).json({
+        message: "Sign Up Successful, here is your token, please keep it safe",
+        data: {
+          token: jwt.sign(user.toJSON(), "wolfjobs", {
+            expiresIn: "100000",
+          }),
+          user,
+        },
+        success: true,
+      });
+    }
 
-          data: {
-            //user.JSON() part gets encrypted
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-            token: jwt.sign(user.toJSON(), "wolfjobs", {
-              expiresIn: "100000",
-            }),
-            user,
-          },
-          success: true,
-        });
-      }
+    // Create a new user
+    user = await User.create({
+      ...req.body,
+      password: hashedPassword, // Save the hashed password
+    });
 
-      if (!user) {
-        let user = User.create(req.body, function (err, user) {
-          if (err) {
-            return res.json(500, {
-              message: "Internal Server Error",
-            });
-          }
-
-          // let userr = User.findOne({ email: req.body.email });
-          res.set("Access-Control-Allow-Origin", "*");
-          return res.json(200, {
-            message: "Sign Up Successful, here is your token, plz keep it safe",
-
-            data: {
-              //user.JSON() part gets encrypted
-
-              token: jwt.sign(user.toJSON(), "wolfjobs", {
-                expiresIn: "100000",
-              }),
-              user,
-            },
-            success: true,
-          });
-        });
-      } else {
-        return res.json(500, {
-          message: "Internal Server Error",
-        });
-      }
+    res.set("Access-Control-Allow-Origin", "*");
+    return res.status(200).json({
+      message: "Sign Up Successful, here is your token, please keep it safe",
+      data: {
+        token: jwt.sign(user.toJSON(), "wolfjobs", {
+          expiresIn: "100000",
+        }),
+        user,
+      },
+      success: true,
     });
   } catch (err) {
     console.log(err);
-
-    return res.json(500, {
+    return res.status(500).json({
       message: "Internal Server Error",
     });
   }
