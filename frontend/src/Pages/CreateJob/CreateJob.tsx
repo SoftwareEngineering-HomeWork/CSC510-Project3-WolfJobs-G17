@@ -205,13 +205,7 @@ const CreateJob = () => {
                 <Button
                   type="submit"
                   variant="outlined"
-                  style={{
-                    color: "#FF5353",
-                    borderColor: "#FF5353",
-                    textTransform: "none",
-                    fontSize: "16px",
-                    minWidth: "200px",
-                  }}
+                  className="text-[#FF5353] border-[#FF5353] normal-case text-[16px] min-w-[200px]"
                 >
                   Proceed
                 </Button>

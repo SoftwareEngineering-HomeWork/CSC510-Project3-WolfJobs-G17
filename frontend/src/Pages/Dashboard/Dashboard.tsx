@@ -154,14 +154,7 @@ const Dashboard = () => {
               naviagte("/createjob");
             }}
             type="button"
-            className="text-white bg-red-400 "
-            style={{
-              background: "#FF5353",
-              borderRadius: "10px",
-              textTransform: "none",
-              fontSize: "18px",
-              width: "250px",
-            }}
+            className="text-white bg-red-400 bg-[#FF5353] rounded-[10px] normal-case text-[18px] w-[250px]"
             variant="contained"
           >
             Create Job +

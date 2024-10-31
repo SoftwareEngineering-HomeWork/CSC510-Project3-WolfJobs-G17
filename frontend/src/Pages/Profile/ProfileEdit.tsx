@@ -274,12 +274,7 @@ const ProfileEdit = ({ props }: { props: any }) => {
               type="submit"
               variant="contained"
               color="primary"
-              style={{
-                background: "#FF5353",
-                borderRadius: "10px",
-                textTransform: "none",
-                fontSize: "16px",
-              }}
+              className="bg-[#FF5353] rounded-[10px] normal-case text-[16px]"
             >
               Save Profile
             </Button>
