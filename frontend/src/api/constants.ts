@@ -4,3 +4,4 @@ export const loginURL = `${API_ROOT}/users/create-session`;
 export const signupURL = `${API_ROOT}/users/signup`;
 export const createJobURL = `${API_ROOT}/users/createjob`;
 export const forgotPasswordURL = `${API_ROOT}/users/forgot-password`;
+export const resetPasswordURL = `${API_ROOT}/users/reset-password`;
