@@ -579,7 +579,7 @@ const knownSkills = [
 
   // Data-Oriented Skills
   "Microsoft Excel", "Microsoft Word", "Microsoft PowerPoint", "Tableau",
-  "Apache Spark", "Hadoop", "R", "Data Visualization", "Data Analysis",
+  "Apache Spark", "Hadoop", "Data Visualization", "Data Analysis",
   "Google Analytics", "SQL Server", "Oracle", "Power BI", "Looker",
 
   // Non-Technical Skills
@@ -591,7 +591,12 @@ const knownSkills = [
 ];
 
 // Common English stop words to exclude from skill extraction
-const stopWords = ["the", "is", "and", "in", "for", "to", "with", "a", "an", "of", "on", "by", "that", "this", "are", "be"];
+const stopWords = ["the", "is", "and", "in", "for", "to", "with", "a", "an", "of", "on", "by", "that", "this", "are", "be", "should"];
+
+// Helper function to convert to camel case
+const toCamelCase = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
 
 module.exports.extractSkills = async (req, res) => {
   try {
@@ -605,7 +610,7 @@ module.exports.extractSkills = async (req, res) => {
     const tokenizer = new natural.WordTokenizer();
     const tokens = tokenizer.tokenize(description.toLowerCase());
 
-    // Filter out common stop words and duplicate terms
+    // Filter out common stop words and create a unique set of tokens
     const uniqueTerms = Array.from(new Set(tokens.filter(token => !stopWords.includes(token))));
 
     // Initialize an array to hold found skills
@@ -613,8 +618,15 @@ module.exports.extractSkills = async (req, res) => {
 
     // Check for known skills in the description
     knownSkills.forEach(skill => {
-      if (uniqueTerms.includes(skill.toLowerCase())) {
-        foundSkills.push(skill);
+      const lowerCaseSkill = skill.toLowerCase();
+
+      // Check for exact matches in the tokenized description
+      if (uniqueTerms.includes(lowerCaseSkill)) {
+        foundSkills.push(toCamelCase(skill)); // Convert to camel case
+      }
+      // Also check if the skill is present as a phrase
+      else if (description.toLowerCase().includes(lowerCaseSkill)) {
+        foundSkills.push(toCamelCase(skill)); // Convert to camel case
       }
     });
 
