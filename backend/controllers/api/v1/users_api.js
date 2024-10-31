@@ -609,4 +609,76 @@ module.exports.verifyOtp = async function (req, res) {
   }
 };
 
+const natural = require('natural');
 
+// Comprehensive list of known skills (technical, non-technical, and data-oriented)
+const knownSkills = [
+  // Technical Skills
+  "JavaScript", "Python", "Java", "SQL", "React", "Node.js",
+  "HTML", "CSS", "C#", "C++", "Go", "PHP", "Ruby", "Django",
+  "Flask", "Kubernetes", "Docker", "AWS", "Azure", "Git",
+  "Machine Learning", "Data Science", "DevOps", "Cybersecurity",
+  "Mobile Development", "Software Engineering", "API Development",
+  "GraphQL", "TypeScript", "Swift", "Objective-C",
+
+  // Data-Oriented Skills
+  "Microsoft Excel", "Microsoft Word", "Microsoft PowerPoint", "Tableau",
+  "Apache Spark", "Hadoop", "Data Visualization", "Data Analysis",
+  "Google Analytics", "SQL Server", "Oracle", "Power BI", "Looker",
+
+  // Non-Technical Skills
+  "Communication", "Teamwork", "Problem Solving", "Leadership",
+  "Project Management", "Time Management", "Critical Thinking",
+  "Creativity", "Adaptability", "Interpersonal Skills", "Conflict Resolution",
+  "Negotiation", "Customer Service", "Analytical Skills", "Presentation Skills",
+  "Research", "Collaboration", "Emotional Intelligence"
+];
+
+// Common English stop words to exclude from skill extraction
+const stopWords = ["the", "is", "and", "in", "for", "to", "with", "a", "an", "of", "on", "by", "that", "this", "are", "be", "should"];
+
+// Helper function to convert to camel case
+const toCamelCase = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
+
+module.exports.extractSkills = async (req, res) => {
+  try {
+    const { description } = req.body;
+
+    if (!description || description.length === 0) {
+      return res.status(400).send({ message: "Invalid text!!" });
+    }
+
+    // Tokenize the description
+    const tokenizer = new natural.WordTokenizer();
+    const tokens = tokenizer.tokenize(description.toLowerCase());
+
+    // Filter out common stop words and create a unique set of tokens
+    const uniqueTerms = Array.from(new Set(tokens.filter(token => !stopWords.includes(token))));
+
+    // Initialize an array to hold found skills
+    const foundSkills = [];
+
+    // Check for known skills in the description
+    knownSkills.forEach(skill => {
+      const lowerCaseSkill = skill.toLowerCase();
+
+      // Check for exact matches in the tokenized description
+      if (uniqueTerms.includes(lowerCaseSkill)) {
+        foundSkills.push(toCamelCase(skill)); // Convert to camel case
+      }
+      // Also check if the skill is present as a phrase
+      else if (description.toLowerCase().includes(lowerCaseSkill)) {
+        foundSkills.push(toCamelCase(skill)); // Convert to camel case
+      }
+    });
+
+    // Format and send response
+    const formattedSkills = foundSkills.join(", ");
+    res.status(200).send({ skills: formattedSkills });
+  } catch (error) {
+    console.error("Error extracting skills:", error);
+    res.status(500).send({ message: "Internal server error!!" });
+  }
+};
