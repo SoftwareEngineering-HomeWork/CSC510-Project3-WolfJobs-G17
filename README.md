@@ -4,7 +4,7 @@
 [![npm-build](https://github.com/deepr41/WolfJobs/actions/workflows/build-checker.yml/badge.svg)](https://github.com/deepr41/WolfJobs/actions/workflows/build-checker.yml)
 [![npm-build](https://github.com/deepr41/WolfJobs/actions/workflows/build-test-upload.yml/badge.svg)](https://github.com/deepr41/WolfJobs/actions/workflows/build-test-upload.yml)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
-[![Issues](https://img.shields.io/github/issues/deepr41/wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
+[![Issues](https://img.shields.io/github/issues/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
 [![Issues Closed](https://img.shields.io/github/issues-closed/deepr41/wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
 ![last commit](https://img.shields.io/github/last-commit/deepr41/Wolfjobs)
 ![Lines of code](https://tokei.rs/b1/github/deepr41/wolfjobs)
