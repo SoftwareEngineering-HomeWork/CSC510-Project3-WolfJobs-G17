@@ -40,7 +40,7 @@ const LoginPage = () => {
     <>
       <div className="mx-auto bg-slate-50 content flex flex-col justify-center items-center">
         <div className=" p-4  border rounded bg-white">
-          <div className="text-xl justify-center text-black mb-4 ">
+          <div className="text-xl justify-center text-[#FF5353] mb-4 ">
             Sign In to your Account
           </div>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -95,6 +95,7 @@ const LoginPage = () => {
                   textTransform: "none",
                   fontSize: "16px",
                 }}
+                className="py-4"
               >
                 Login
               </Button>
@@ -108,7 +109,7 @@ const LoginPage = () => {
           </div>
           <br />
           <p
-            className="text-[#656565] text-center cursor-pointer hover:text-blue-500 transition-colors duration-200"
+            className="text-[#656565] text-center cursor-pointer hover:text-[#FF5353] transition-colors duration-200"
             onClick={() => {
               navigate("/register");
             }}
