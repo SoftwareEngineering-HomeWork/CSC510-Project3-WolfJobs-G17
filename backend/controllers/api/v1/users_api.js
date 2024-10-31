@@ -569,7 +569,7 @@ module.exports.extractSkills = async (req, res) => {
   try {
     const { description } = req.body;
 
-    if (!description || description.length() === 0) {
+    if (!description || description.length === 0) {
       return res.send(200).send({ message: "Invalid text!!" });
     }
 
@@ -577,7 +577,7 @@ module.exports.extractSkills = async (req, res) => {
     const skills = [];
 
     // Format skills
-    const formattedSkills = "";
+    const formattedSkills = "its me";
     for (let i = 0; i < skills.length; i++) {
       formattedSkills += skills[i];
       if (i != skills.length - 1) {

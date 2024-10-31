@@ -52,8 +52,7 @@ const CreateJob = () => {
   }
 
   const extractSkills = () => {
-    axios
-      .post("http://localhost:8000/api/v1/users/extractSkills", {
+    axios.post("http://localhost:8000/api/v1/users/extractSkills", {
         description
       })
       .then((res) => {
