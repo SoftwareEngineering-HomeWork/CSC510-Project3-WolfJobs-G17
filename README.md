@@ -1,8 +1,8 @@
 ![Banner](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Banner.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm-build](https://github.com/deepr41/WolfJobs/actions/workflows/build-checker.yml/badge.svg)](https://github.com/deepr41/WolfJobs/actions/workflows/build-checker.yml)
-[![npm-build](https://github.com/deepr41/WolfJobs/actions/workflows/build-test-upload.yml/badge.svg)](https://github.com/deepr41/WolfJobs/actions/workflows/build-test-upload.yml)
+[![npm-build](https://github.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/actions/workflows/build-checker.yml/badge.svg)](https://github.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/actions/workflows/build-checker.yml)
+[![npm-build](https://github.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/actions/workflows/build-test-upload.yml/badge.svg)](https://github.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/actions/workflows/build-test-upload.yml)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 [![Issues](https://img.shields.io/github/issues/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
 [![Issues Closed](https://img.shields.io/github/issues-closed/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
@@ -15,7 +15,7 @@
 [![Top Language](https://img.shields.io/github/languages/top/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
 [![DOI](https://zenodo.org/badge/429097663.svg)](https://zenodo.org/badge/latestdoi/429097663)
 [![Release](https://img.shields.io/github/v/release/deepr41/WolfJobs)](https://github.com/deepr41/WolfJobs/)
-[![codecov](https://codecov.io/gh/deepr41/WolfJobs/graph/badge.svg?token=RH472ZM4PT)](https://codecov.io/gh/deepr41/WolfJobs)
+[![codecov](https://codecov.io/gh/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/graph/badge.svg?token=df306ec6-8f07-44c7-9c7c-4299eff22da9)](https://codecov.io/gh/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)
 
 <!-- ![Static Badge](https://img.shields.io/badge/any_text-i_like-blue) -->
 
