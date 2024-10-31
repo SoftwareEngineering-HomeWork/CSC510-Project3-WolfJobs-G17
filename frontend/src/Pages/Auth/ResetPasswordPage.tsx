@@ -11,12 +11,12 @@ type FormValues = {
 };
 
 const schema = yup.object({
-  newPassword: yup.string().required("New password is required"),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("newPassword"), null], "Passwords must match")
-    .required("Please confirm your new password"),
-});
+    newPassword: yup.string().required("New password is required"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("newPassword")], "Passwords must match")
+      .required("Please confirm your new password"),
+  });
 
 const ResetPasswordPage = () => {
   const { token } = useParams<{ token: string }>();
