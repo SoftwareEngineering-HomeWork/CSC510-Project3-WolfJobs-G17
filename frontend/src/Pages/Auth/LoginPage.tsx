@@ -108,13 +108,14 @@ const LoginPage = () => {
           </div>
           <br />
           <p
-            className="text-[#656565] text-center"
+            className="text-[#656565] text-center cursor-pointer hover:text-blue-500 transition-colors duration-200"
             onClick={() => {
               navigate("/register");
             }}
           >
-            Create a new account
-          </p>
+          Create a new account
+        </p>
+
         </div>
       </div>
       {/* <DevTool control={control}></DevTool> */}

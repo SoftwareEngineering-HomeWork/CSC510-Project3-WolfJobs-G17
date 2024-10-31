@@ -226,13 +226,14 @@ const RegistrationPage = () => {
           </div>
           <br />
           <p
-            className="text-[#656565] text-center"
+            className="text-[#656565] text-center cursor-pointer hover:text-blue-500 transition-colors duration-200"
             onClick={() => {
               navigate("/login");
             }}
           >
             Already have an Account? Login Here
           </p>
+
         </div>
       </div>
     </>
