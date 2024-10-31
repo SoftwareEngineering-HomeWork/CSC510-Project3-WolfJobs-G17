@@ -53,7 +53,7 @@ export function resetPassword(token: string, newPassword: string, navigate: any)
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.success) {
+      if (data) {
         toast.success("Password reset successful");
         navigate("/login");
       } else {
