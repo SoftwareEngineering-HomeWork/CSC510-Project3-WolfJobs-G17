@@ -27,6 +27,7 @@ router.post("/rejectapplication", usersApi.rejectApplication);
 router.post("/closejob", jsonParser, usersApi.closeJob);
 router.post("/createapplication", jsonParser, usersApi.createApplication);
 
+router.post("/forgot-password", jsonParser, usersApi.forgotPassword); // Route to initiate password reset
 router.post("/reset-password", jsonParser, usersApi.resetPassword); // Route to reset the password
 
 
