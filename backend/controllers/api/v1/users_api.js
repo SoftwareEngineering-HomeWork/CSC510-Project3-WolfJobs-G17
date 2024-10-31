@@ -8,19 +8,21 @@ const AuthOtp = require("../../../models/authOtp");
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const crypto = require('crypto');
 
-const bcrypt = require('bcryptjs');
+//const bcrypt = require('bcryptjs');
 
 const nodemailer = require("nodemailer");
 
 require("dotenv").config();
 
-const transporter = nodemailer.createTransport({
-  service: "Gmail", // Use your email provider
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+
+const transporter = nodemailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key:
+      process.env.SENDGRID_API_KEY
+    }
+  })
+);
 
 module.exports.createSession = async function (req, res) {
   try {
