@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { body, validationResult } = require("express-validator");
 const User = require("../../../models/user");
 const jwt = require("jsonwebtoken");
 const Food = require("../../../models/food");
@@ -24,105 +25,91 @@ const transporter = nodemailer.createTransport(
   })
 );
 
-module.exports.createSession = async function (req, res) {
-  try {
-    let user = await User.findOne({ email: req.body.email });
-    res.set("Access-Control-Allow-Origin", "*");
-    console.log(bcrypt.compare(req.body.password, user.password));
-    if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
-      return res.status(422).json({
-        message: "Invalid username or password",
-      });
-    }
-    res.set("Access-Control-Allow-Origin", "*");
-    return res.status(200).json({
-      message: "Sign In Successful, here is your token, please keep it safe",
-      data: {
-        token: jwt.sign(user.toJSON(), "wolfjobs", { expiresIn: "100000" }),
-        user,
-      },
-      success: true,
-    });
-  } catch (err) {
-    console.log("*******", err);
-    return res.status(500).json({
-      message: "Internal Server Error",
-    });
+const handleValidationErrors = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const errorMessages = errors.array().map(error => error.msg);
+    return res.status(422).json({ errors: errorMessages });
   }
+  next();
 };
 
-module.exports.forgotPassword = async function (req, res) {
-  console.log(req);
-  try {
-    const user = await User.findOne({ email: req.body.email });
-    if (!user) {
-      return res.status(404).json({
-        message: "User not found",
+module.exports.createSession = [
+  body('email').isEmail().withMessage('Enter a valid email'),
+  body('password').notEmpty().withMessage('Password is required'),
+  handleValidationErrors,
+  async function (req, res) {
+    try {
+      let user = await User.findOne({ email: req.body.email });
+      res.set("Access-Control-Allow-Origin", "*");
+      if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
+        return res.status(422).json({
+          message: "Invalid username or password",
+        });
+      }
+      return res.status(200).json({
+        message: "Sign In Successful, here is your token, please keep it safe",
+        data: {
+          token: jwt.sign(user.toJSON(), jwtSecret, { expiresIn: "100000" }),
+          user,
+        },
+        success: true,
       });
+    } catch (err) {
+      console.log("*******", err);
+      return res.status(500).json({ message: "Internal Server Error" });
     }
-
-    // Create a reset token
-    const token = jwt.sign({ id: user._id }, jwtSecret);
-
-    // Create the reset link with the correct URL
-    const resetLink = `http://127.0.0.1:5173/reset-password?token=${token}`; // Updated with your frontend URL
-
-    // Send email with nodemailer
-    await transporter.sendMail({
-      from: 'smarred@ncsu.edu',
-      to: user.email,
-      subject: "Password Reset Request",
-      html: `<p>You requested a password reset. Click the link below to reset your password:</p>
-             <a href="${resetLink}">Reset Password</a>`,
-    });
-
-    return res.status(200).json({
-      message: "Password reset link has been sent to your email",
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({
-      message: "Internal Server Error",
-    });
   }
-};
+];
+
+module.exports.forgotPassword = [
+  body('email').isEmail().withMessage('Enter a valid email'),
+  handleValidationErrors,
+  async function (req, res) {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      const token = jwt.sign({ id: user._id }, jwtSecret);
+      const resetLink = `http://127.0.0.1:5173/reset-password?token=${token}`;
+      await transporter.sendMail({
+        from: 'smarred@ncsu.edu',
+        to: user.email,
+        subject: "Password Reset Request",
+        html: `<p>You requested a password reset. Click the link below to reset your password:</p><a href="${resetLink}">Reset Password</a>`,
+      });
+      return res.status(200).json({ message: "Password reset link has been sent to your email" });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+];
+
 
 // Method to reset password
-module.exports.resetPassword = async function (req, res) {
-  try {
-    const { token, newPassword } = req.body;
-
-    if (!token) {
-      return res.status(400).json({
-        message: "Token is required",
-      });
+module.exports.resetPassword = [
+  body('token').notEmpty().withMessage('Token is required'),
+  body('newPassword').isLength({ min: 6 }).withMessage('New password must be at least 6 characters long'),
+  handleValidationErrors,
+  async function (req, res) {
+    try {
+      const { token, newPassword } = req.body;
+      const decoded = jwt.verify(token, jwtSecret);
+      const user = await User.findById(decoded.id);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      user.password = await bcrypt.hash(newPassword, 10);
+      await user.save();
+      return res.status(200).send({ message: "Password reset successful" });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Internal Server Error" });
     }
-
-    // Verify the token
-    const decoded = jwt.verify(token, jwtSecret);
-    const user = await User.findById(decoded.id);
-
-    if (!user) {
-      return res.status(404).json({
-        message: "User not found",
-      });
-    }
-
-    // Hash the new password
-    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedNewPassword; // Replace with hashed password
-    await user.save();
-
-    return res.status(200).send({
-      message: "Password reset successful",
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({
-      message: "Internal Server Error",
-    });
   }
-};
+];
 
 
 module.exports.createHistory = async function (req, res) {
@@ -152,57 +139,38 @@ module.exports.createHistory = async function (req, res) {
   }
 };
 
-module.exports.signUp = async function (req, res) {
-  try {
-    if (req.body.password !== req.body.confirm_password) {
-      return res.status(422).json({
-        message: "Passwords do not match",
-      });
+module.exports.signUp = [
+  body('email').isEmail().withMessage('Enter a valid email'),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+  body('confirm_password').custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error('Passwords do not match');
     }
-
-    // Check if the user already exists
-    let user = await User.findOne({ email: req.body.email });
-    if (user) {
-      res.set("Access-Control-Allow-Origin", "*");
+    return true;
+  }),
+  handleValidationErrors,
+  async function (req, res) {
+    try {
+      let user = await User.findOne({ email: req.body.email });
+      if (user) {
+        return res.status(200).json({
+          message: "Sign Up Successful, here is your token, please keep it safe",
+          data: { token: jwt.sign(user.toJSON(), jwtSecret, { expiresIn: "100000" }), user },
+          success: true,
+        });
+      }
+      user = await User.create({ ...req.body, password: await bcrypt.hash(req.body.password, 10) });
       return res.status(200).json({
         message: "Sign Up Successful, here is your token, please keep it safe",
-        data: {
-          token: jwt.sign(user.toJSON(), "wolfjobs", {
-            expiresIn: "100000",
-          }),
-          user,
-        },
+        data: { token: jwt.sign(user.toJSON(), jwtSecret, { expiresIn: "100000" }), user },
         success: true,
       });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ message: "Internal Server Error" });
     }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-    // Create a new user
-    user = await User.create({
-      ...req.body,
-      password: hashedPassword, // Save the hashed password
-    });
-
-    res.set("Access-Control-Allow-Origin", "*");
-    return res.status(200).json({
-      message: "Sign Up Successful, here is your token, please keep it safe",
-      data: {
-        token: jwt.sign(user.toJSON(), "wolfjobs", {
-          expiresIn: "100000",
-        }),
-        user,
-      },
-      success: true,
-    });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({
-      message: "Internal Server Error",
-    });
   }
-};
+];
 
 module.exports.getProfile = async function (req, res) {
   try {
