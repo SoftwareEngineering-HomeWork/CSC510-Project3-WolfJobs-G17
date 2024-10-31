@@ -4,10 +4,10 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-around items-center">
-    <div className="w-1/3">
+    <div className="md:flex-row flex-col flex justify-around items-center">
+    <div className="px-5 mt-5 md:w-1/3">
     <div
-      className="font-semibold text-[40px] leading-[48px] text-black"
+      className="font-semibold md:text-[40px] text-4xl leading-[48px] text-black"
     >
       We understand that being a student can be{" "}
       <span style={{ color: "#FF5353" }}>challenging.</span>
@@ -27,7 +27,7 @@ const LandingPage = () => {
         navigate("/register");
       }}
       type="button"
-      className="flex-1 px-12 py-4 font-semibold text-[20px] leading-[24px] text-white bg-[#FF5353] rounded-[10px] flex items-center justify-center hover:bg-[#ff5366]"
+      className="whitespace-nowrap flex-1 px-12 py-4 font-semibold text-[20px] leading-[24px] text-white bg-[#FF5353] rounded-[10px] flex items-center justify-center hover:bg-[#ff5366]"
     >
       {/* <p
         className=""
@@ -58,7 +58,7 @@ const LandingPage = () => {
     </button>
     </div>
     </div>
-    <div className="flex justify-between items-center relative">
+    <div className="order-1 md:order-2 flex justify-between items-center relative">
     {/* <div
       className="w-[735px] h-[752px] -top-16 -left-[560px] absolute -z-10"
     >

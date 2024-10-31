@@ -12,13 +12,13 @@ const Header = () => {
           <div className="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 mx-4 lg:mx-0">
             <div className="relative flex items-center">
               <a
-                className="mr-3 flex-none w-[2.0625rem] overflow-hidden md:w-auto"
+                className="mr-3 flex-none overflow-hidden w-auto"
                 href={isLoggedIn ? "/dashboard" : "/"}
               >
                 <img
                   alt="logo"
                   src="/images/wolfjobs-logo.png"
-                  className="h-10 p-0"
+                  className="h-10 p-0 object-cover w-full"
                 />
               </a>
               <ul className="ml-4 flex space-x-8">
