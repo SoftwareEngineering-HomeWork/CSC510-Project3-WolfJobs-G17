@@ -565,28 +565,64 @@ module.exports.verifyOtp = async function (req, res) {
   }
 };
 
+const natural = require('natural');
+
+// Comprehensive list of known skills (technical, non-technical, and data-oriented)
+const knownSkills = [
+  // Technical Skills
+  "JavaScript", "Python", "Java", "SQL", "React", "Node.js",
+  "HTML", "CSS", "C#", "C++", "Go", "PHP", "Ruby", "Django",
+  "Flask", "Kubernetes", "Docker", "AWS", "Azure", "Git",
+  "Machine Learning", "Data Science", "DevOps", "Cybersecurity",
+  "Mobile Development", "Software Engineering", "API Development",
+  "GraphQL", "TypeScript", "Swift", "Objective-C",
+
+  // Data-Oriented Skills
+  "Microsoft Excel", "Microsoft Word", "Microsoft PowerPoint", "Tableau",
+  "Apache Spark", "Hadoop", "R", "Data Visualization", "Data Analysis",
+  "Google Analytics", "SQL Server", "Oracle", "Power BI", "Looker",
+
+  // Non-Technical Skills
+  "Communication", "Teamwork", "Problem Solving", "Leadership",
+  "Project Management", "Time Management", "Critical Thinking",
+  "Creativity", "Adaptability", "Interpersonal Skills", "Conflict Resolution",
+  "Negotiation", "Customer Service", "Analytical Skills", "Presentation Skills",
+  "Research", "Collaboration", "Emotional Intelligence"
+];
+
+// Common English stop words to exclude from skill extraction
+const stopWords = ["the", "is", "and", "in", "for", "to", "with", "a", "an", "of", "on", "by", "that", "this", "are", "be"];
+
 module.exports.extractSkills = async (req, res) => {
   try {
     const { description } = req.body;
 
     if (!description || description.length === 0) {
-      return res.send(200).send({ message: "Invalid text!!" });
+      return res.status(400).send({ message: "Invalid text!!" });
     }
 
-    // Extracting skills
-    const skills = [];
+    // Tokenize the description
+    const tokenizer = new natural.WordTokenizer();
+    const tokens = tokenizer.tokenize(description.toLowerCase());
 
-    // Format skills
-    const formattedSkills = "its me";
-    for (let i = 0; i < skills.length; i++) {
-      formattedSkills += skills[i];
-      if (i != skills.length - 1) {
-        formattedSkills += ", ";
+    // Filter out common stop words and duplicate terms
+    const uniqueTerms = Array.from(new Set(tokens.filter(token => !stopWords.includes(token))));
+
+    // Initialize an array to hold found skills
+    const foundSkills = [];
+
+    // Check for known skills in the description
+    knownSkills.forEach(skill => {
+      if (uniqueTerms.includes(skill.toLowerCase())) {
+        foundSkills.push(skill);
       }
-    }
+    });
 
+    // Format and send response
+    const formattedSkills = foundSkills.join(", ");
     res.status(200).send({ skills: formattedSkills });
-  } catch {
+  } catch (error) {
+    console.error("Error extracting skills:", error);
     res.status(500).send({ message: "Internal server error!!" });
   }
-}
+};
