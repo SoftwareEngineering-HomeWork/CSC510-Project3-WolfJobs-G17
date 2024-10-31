@@ -5,10 +5,22 @@ const History = require("../../../models/history");
 const Job = require("../../../models/job");
 const Application = require("../../../models/application");
 const AuthOtp = require("../../../models/authOtp");
+const sendgridTransport = require('nodemailer-sendgrid-transport');
+const crypto = require('crypto');
+
+const bcrypt = require('bcryptjs');
 
 const nodemailer = require("nodemailer");
 
 require("dotenv").config();
+
+const transporter = nodemailer.createTransport({
+  service: "Gmail", // Use your email provider
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 
 module.exports.createSession = async function (req, res) {
   try {
