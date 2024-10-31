@@ -5,9 +5,9 @@ name: npm-test-upload
 
 on:
   push:
-    branches: ["master"]
+    branches: ["New_CSC510-G50-WolfJobs"]
   pull_request:
-    branches: ["master"]
+    branches: ["New_CSC510-G50-WolfJobs"]
 
 jobs:
   build:
