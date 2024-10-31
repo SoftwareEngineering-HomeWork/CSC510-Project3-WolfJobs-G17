@@ -33,7 +33,7 @@ export function sendForgotPasswordEmail(email: string, navigate: any) {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.success) {
+      if (data) {
         toast.success("Password reset link sent to email");
         navigate("/login");
       } else {
