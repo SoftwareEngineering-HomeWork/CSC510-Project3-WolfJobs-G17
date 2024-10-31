@@ -23,7 +23,7 @@ type FormValues = {
   address: string;
   role: string;
   skills: string;
-  phonenumber: string;
+  phonenumber: number;
   availability: string;
   gender: string;
   hours: string;
@@ -184,7 +184,7 @@ const ProfileEdit = ({ props }: { props: any }) => {
             />
             <TextField
               label="Phone number"
-              type="text"
+              type="number"
               {...register("phonenumber")}
               error={!!errors.phonenumber}
               helperText={errors.phonenumber?.message}
