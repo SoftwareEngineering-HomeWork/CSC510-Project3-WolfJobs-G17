@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { resetPassword } from "../../deprecateded/auth";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -18,22 +18,36 @@ const schema = yup.object({
       .required("Please confirm your new password"),
   });
 
-const ResetPasswordPage = () => {
-  const { token } = useParams<{ token: string }>();
-  const navigate = useNavigate();
-
-  const form = useForm<FormValues>({
-    defaultValues: { newPassword: "", confirmPassword: "" },
-    resolver: yupResolver(schema),
-  });
-  const { register, handleSubmit, formState } = form;
-  const { errors } = formState;
-
-  const onSubmit = (data: FormValues) => {
-    if (token) {
-      resetPassword(token, data.newPassword, navigate);
-    }
-  };
+  const ResetPasswordPage = () => {
+  
+    const location = useLocation();
+    
+    const queryParams = new URLSearchParams(location.search);
+    
+    // Extract the token using the parameter name (e.g., "t")
+    const token = queryParams.get('token');
+      console.log(token);
+      const navigate = useNavigate();
+    
+      const form = useForm<FormValues>({
+        defaultValues: { newPassword: "", confirmPassword: "" },
+        resolver: yupResolver(schema),
+      });
+      const { register, handleSubmit, formState } = form;
+      const { errors } = formState;
+    
+      const onSubmit = async (data: FormValues) => {
+        console.log(data.success);
+        if (token) {
+            console.log(token);
+          try {
+            await resetPassword(token, data.newPassword, navigate); // Pass navigate here
+            navigate("/login"); // Redirect to login after successful reset
+          } catch (error) {
+            alert("Error resetting password"); // Handle error appropriately
+          }
+        }
+      };
 
   return (
     <div className="mx-auto bg-slate-50 content flex flex-col justify-center items-center">
