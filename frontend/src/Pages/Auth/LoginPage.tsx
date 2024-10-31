@@ -1,10 +1,11 @@
+import { useState } from "react"; // Import useState
 import { useNavigate } from "react-router-dom";
 import { login } from "../../deprecateded/auth";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Stack, TextField, Button } from "@mui/material";
-// import { DevTool } from "@hookform/devtools";
+import { Stack, TextField, Button, InputAdornment, IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material"; // Import icons
 
 type FormValues = {
   email: string;
@@ -21,12 +22,12 @@ const schema = yup.object({
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false); // State for password visibility
 
   const form = useForm<FormValues>({
     defaultValues: { email: "", password: "" },
     resolver: yupResolver(schema),
   });
-  // const { control } = form;
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
@@ -39,8 +40,8 @@ const LoginPage = () => {
   return (
     <>
       <div className="mx-auto bg-slate-50 content flex flex-col justify-center items-center">
-        <div className=" p-4  border rounded bg-white">
-          <div className="text-xl justify-center text-black mb-4 ">
+        <div className="p-4 border rounded bg-white">
+          <div className="text-xl justify-center text-black mb-4">
             Sign In to your Account
           </div>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -68,12 +69,24 @@ const LoginPage = () => {
               />
               <TextField
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"} // Toggle between text and password
                 {...register("password", {
                   required: "Password is required",
                 })}
                 error={!!errors.password}
                 helperText={errors.password?.message}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword((prev) => !prev)} // Toggle password visibility
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />} {/* Show icon based on state */}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
                 sx={{
                   "& label": {
                     paddingLeft: (theme) => theme.spacing(1),
@@ -100,8 +113,16 @@ const LoginPage = () => {
               </Button>
             </Stack>
           </form>
-          <div className="mx-auto"></div>
-          <br />
+          <div className="flex justify-end mt-2">
+            <p
+              className="text-[#656565] cursor-pointer text-sm"
+              onClick={() => {
+                navigate("/forgot-password");
+              }}
+            >
+              Forgot Password?
+            </p>
+          </div>
           <div className="mv-1 border-t mx-16" />
           <div className="flex justify-center">
             <p className="-mt-3 bg-white px-3 text-[#CCCCCC]">OR</p>
