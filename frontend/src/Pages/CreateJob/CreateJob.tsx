@@ -12,6 +12,8 @@ import {
   TextField,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 type FormValues = {
   role: string;
@@ -22,9 +24,12 @@ type FormValues = {
   description: string;
 };
 
+let description: string | null = null;
+
 const CreateJob = () => {
   const navigate = useNavigate();
   const [requiredSkills, setRequiredSkills] = useState("");
+  const [showExtractJobButton, setShowExtractJobButton] = useState(false);
 
   const form = useForm<FormValues>({
     defaultValues: {
@@ -35,6 +40,30 @@ const CreateJob = () => {
       description: "",
     },
   });
+
+  const onJobDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    description = e.target.value;
+
+    if (description && description.length > 0) {
+      setShowExtractJobButton(true);
+    } else {
+      setShowExtractJobButton(false);
+    }
+  }
+
+  const extractSkills = () => {
+    axios.post("http://localhost:8000/api/v1/users/extractSkills", {
+        description
+      })
+      .then((res) => {
+        if (res.status !== 200) {
+          toast.error("Error fetching applications");
+          return;
+        } else {
+          setRequiredSkills(res.data.skills);
+        }
+      });
+  }
 
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
@@ -180,9 +209,27 @@ const CreateJob = () => {
                       borderRadius: "10px",
                     },
                   }}
+                  onChange={onJobDescriptionChange}
                   minRows={4}
                   multiline
                 />
+                {
+                  showExtractJobButton
+                  && (
+                    <Button
+                      type="button"
+                      variant="outlined"
+                      style={{
+                        textTransform: "none",
+                        fontSize: "16px",
+                        minWidth: "200px",
+                      }}
+                      onClick={extractSkills}
+                    >
+                      Extract & Autofill Skills
+                    </Button>
+                  )
+                }
                 <TextField
                   label="Required Skills"
                   type="text"
