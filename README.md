@@ -35,8 +35,12 @@
 
 # What's New:
 
- - **New Screens Added!**
- - Branding, Colours and Typography
+**Enhanced User Experience, Security, and Functionality!**
+- **Strengthened Security**: Enhanced security by implementing password hashing for database storage and using JSON Web Tokens (JWT) to improve authentication processes.
+- **Forgot and Reset Password Functionality**: Added a "Forgot Password" feature, allowing users to securely reset their passwords if needed.
+- **Automated Email Notifications**: Integrated an email service to automatically notify users when they request a password reset, provided their account exists in the database.
+- **Resolved Security Vulnerabilities**:  Fixed a critical issue in the previous version that allowed login through direct links, ensuring proper verification of users and passwords for secure access.
+- **Field Validations** : Introduced input validations to ensure data accuracy and enhance the reliability of the application.
  - Components & States
  - Mutliple UI Screens _flows_ for Student & Manager Roles
  - [https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs](https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs)
