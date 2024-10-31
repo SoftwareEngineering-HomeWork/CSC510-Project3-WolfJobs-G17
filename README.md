@@ -40,15 +40,8 @@
 - **Forgot and Reset Password Functionality**: Added a "Forgot Password" feature, allowing users to securely reset their passwords if needed.
 - **Automated Email Notifications**: Integrated an email service to automatically notify users when they request a password reset, provided their account exists in the database.
 - **Resolved Security Vulnerabilities**:  Fixed a critical issue in the previous version that allowed login through direct links, ensuring proper verification of users and passwords for secure access.
-- **Field Validations** : Introduced input validations to ensure data accuracy and enhance the reliability of the application.
- - Components & States
- - Mutliple UI Screens _flows_ for Student & Manager Roles
- - [https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs](https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs)
+- **Field Validations** : Implemented comprehensive input validations to ensure data accuracy and enhance the reliability of the application. This includes measures to validate user inputs on the frontend, such as enforcing minimum password lengths and ensuring that fields meet specific criteria. Additionally, backend validations have been established to reinforce database security, preventing unauthorized access and safeguarding against potential vulnerabilities.
 
- - Seamless Resume Upload and Parsing: We've made it a breeze for applicants to submit their resumes for each job posting, while employers can effortlessly access and view the stored PDFs in MongoDB.
- - Precision Application Matching: Say goodbye to the uncertainty of job applications! With our enhanced system, applicants now have the power to identify which jobs align perfectly with their skills and qualifications. WolfJobs will analyze your profile and inform you if you're a strong fit for a position.
- - Revamped Job Sorting and Search:  Our revamped job sorting and search features allows you to easily organize opportunities by pay, city, and employment type. Plus, you can perform specific job searches to find the perfect match.
-- Stay Informed with the Notifications Tab: Introduced our brand-new Notifications tab to WolfJobs. Now, you can receive timely updates on the status of your applications, ensuring you're always in the know about your job prospects. 
 
 
 # Presentation Video
