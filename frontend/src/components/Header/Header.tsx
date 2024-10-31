@@ -1,16 +1,20 @@
 import { useUserStore } from "../../store/UserStore";
 import NavBar from "./NavBar";
 import NavBarItem from "./NavBarItem";
+// import { GiHamburgerMenu } from "react-icons/gi";
+// import { useContext } from "react";
+// import { MenuContext } from "../../context/context";
 
 const Header = () => {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const role = useUserStore((state) => state.role);
+  // const {isMenuOn,setIsMenuOn} = useContext(MenuContext)
   return (
     <>
       <div className="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 bg-white supports-backdrop-blur:bg-white/95">
         <div className="max-w-8xl mx-auto">
           <div className="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 mx-4 lg:mx-0">
-            <div className="relative flex items-center">
+            <div className="relative flex items-center justify-between md:justify-normal">
               <a
                 className="mr-3 flex-none overflow-hidden w-auto"
                 href={isLoggedIn ? "/dashboard" : "/"}
@@ -21,7 +25,9 @@ const Header = () => {
                   className="h-10 p-0 object-cover w-full"
                 />
               </a>
-              <ul className="ml-4 flex space-x-8">
+              {/* <GiHamburgerMenu className="md:hidden" onClick={(e)=>{setIsMenuOn(!isMenuOn)}}/> */}
+               
+              <ul className="hidden ml-4 md:flex space-x-8">
                 {role == "Manager" && isLoggedIn && (
                   <NavBarItem link="/dashboard" text="My Listings" />
                 )}
