@@ -1,3 +1,4 @@
+require("dotenv").config();
 const User = require("../../../models/user");
 const jwt = require("jsonwebtoken");
 const Food = require("../../../models/food");
@@ -12,14 +13,13 @@ const crypto = require('crypto');
 
 const nodemailer = require("nodemailer");
 
-require("dotenv").config();
+const jwtSecret = process.env.JWT_SECRET;
 
-const jwtSecret= process.env.JWT_SECRET;
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-      process.env.SENDGRID_API_KEY
+      ,
     }
   })
 );
@@ -49,7 +49,6 @@ module.exports.createSession = async function (req, res) {
     });
   }
 };
-
 
 module.exports.forgotPassword = async function (req, res) {
   console.log(req);
@@ -87,7 +86,7 @@ module.exports.forgotPassword = async function (req, res) {
   }
 };
 
-
+// Method to reset password
 module.exports.resetPassword = async function (req, res) {
   try {
     const { token, newPassword } = req.body;

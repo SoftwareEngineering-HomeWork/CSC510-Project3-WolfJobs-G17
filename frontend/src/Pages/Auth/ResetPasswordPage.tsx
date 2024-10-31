@@ -1,5 +1,5 @@
-import { useNavigate, useLocation } from "react-router-dom";
-import { resetPassword } from "../../deprecateded/auth";
+import { useLocation, useNavigate } from "react-router-dom";
+import { resetPassword } from "../../deprecateded/auth"; // Ensure this function handles the API call
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,43 +11,45 @@ type FormValues = {
 };
 
 const schema = yup.object({
-    newPassword: yup.string().required("New password is required"),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("newPassword")], "Passwords must match")
-      .required("Please confirm your new password"),
-  });
+  newPassword: yup.string().required("New password is required"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("newPassword")], "Passwords must match")
+    .required("Please confirm your new password"),
+});
 
-  const ResetPasswordPage = () => {
+const ResetPasswordPage = () => {
   
-    const location = useLocation();
-    
-    const queryParams = new URLSearchParams(location.search);
-    
-    // Extract the token using the parameter name (e.g., "t")
-    const token = queryParams.get('token');
-      console.log(token);
-      const navigate = useNavigate();
-    
-      const form = useForm<FormValues>({
-        defaultValues: { newPassword: "", confirmPassword: "" },
-        resolver: yupResolver(schema),
-      });
-      const { register, handleSubmit, formState } = form;
-      const { errors } = formState;
-    
-      const onSubmit = async (data: FormValues) => {
-        console.log(data);
-        if (token) {
-            console.log(token);
-          try {
-            await resetPassword(token, data.newPassword, navigate); // Pass navigate here
-            navigate("/login"); // Redirect to login after successful reset
-          } catch (error) {
-            alert("Error resetting password"); // Handle error appropriately
-          }
-        }
-      };
+// Get the current location
+const location = useLocation();
+
+// Create a URLSearchParams object to parse the query string
+const queryParams = new URLSearchParams(location.search);
+
+// Extract the token using the parameter name (e.g., "t")
+const token = queryParams.get('token');
+  console.log(token);
+  const navigate = useNavigate();
+
+  const form = useForm<FormValues>({
+    defaultValues: { newPassword: "", confirmPassword: "" },
+    resolver: yupResolver(schema),
+  });
+  const { register, handleSubmit, formState } = form;
+  const { errors } = formState;
+
+  const onSubmit = async (data: FormValues) => {
+    console.log(data);
+    if (token) {
+        console.log(token);
+      try {
+        await resetPassword(token, data.newPassword, navigate); // Pass navigate here
+        navigate("/login"); // Redirect to login after successful reset
+      } catch (error) {
+        alert("Error resetting password"); // Handle error appropriately
+      }
+    }
+  };
 
   return (
     <div className="mx-auto bg-slate-50 content flex flex-col justify-center items-center">
