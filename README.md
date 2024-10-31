@@ -30,6 +30,7 @@
 ![RestAPI](https://img.shields.io/badge/RestAPI-005571?style=for-the-badge&logo=restapi)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript)
+![SendGrid](https://img.shields.io/badge/SendGrid-4E3D6E?style=for-the-badge&logo=sendgrid)
 
 
 # What's New:
