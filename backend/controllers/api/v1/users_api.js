@@ -14,7 +14,7 @@ const nodemailer = require("nodemailer");
 
 require("dotenv").config();
 
-
+const jwtSecret= process.env.JWT_SECRET;
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
@@ -86,6 +86,46 @@ module.exports.forgotPassword = async function (req, res) {
     });
   }
 };
+
+
+module.exports.resetPassword = async function (req, res) {
+  try {
+    const { token, newPassword } = req.body;
+
+    console.log(token);
+
+    if (!token) {
+      return res.status(400).json({
+        message: "Token is required",
+      });
+    }
+
+    // Verify the token
+    const decoded = jwt.verify(token, jwtSecret);
+    console.log(decoded);
+    const user = await User.findById(decoded.id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    // Hash the new password (make sure to hash it properly before saving)
+    user.password = newPassword; // Replace this with proper hashing
+    await user.save();
+
+    return res.status(200).send({
+      message: "Password reset successful",
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
 
 module.exports.createHistory = async function (req, res) {
   try {
