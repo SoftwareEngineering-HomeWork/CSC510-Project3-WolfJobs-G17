@@ -3,7 +3,9 @@ import { resetPassword } from "../../deprecateded/auth"; // Ensure this function
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Stack, TextField, Button } from "@mui/material";
+import { Stack, TextField, Button, IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useState } from "react";
 
 type FormValues = {
   newPassword: string;
@@ -19,15 +21,9 @@ const schema = yup.object({
 });
 
 const ResetPasswordPage = () => {
-  
-// Get the current location
-const location = useLocation();
-
-// Create a URLSearchParams object to parse the query string
-const queryParams = new URLSearchParams(location.search);
-
-// Extract the token using the parameter name (e.g., "t")
-const token = queryParams.get('token');
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const token = queryParams.get('token');
   console.log(token);
   const navigate = useNavigate();
 
@@ -38,10 +34,12 @@ const token = queryParams.get('token');
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const onSubmit = async (data: FormValues) => {
     console.log(data);
     if (token) {
-        console.log(token);
       try {
         await resetPassword(token, data.newPassword, navigate); // Pass navigate here
         navigate("/login"); // Redirect to login after successful reset
@@ -61,10 +59,22 @@ const token = queryParams.get('token');
           <Stack spacing={2} width={400}>
             <TextField
               label="New Password"
-              type="password"
+              type={showNewPassword ? "text" : "password"}
               {...register("newPassword")}
               error={!!errors.newPassword}
               helperText={errors.newPassword?.message}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowNewPassword((prev) => !prev)}
+                      edge="end"
+                    >
+                      {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               sx={{
                 "& label": { paddingLeft: (theme) => theme.spacing(1) },
                 "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
@@ -76,10 +86,22 @@ const token = queryParams.get('token');
             />
             <TextField
               label="Confirm Password"
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               {...register("confirmPassword")}
               error={!!errors.confirmPassword}
               helperText={errors.confirmPassword?.message}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowConfirmPassword((prev) => !prev)}
+                      edge="end"
+                    >
+                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               sx={{
                 "& label": { paddingLeft: (theme) => theme.spacing(1) },
                 "& input": { paddingLeft: (theme) => theme.spacing(2.5) },

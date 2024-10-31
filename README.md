@@ -1,21 +1,21 @@
 ![Banner](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Banner.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm-build](https://github.com/deepr41/WolfJobs/actions/workflows/build-checker.yml/badge.svg)](https://github.com/deepr41/WolfJobs/actions/workflows/build-checker.yml)
-[![npm-build](https://github.com/deepr41/WolfJobs/actions/workflows/build-test-upload.yml/badge.svg)](https://github.com/deepr41/WolfJobs/actions/workflows/build-test-upload.yml)
+[![npm-build](https://github.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/actions/workflows/build-checker.yml/badge.svg)](https://github.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/actions/workflows/build-checker.yml)
+[![npm-build](https://github.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/actions/workflows/build-test-upload.yml/badge.svg)](https://github.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/actions/workflows/build-test-upload.yml)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
-[![Issues](https://img.shields.io/github/issues/deepr41/wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
-[![Issues Closed](https://img.shields.io/github/issues-closed/deepr41/wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
-![last commit](https://img.shields.io/github/last-commit/deepr41/Wolfjobs)
-![Lines of code](https://tokei.rs/b1/github/deepr41/wolfjobs)
-[![Repo-size](https://img.shields.io/github/repo-size/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
-[![file_count](https://img.shields.io/github/directory-file-count/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
-[![language_count](https://img.shields.io/github/languages/count/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
+[![Issues](https://img.shields.io/github/issues/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
+[![Issues Closed](https://img.shields.io/github/issues-closed/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
+![last commit](https://img.shields.io/github/last-commit/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)
+![Lines of code](https://tokei.rs/b1/github/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)
+[![Repo-size](https://img.shields.io/github/repo-size/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
+[![file_count](https://img.shields.io/github/directory-file-count/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
+[![language_count](https://img.shields.io/github/languages/count/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
 [![Downloads](https://img.shields.io/github/downloads/deepr41/WolfJobs/total)](https://GitHub.com/deepr41/Wolfjobs/)
-[![Top Language](https://img.shields.io/github/languages/top/deepr41/wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
+[![Top Language](https://img.shields.io/github/languages/top/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)](https://GitHub.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/)
 [![DOI](https://zenodo.org/badge/429097663.svg)](https://zenodo.org/badge/latestdoi/429097663)
-[![Release](https://img.shields.io/github/v/release/deepr41/wolfjobs)](https://gitHub.com/deepr41/Wolfjobs)
-[![codecov](https://codecov.io/gh/deepr41/WolfJobs/graph/badge.svg?token=RH472ZM4PT)](https://codecov.io/gh/deepr41/WolfJobs)
+[![Release](https://img.shields.io/github/v/release/deepr41/WolfJobs)](https://github.com/deepr41/WolfJobs/)
+[![codecov](https://codecov.io/gh/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/graph/badge.svg?token=df306ec6-8f07-44c7-9c7c-4299eff22da9)](https://codecov.io/gh/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50)
 
 <!-- ![Static Badge](https://img.shields.io/badge/any_text-i_like-blue) -->
 
@@ -28,19 +28,20 @@
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![RestAPI](https://img.shields.io/badge/RestAPI-005571?style=for-the-badge&logo=restapi)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript)
+![SendGrid](https://img.shields.io/badge/SendGrid-4E3D6E?style=for-the-badge&logo=sendgrid)
+
 
 # What's New:
 
- - **New Screens Added!**
- - Branding, Colours and Typography
- - Components & States
- - Mutliple UI Screens _flows_ for Student & Manager Roles
- - [https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs](https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs)
+**Enhanced User Experience, Security, and Functionality!**
+- **Strengthened Security**: Enhanced security by implementing password hashing for database storage and using JSON Web Tokens (JWT) to improve authentication processes.
+- **Forgot and Reset Password Functionality**: Added a "Forgot Password" feature, allowing users to securely reset their passwords if needed.
+- **Automated Email Notifications**: Integrated an email service to automatically notify users when they request a password reset, provided their account exists in the database.
+- **Resolved Security Vulnerabilities**:  Fixed a critical issue in the previous version that allowed login through direct links, ensuring proper verification of users and passwords for secure access.
+- **Field Validations** : Implemented comprehensive input validations to ensure data accuracy and enhance the reliability of the application. This includes measures to validate user inputs on the frontend, such as enforcing minimum password lengths and ensuring that fields meet specific criteria. Additionally, backend validations have been established to reinforce database security, preventing unauthorized access and safeguarding against potential vulnerabilities.
 
- - Seamless Resume Upload and Parsing: We've made it a breeze for applicants to submit their resumes for each job posting, while employers can effortlessly access and view the stored PDFs in MongoDB.
- - Precision Application Matching: Say goodbye to the uncertainty of job applications! With our enhanced system, applicants now have the power to identify which jobs align perfectly with their skills and qualifications. WolfJobs will analyze your profile and inform you if you're a strong fit for a position.
- - Revamped Job Sorting and Search:  Our revamped job sorting and search features allows you to easily organize opportunities by pay, city, and employment type. Plus, you can perform specific job searches to find the perfect match.
-- Stay Informed with the Notifications Tab: Introduced our brand-new Notifications tab to WolfJobs. Now, you can receive timely updates on the status of your applications, ensuring you're always in the know about your job prospects. 
 
 
 # Presentation Video
@@ -49,9 +50,9 @@
 
 # About Us
 
-Eager to dive into a side hustle or seize a full-time job opportunity? Look no further than WolfJobs. Our platform is the ultimate connector between recruiters in need of talent for both short-term and full-time roles and candidates seeking the freedom to choose. Dive in, earn your share, and opt out whenever you want – or stay on for a longer journey!
+Are you ready to explore a side gig or land a full-time job? Look no further than WolfJobs! Our platform serves as the perfect link between recruiters seeking talent for both temporary and permanent positions and candidates who want the flexibility to choose. Jump in, earn your rewards, and exit whenever you wish—or stay for a longer journey!
 
-At the heart of our bustling campus, WolfJobs stands out as the top student employment portal. Whether you're on the hunt for a short-term tech project, a part-time shift at a campus dining hall, or a full-time position that offers stability and growth, WolfJobs has a spot just for you.
+Located at the center of our vibrant campus, WolfJobs is the premier student employment portal. Whether you’re searching for a short-term tech project, a part-time job at a campus dining facility, or a full-time role that offers stability and opportunities for advancement, WolfJobs has the perfect opportunity for you.
 
 # Why WolfJobs?
 
@@ -194,5 +195,14 @@ Your app is ready to be deployed!
 
 
    
+  </tr>
+</table>
+
+## Iteration 3:
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/vineel31"><img src="https://avatars.githubusercontent.com/vineel31" width="100px;" alt=""/><br /><b>Sai Vineel Reddy Marreddy</b></a></td>
+    <td align="center"><a href="https://github.com/konetichandrakant"><img src="https://avatars.githubusercontent.com/konetichandrakant" width="100px;" alt=""/><br /><b>Chandrakanth Koneti</b></a><br /></td>
+    <td align="center"><a href="https://github.com/UddharshV"><img src="https://avatars.githubusercontent.com/UddharshV" width="100px;" alt=""/><br /><b> Uddharsh Vasili</b></a><br /></td>
   </tr>
 </table>
