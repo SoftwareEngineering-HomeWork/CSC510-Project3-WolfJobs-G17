@@ -37,7 +37,7 @@ const schema = yup.object({
       const { errors } = formState;
     
       const onSubmit = async (data: FormValues) => {
-        console.log(data.success);
+        console.log(data);
         if (token) {
             console.log(token);
           try {
