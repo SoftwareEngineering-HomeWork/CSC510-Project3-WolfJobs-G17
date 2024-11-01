@@ -122,7 +122,7 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 - Download and install the latest version of MongoDB from [MongoDB Official Website.](https://www.mongodb.com/try/download/community)
 - Make sure you have React version 18.0
 
-**Step 1: Clone the Repository from this [link](https://github.com/deepr41/WolfJobs.git)**
+**Step 1: Clone the Repository from this [link](https://github.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50.git)**
 
 **Step 2: Backend Setup**
 
@@ -165,7 +165,7 @@ Your app is ready to be deployed!
 
 # Future Improvements✨
 
-**1. Email Service📧** - On getting selected/rejected to a job, the applicant should be getting an email about it.
+**1. Enhanced Security with 2FA/MFA** - Implement two-factor (2FA) or multi-factor authentication (MFA) to increase account security, ensuring a safe experience for all users.
 
 **2. Interview Video Submission** - Managers can request applicants to submit a video screening file and applicants can upload a video on their side of the portal.
 
@@ -179,7 +179,9 @@ Your app is ready to be deployed!
 
 **7. Matching based on Resume** – WolfJobs applicants will be able to parse their resume and WolfJobs will extract key skills from the resume and compare it with required job skills to give candidates job matching status.
 
-**8. Database Security and Hashing** – WolfJobs currently does not securely store the password and user information in the database. This data needs to be protected and hashed to ensure security.
+**8. Job Recommendations with Web Scraping** - Incorporate web scraping tools to suggest relevant job opportunities tailored to applicants’ profiles.
+
+**9. Mobile App Development** - Future plans include the development of a mobile app for both iOS and Android, enabling job seekers and hiring managers to access WolfJobs on the go.
 
 # Contributors
 
