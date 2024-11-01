@@ -37,6 +37,7 @@ describe('User API Tests', () => {
             email: 'testmanager@example.com',
             password: await bcrypt.hash('password', 10),
             name: 'ManagerTest User',
+            affiliation: 'nc-state-dining',
             role: 'Manager',
         });
         await user2.save();
@@ -128,7 +129,6 @@ describe('User API Tests', () => {
     test('POST /edit - should update profile with valid data', async () => {
         const response = await request(app)
             .post(`${base_url}/edit`)
-            .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({ id: userManagerId, name: 'Updated Test Manager User', password: 'password', role: 'Manager' });
 
         expect(response.status).toBe(200);
@@ -199,26 +199,8 @@ describe('User API Tests', () => {
         expect(response.body.success).toBe(true);
     });
 
-    
+
     // 17. Test for creating job with insufficient data
-    test('POST /createjob - should not create job with applicant as role', async () => {
-        const response = await request(app)
-        .post(`${base_url}/createjob`)
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .send({
-            id: userAppId,
-            name: 'Test Job',
-            type: 'Full-Time',
-            location: 'Remote',
-            description: 'Test Job Description',
-            pay: 10,
-            requiredSkills: ['JavaScript'],
-        });
-        
-        expect(response.status).toBe(402);
-    });
-    
-    // 17. Test for creating job with applicant role
     test('POST /createjob - should not create job with applicant as role', async () => {
         const response = await request(app)
             .post(`${base_url}/createjob`)
@@ -230,26 +212,47 @@ describe('User API Tests', () => {
                 location: 'Remote',
                 description: 'Test Job Description',
                 pay: 10,
-                requiredSkills: ['JavaScript'],
+                requiredSkills: 'JavaScript',
+            });
+
+        expect(response.status).toBe(402);
+    });
+
+    // 17. Test for creating job with applicant role
+    test('POST /createjob - should not create job with applicant as role', async () => {
+        const response = await request(app)
+            .post(`${base_url}/createjob`)
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                id: userAppId,
+                name: 'Test Job',
+                affiliation: 'Manager',
+                type: 'Full-Time',
+                location: 'Remote',
+                description: 'Test Job Description',
+                pay: '10',
+                requiredSkills: 'JavaScript',
+                question1: 'a?',
+                question2: 'b?',
+                question3: 'c?',
+                question4: 'd?',
             });
 
         expect(response.status).toBe(402);
     });
 
     // 18. Test for creating job with manager as role
-    test('POST /createjob - should not create job with applicant as role', async () => {
+    test('POST /createjob - should create a job', async () => {
         const response = await request(app)
             .post(`${base_url}/createjob`)
-            .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
                 id: userManagerId,
                 name: 'Test Job',
-                managerAffilication: 'manager',
                 type: 'Full-Time',
                 location: 'Remote',
                 description: 'Test Job Description',
-                pay: 10,
-                requiredSkills: ['JavaScript'],
+                pay: '10',
+                requiredSkills: 'JavaScript',
                 question1: 'a?',
                 question2: 'b?',
                 question3: 'c?',
@@ -267,23 +270,22 @@ describe('User API Tests', () => {
             .get(`${base_url}/`);
 
         expect(response.status).toBe(200);
+
+        // As we have already added one job we will get more than one
         expect(response.body.jobs.length).toBeGreaterThan(0);
     });
 
     // 20. Test for creating application
-    test('POST /createapplication - should create application', async () => {
+    test('POST /extractSkills - should modify application', async () => {
         const response = await request(app)
-            .post(`${base_url}/createapplication`)
+            .post(`${base_url}/extractSkills`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                applicantid: userAppId,
-                jobid: jobId,
-                applicantname: 'Test Applicant',
-                jobname: 'Test Job',
-                managerid: userManagerId,
+                description: "1) Java is most used language in our systems"
+                    + ", 2) Experience in Docker is a plus"
             });
 
         expect(response.status).toBe(200);
-        expect(response.body.success).toBe(true);
+        expect(response.body.skills).toBe("Java, Docker");
     });
 });

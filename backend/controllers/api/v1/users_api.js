@@ -304,6 +304,8 @@ module.exports.createJob = async function (req, res) {
   let user = await User.findOne({ _id: req.body.id });
   check = req.body.skills;
 
+  console.log(user);
+
   if (user && user.role === 'Manager') {
     try {
       let job = await Job.create({
@@ -321,7 +323,7 @@ module.exports.createJob = async function (req, res) {
         question4: req.body.question4,
       });
       res.set("Access-Control-Allow-Origin", "*");
-      return res.json(200, {
+      return res.status(200).send({
         data: {
           job: job,
           //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
