@@ -46,14 +46,14 @@ describe("RegistrationPage Tests", () => {
   });
 
   // Test Case 3: Navigates to login page when 'Already have an Account? Login Here' is clicked
-  it("Test Case 3: Navigates to login page when 'Already have an Account? Login Here' is clicked", () => {
+  it("Test Case 3: Navigates to login page when 'Already have an Account? Login' is clicked", () => {
     render(
       <MemoryRouter>
         <RegistrationPage />
       </MemoryRouter>
     );
 
-    const loginText = screen.getByText("Already have an Account? Login Here");
+    const loginText = screen.getByText("Already have an Account? Login");
     fireEvent.click(loginText);
 
     expect(mockNavigate).toHaveBeenCalledWith("/login");
