@@ -68,15 +68,15 @@ const Notifications = () => {
   };
 
   return (
-    <div className="notifications-page">
-      <h1>
+    <div className="px-5 notifications-page">
+      <h1 className='my-2'>
         Accepted Jobs ({acceptedJobs.length})
         <span onClick={toggleAcceptedVisibility} style={{ cursor: 'pointer' }}>
           {isAcceptedVisible ? '▼' : '▲'}
         </span>
       </h1>
       {isAcceptedVisible && (
-        <div className="notifications-list">
+        <div className="mb-2 notifications-list">
           {acceptedJobs.length > 0 ? (
             acceptedJobs.map(job => (
               <div onClick={() => handleJobClick(job._id)} key={job._id}>
@@ -89,7 +89,7 @@ const Notifications = () => {
         </div>
       )}
 
-      <h1>
+      <h1 className='mb-2'>
         Rejected Jobs ({rejectedJobs.length})
         <span onClick={toggleRejectedVisibility} style={{ cursor: 'pointer' }}>
           {isRejectedVisible ? '▼' : '▲'}
