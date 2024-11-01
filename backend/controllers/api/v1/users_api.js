@@ -7,10 +7,10 @@ const History = require("../../../models/history");
 const Job = require("../../../models/job");
 const Application = require("../../../models/application");
 const AuthOtp = require("../../../models/authOtp");
-const sendgridTransport = require('nodemailer-sendgrid-transport');
-const crypto = require('crypto');
+const sendgridTransport = require("nodemailer-sendgrid-transport");
+const crypto = require("crypto");
 
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 const nodemailer = require("nodemailer");
 
@@ -19,24 +19,23 @@ const jwtSecret = process.env.JWT_SECRET;
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
-      api_key:
-      process.env.SENDGRID_API_KEY,
-    }
+      api_key: process.env.SENDGRID_API_KEY,
+    },
   })
 );
 
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const errorMessages = errors.array().map(error => error.msg);
+    const errorMessages = errors.array().map((error) => error.msg);
     return res.status(422).json({ errors: errorMessages });
   }
   next();
 };
 
 module.exports.createSession = [
-  body('email').isEmail().withMessage('Enter a valid email'),
-  body('password').notEmpty().withMessage('Password is required'),
+  body("email").isEmail().withMessage("Enter a valid email"),
+  body("password").notEmpty().withMessage("Password is required"),
   handleValidationErrors,
   async function (req, res) {
     try {
@@ -59,11 +58,11 @@ module.exports.createSession = [
       console.log("*******", err);
       return res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  },
 ];
 
 module.exports.forgotPassword = [
-  body('email').isEmail().withMessage('Enter a valid email'),
+  body("email").isEmail().withMessage("Enter a valid email"),
   handleValidationErrors,
   async function (req, res) {
     try {
@@ -74,24 +73,27 @@ module.exports.forgotPassword = [
       const token = jwt.sign({ id: user._id }, jwtSecret);
       const resetLink = `http://127.0.0.1:5173/reset-password?token=${token}`;
       await transporter.sendMail({
-        from: 'smarred@ncsu.edu',
+        from: "smarred@ncsu.edu",
         to: user.email,
         subject: "Password Reset Request",
         html: `<p>You requested a password reset. Click the link below to reset your password:</p><a href="${resetLink}">Reset Password</a>`,
       });
-      return res.status(200).json({ message: "Password reset link has been sent to your email" });
+      return res
+        .status(200)
+        .json({ message: "Password reset link has been sent to your email" });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  },
 ];
-
 
 // Method to reset password
 module.exports.resetPassword = [
-  body('token').notEmpty().withMessage('Token is required'),
-  body('newPassword').isLength({ min: 6 }).withMessage('New password must be at least 6 characters long'),
+  body("token").notEmpty().withMessage("Token is required"),
+  body("newPassword")
+    .isLength({ min: 6 })
+    .withMessage("New password must be at least 6 characters long"),
   handleValidationErrors,
   async function (req, res) {
     try {
@@ -108,9 +110,8 @@ module.exports.resetPassword = [
       console.error(err);
       return res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  },
 ];
-
 
 module.exports.createHistory = async function (req, res) {
   try {
@@ -140,11 +141,13 @@ module.exports.createHistory = async function (req, res) {
 };
 
 module.exports.signUp = [
-  body('email').isEmail().withMessage('Enter a valid email'),
-  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
-  body('confirm_password').custom((value, { req }) => {
+  body("email").isEmail().withMessage("Enter a valid email"),
+  body("password")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters long"),
+  body("confirm_password").custom((value, { req }) => {
     if (value !== req.body.password) {
-      throw new Error('Passwords do not match');
+      throw new Error("Passwords do not match");
     }
     return true;
   }),
@@ -154,22 +157,32 @@ module.exports.signUp = [
       let user = await User.findOne({ email: req.body.email });
       if (user) {
         return res.status(200).json({
-          message: "Sign Up Successful, here is your token, please keep it safe",
-          data: { token: jwt.sign(user.toJSON(), jwtSecret, { expiresIn: "100000" }), user },
+          message:
+            "Sign Up Successful, here is your token, please keep it safe",
+          data: {
+            token: jwt.sign(user.toJSON(), jwtSecret, { expiresIn: "100000" }),
+            user,
+          },
           success: true,
         });
       }
-      user = await User.create({ ...req.body, password: await bcrypt.hash(req.body.password, 10) });
+      user = await User.create({
+        ...req.body,
+        password: await bcrypt.hash(req.body.password, 10),
+      });
       return res.status(200).json({
         message: "Sign Up Successful, here is your token, please keep it safe",
-        data: { token: jwt.sign(user.toJSON(), jwtSecret, { expiresIn: "100000" }), user },
+        data: {
+          token: jwt.sign(user.toJSON(), jwtSecret, { expiresIn: "100000" }),
+          user,
+        },
         success: true,
       });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  },
 ];
 
 module.exports.getProfile = async function (req, res) {
@@ -609,33 +622,99 @@ module.exports.verifyOtp = async function (req, res) {
   }
 };
 
-const natural = require('natural');
+const natural = require("natural");
 
 // Comprehensive list of known skills (technical, non-technical, and data-oriented)
 const knownSkills = [
   // Technical Skills
-  "JavaScript", "Python", "Java", "SQL", "React", "Node.js",
-  "HTML", "CSS", "C#", "C++", "Go", "PHP", "Ruby", "Django",
-  "Flask", "Kubernetes", "Docker", "AWS", "Azure", "Git",
-  "Machine Learning", "Data Science", "DevOps", "Cybersecurity",
-  "Mobile Development", "Software Engineering", "API Development",
-  "GraphQL", "TypeScript", "Swift", "Objective-C",
+  "JavaScript",
+  "Python",
+  "Java",
+  "SQL",
+  "React",
+  "Node.js",
+  "HTML",
+  "CSS",
+  "C#",
+  "C++",
+  "Go",
+  "PHP",
+  "Ruby",
+  "Django",
+  "Flask",
+  "Kubernetes",
+  "Docker",
+  "AWS",
+  "Azure",
+  "Git",
+  "Machine Learning",
+  "Data Science",
+  "DevOps",
+  "Cybersecurity",
+  "Mobile Development",
+  "Software Engineering",
+  "API Development",
+  "GraphQL",
+  "TypeScript",
+  "Swift",
+  "Objective-C",
 
   // Data-Oriented Skills
-  "Microsoft Excel", "Microsoft Word", "Microsoft PowerPoint", "Tableau",
-  "Apache Spark", "Hadoop", "Data Visualization", "Data Analysis",
-  "Google Analytics", "SQL Server", "Oracle", "Power BI", "Looker",
+  "Microsoft Excel",
+  "Microsoft Word",
+  "Microsoft PowerPoint",
+  "Tableau",
+  "Apache Spark",
+  "Hadoop",
+  "Data Visualization",
+  "Data Analysis",
+  "Google Analytics",
+  "SQL Server",
+  "Oracle",
+  "Power BI",
+  "Looker",
 
   // Non-Technical Skills
-  "Communication", "Teamwork", "Problem Solving", "Leadership",
-  "Project Management", "Time Management", "Critical Thinking",
-  "Creativity", "Adaptability", "Interpersonal Skills", "Conflict Resolution",
-  "Negotiation", "Customer Service", "Analytical Skills", "Presentation Skills",
-  "Research", "Collaboration", "Emotional Intelligence"
+  "Communication",
+  "Teamwork",
+  "Problem Solving",
+  "Leadership",
+  "Project Management",
+  "Time Management",
+  "Critical Thinking",
+  "Creativity",
+  "Adaptability",
+  "Interpersonal Skills",
+  "Conflict Resolution",
+  "Negotiation",
+  "Customer Service",
+  "Analytical Skills",
+  "Presentation Skills",
+  "Research",
+  "Collaboration",
+  "Emotional Intelligence",
 ];
 
 // Common English stop words to exclude from skill extraction
-const stopWords = ["the", "is", "and", "in", "for", "to", "with", "a", "an", "of", "on", "by", "that", "this", "are", "be", "should"];
+const stopWords = [
+  "the",
+  "is",
+  "and",
+  "in",
+  "for",
+  "to",
+  "with",
+  "a",
+  "an",
+  "of",
+  "on",
+  "by",
+  "that",
+  "this",
+  "are",
+  "be",
+  "should",
+];
 
 // Helper function to convert to camel case
 const toCamelCase = (str) => {
@@ -655,13 +734,15 @@ module.exports.extractSkills = async (req, res) => {
     const tokens = tokenizer.tokenize(description.toLowerCase());
 
     // Filter out common stop words and create a unique set of tokens
-    const uniqueTerms = Array.from(new Set(tokens.filter(token => !stopWords.includes(token))));
+    const uniqueTerms = Array.from(
+      new Set(tokens.filter((token) => !stopWords.includes(token)))
+    );
 
     // Initialize an array to hold found skills
     const foundSkills = [];
 
     // Check for known skills in the description
-    knownSkills.forEach(skill => {
+    knownSkills.forEach((skill) => {
       const lowerCaseSkill = skill.toLowerCase();
 
       // Check for exact matches in the tokenized description

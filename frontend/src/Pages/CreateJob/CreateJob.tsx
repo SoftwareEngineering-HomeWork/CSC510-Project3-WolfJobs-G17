@@ -49,11 +49,12 @@ const CreateJob = () => {
     } else {
       setShowExtractJobButton(false);
     }
-  }
+  };
 
   const extractSkills = () => {
-    axios.post("http://localhost:8000/api/v1/users/extractSkills", {
-        description
+    axios
+      .post("http://localhost:8000/api/v1/users/extractSkills", {
+        description,
       })
       .then((res) => {
         if (res.status !== 200) {
@@ -63,7 +64,7 @@ const CreateJob = () => {
           setRequiredSkills(res.data.skills);
         }
       });
-  }
+  };
 
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
@@ -99,7 +100,9 @@ const CreateJob = () => {
             </div>
             <div className="inline-flex items-center flex-row  ">
               <AiFillCheckCircle color="#CBCBCB" size="20px" />
-              <span className="ml-2 text-xl text-[#CBCBCB]">Fill Questionnaire</span>
+              <span className="ml-2 text-xl text-[#CBCBCB]">
+                Fill Questionnaire
+              </span>
             </div>
             <div className="inline-flex items-center flex-row  ">
               <AiFillCheckCircle color="#CBCBCB" size="20px" />
@@ -213,23 +216,20 @@ const CreateJob = () => {
                   minRows={4}
                   multiline
                 />
-                {
-                  showExtractJobButton
-                  && (
-                    <Button
-                      type="button"
-                      variant="outlined"
-                      style={{
-                        textTransform: "none",
-                        fontSize: "16px",
-                        minWidth: "200px",
-                      }}
-                      onClick={extractSkills}
-                    >
-                      Extract & Autofill Skills
-                    </Button>
-                  )
-                }
+                {showExtractJobButton && (
+                  <Button
+                    type="button"
+                    variant="outlined"
+                    style={{
+                      textTransform: "none",
+                      fontSize: "16px",
+                      minWidth: "200px",
+                    }}
+                    onClick={extractSkills}
+                  >
+                    Extract & Autofill Skills
+                  </Button>
+                )}
                 <TextField
                   label="Required Skills"
                   type="text"

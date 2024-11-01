@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { useDropzone, DropzoneOptions, FileRejection } from 'react-dropzone';
+import React, { useCallback } from "react";
+import { useDropzone, DropzoneOptions, FileRejection } from "react-dropzone";
 
 interface ResumeDropzoneProps {
   onFileUpload: (acceptedFiles: File[]) => void; // Define the type here
@@ -25,15 +25,21 @@ const ResumeDropzone: React.FC<ResumeDropzoneProps> = ({ onFileUpload }) => {
     maxSize: 15 * 1024 * 1024, // 15 MB limit
   };
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone(dropzoneOptions);
+  const { getRootProps, getInputProps, isDragActive } =
+    useDropzone(dropzoneOptions);
 
   return (
-    <div {...getRootProps()} className="flex items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer">
+    <div
+      {...getRootProps()}
+      className="flex items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer"
+    >
       <input {...getInputProps()} />
       {isDragActive ? (
         <p className="text-gray-700">Drop the files here ...</p>
       ) : (
-        <p className="text-gray-700">Drag 'n' drop your resume here, or click to select it</p>
+        <p className="text-gray-700">
+          Drag 'n' drop your resume here, or click to select it
+        </p>
       )}
     </div>
   );

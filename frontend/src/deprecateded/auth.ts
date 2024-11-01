@@ -1,6 +1,11 @@
 import { toast } from "react-toastify";
 import { getFormBody } from "./apiUtils";
-import { loginURL, signupURL, forgotPasswordURL, resetPasswordURL } from "../api/constants";
+import {
+  loginURL,
+  signupURL,
+  forgotPasswordURL,
+  resetPasswordURL,
+} from "../api/constants";
 
 export async function login(email: string, password: string, navigate: any) {
   const url = loginURL;
@@ -42,7 +47,11 @@ export function sendForgotPasswordEmail(email: string, navigate: any) {
     });
 }
 
-export function resetPassword(token: string, newPassword: string, navigate: any) {
+export function resetPassword(
+  token: string,
+  newPassword: string,
+  navigate: any
+) {
   const url = resetPasswordURL;
   fetch(url, {
     method: "POST",

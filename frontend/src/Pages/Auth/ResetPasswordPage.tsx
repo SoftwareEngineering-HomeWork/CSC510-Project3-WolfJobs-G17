@@ -3,7 +3,13 @@ import { resetPassword } from "../../deprecateded/auth"; // Ensure this function
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Stack, TextField, Button, IconButton, InputAdornment } from "@mui/material";
+import {
+  Stack,
+  TextField,
+  Button,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 
@@ -23,7 +29,7 @@ const schema = yup.object({
 const ResetPasswordPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const token = queryParams.get('token');
+  const token = queryParams.get("token");
   console.log(token);
   const navigate = useNavigate();
 

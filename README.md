@@ -32,17 +32,15 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript)
 ![SendGrid](https://img.shields.io/badge/SendGrid-4E3D6E?style=for-the-badge&logo=sendgrid)
 
-
 # What's New:
 
 **Enhanced User Experience, Security, and Functionality!**
+
 - **Strengthened Security**: Enhanced security by implementing password hashing for database storage and using JSON Web Tokens (JWT) to improve authentication processes.
 - **Forgot and Reset Password Functionality**: Added a "Forgot Password" feature, allowing users to securely reset their passwords if needed.
 - **Automated Email Notifications**: Integrated an email service to automatically notify users when they request a password reset, provided their account exists in the database.
-- **Resolved Security Vulnerabilities**:  Fixed a critical issue in the previous version that allowed login through direct links, ensuring proper verification of users and passwords for secure access.
+- **Resolved Security Vulnerabilities**: Fixed a critical issue in the previous version that allowed login through direct links, ensuring proper verification of users and passwords for secure access.
 - **Field Validations** : Implemented comprehensive input validations to ensure data accuracy and enhance the reliability of the application. This includes measures to validate user inputs on the frontend, such as enforcing minimum password lengths and ensuring that fields meet specific criteria. Additionally, backend validations have been established to reinforce database security, preventing unauthorized access and safeguarding against potential vulnerabilities.
-
-
 
 # Presentation Video
 
@@ -85,23 +83,28 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 ## Manager Side
 
 ### Manager Sign Up
+
 ![Manager Sign Up](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Manager%20-%20Sign%20Up.gif)
 
 ### Manager Login
+
 ![Manager Login](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Manager%20-%20Login.gif)
 
 ### Edit Profile
+
 ![Edit Profile](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Open%20%26%20Edit%20Profile.gif)
 
 ### Add/Close Job
+
 ![Add/Close Job](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Add%20%26%20Close%20Job.gif)
 
 ### Screening
+
 ![Screening](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Manager%20-%20Screening.gif)
 
 ### Review & Accept Applications
-![Review Applications](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Manager%20-%20Grade%2C%20Review%20%26%20Accept%20Candidates.gif)
 
+![Review Applications](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Manager%20-%20Grade%2C%20Review%20%26%20Accept%20Candidates.gif)
 
 # Installation Instructions for Project Setup
 
@@ -164,12 +167,11 @@ Your app is ready to be deployed!
 
 **5. Interview Appointment Scheduling📆** – WolfJobs will also provide the facility for the hiring manager to organize an interview appointment for the job based on applicant’s availability and convenient time uploaded by the hiring manager. Either of the users can upload their availability time in the G-sheet and using google calendar appointments can be organised.
 
-**6. Candidate Matching Percentage** – WolfJobs applicant skill matching feature will include a percentage to how fit a candidate's skills are based on the job's required skills. Applicants will see a match percentage indicating how likely they are to get accepted and recieve an interview. 
+**6. Candidate Matching Percentage** – WolfJobs applicant skill matching feature will include a percentage to how fit a candidate's skills are based on the job's required skills. Applicants will see a match percentage indicating how likely they are to get accepted and recieve an interview.
 
 **7. Matching based on Resume** – WolfJobs applicants will be able to parse their resume and WolfJobs will extract key skills from the resume and compare it with required job skills to give candidates job matching status.
 
 **8. Database Security and Hashing** – WolfJobs currently does not securely store the password and user information in the database. This data needs to be protected and hashed to ensure security.
-
 
 # Contributors
 
@@ -180,12 +182,11 @@ Your app is ready to be deployed!
     <td align="center"><a href="https://github.com/Janhavi-23"><img src="https://avatars.githubusercontent.com/Janhavi-23" width="100px;" alt=""/><br /><b>Janhavi Pendse</b></a><br /></td>
     <td align="center"><a href="https://github.com/deepp2905"><img src="https://avatars.githubusercontent.com/deepp2905" width="100px;" alt=""/><br /><b>Deep Patel</b></a><br /></td>
 
-
-   
   </tr>
 </table>
 
 ## Iteration 2:
+
  <table>
   <tr>
     <td align="center"><a href="https://github.com/sanjitkverma"><img src="https://avatars.githubusercontent.com/sanjitkverma" width="100px;" alt=""/><br /><b>Sanjit Verma</b></a></td>
@@ -193,12 +194,11 @@ Your app is ready to be deployed!
     <td align="center"><a href="https://github.com/Harris-A-Khan"><img src="https://avatars.githubusercontent.com/Harris-A-Khan" width="100px;" alt=""/><br /><b>Harris Khan </b></a><br /></td>
     <td align="center"><a href="https://github.com/Sarvesh-Somasundaram"><img src="https://avatars.githubusercontent.com/Sarvesh-Somasundaram" width="100px;" alt=""/><br /><b>Sarvesh Somasundaram</b></a><br /></td>
 
-
-   
   </tr>
 </table>
 
 ## Iteration 3:
+
 <table>
   <tr>
     <td align="center"><a href="https://github.com/vineel31"><img src="https://avatars.githubusercontent.com/vineel31" width="100px;" alt=""/><br /><b>Sai Vineel Reddy Marreddy</b></a></td>
