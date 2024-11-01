@@ -136,7 +136,7 @@ const LoginPage = () => {
           </div>
           <br />
           <p
-            className="text-[#656565] text-center hover:text-blue-500 cursor-pointer"
+            className="text-[#656565] text-center"
             onClick={() => {
               navigate("/register");
             }}
@@ -145,7 +145,11 @@ const LoginPage = () => {
           </p>
         </div>
       </div>
-      {/* <DevTool control={control}></DevTool> */}
+      {/* Footer Section */}
+      <footer className="mt-8 text-center text-gray-500">
+        <p>Contact us at: <a href="mailto:support12@gmail.com" className="text-blue-600 underline">support12@gmail.com</a></p>
+        <p>&copy; Copyright@2024</p>
+      </footer>
     </>
   );
 };
