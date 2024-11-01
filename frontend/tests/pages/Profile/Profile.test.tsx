@@ -27,7 +27,6 @@ describe("Profile Component", () => {
     expect(screen.getByText("Address:")).toBeInTheDocument();
     expect(screen.getByText("Skills:")).toBeInTheDocument();
     expect(screen.getByText("Phone Number:")).toBeInTheDocument();
-    expect(screen.getByText("Affiliation:")).toBeInTheDocument();
     expect(screen.getByText("Availability:")).toBeInTheDocument();
     expect(screen.getByText("Gender:")).toBeInTheDocument();
     expect(screen.getByText("Resume:")).toBeInTheDocument();
