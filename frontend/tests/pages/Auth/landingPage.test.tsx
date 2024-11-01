@@ -6,6 +6,7 @@ import axios from "axios";
 import { vi } from "vitest";
 import { login } from "../../../src/deprecateded/auth";
 
+
 vi.mock("axios");
 vi.mock("../../../src/deprecateded/auth", () => ({
   login: vi.fn(),
@@ -121,5 +122,28 @@ describe("LoginPage - Tests", () => {
       textTransform: "none",
       fontSize: "16px",
     });
+  });
+
+  it("toggles password visibility when icon is clicked", () => {
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
+
+    const passwordField = screen.getByLabelText(/Password/i);
+
+    const passwordFieldParent = passwordField.parentElement!;
+    const toggleButton = passwordFieldParent.querySelector("button");
+
+    expect(toggleButton).toBeInTheDocument();
+
+    expect(passwordField).toHaveAttribute("type", "password");
+
+    fireEvent.click(toggleButton!);
+    expect(passwordField).toHaveAttribute("type", "text");
+
+    fireEvent.click(toggleButton!);
+    expect(passwordField).toHaveAttribute("type", "password");
   });
 });
