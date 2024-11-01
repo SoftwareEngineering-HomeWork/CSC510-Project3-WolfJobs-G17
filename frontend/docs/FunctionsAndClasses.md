@@ -159,3 +159,35 @@ data: {
 application,
 },
 success: true
+
+### IX. Function Reset Password
+
+#### Parameters: 
+- `token`: Token received from the reset password email link
+- `newPassword`: New password provided by the user
+- `confirmPassword`: Confirmation of the new password to ensure they match
+
+#### Method: "POST"
+
+#### Description:
+Handles the reset of a user's password. Validates that the new password and confirmation password match. Makes an API call with the provided token and new password. On success, redirects the user to the login page. Shows an alert in case of an error.
+
+#### Output:
+- Success message: "Password reset successful"
+- Error: "Error resetting password"
+
+---
+
+### X. Function Forgot Password
+
+#### Parameters: 
+- `email`: Email ID of the user who requests a password reset
+
+#### Method: "POST"
+
+#### Description:
+Sends a password reset email to the user. Validates the email and, if it exists, sends a reset link to the email address. The user can use this link to reset their password.
+
+#### Output:
+- Success message: "Reset link sent to your email"
+- Error: Appropriate error message (e.g., if email is invalid)
