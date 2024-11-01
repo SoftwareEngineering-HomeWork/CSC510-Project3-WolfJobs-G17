@@ -42,6 +42,14 @@
 - **Resolved Security Vulnerabilities**: Fixed a critical issue in the previous version that allowed login through direct links, ensuring proper verification of users and passwords for secure access.
 - **Field Validations** : Implemented comprehensive input validations to ensure data accuracy and enhance the reliability of the application. This includes measures to validate user inputs on the frontend, such as enforcing minimum password lengths and ensuring that fields meet specific criteria. Additionally, backend validations have been established to reinforce database security, preventing unauthorized access and safeguarding against potential vulnerabilities.
 
+**Resume Upload Fix, Skill Extraction, Error Handling and Invalid Data Request!**
+
+- **User Experience:** Simplified the job creation process for managers by providing a button to filter and select relevant skills, reducing manual effort.
+- **Autofill & Extract Skills:** Implemented automatic skill extraction from job descriptions, separating skills with commas for easier readability and input.
+- **Resume Upload Issue:** Resolved a critical issue that previously prevented users from uploading resumes, ensuring proper upload and viewing capabilities.
+- **Error Management:** Improved error handling on both the frontend and backend, offering clear, descriptive messages to inform users about the status of their requests.
+- **Handling Invalid Data Request:** Enforced role-based access control for job creation, restricting applicants from adding jobs and ensuring only authorized users have the required permissions.
+
 # Presentation Video
 
 [![Watch the video](https://github.com/deepr41/WolfJobs/blob/master/GIFs/Video%20Thumbnail.png)](http://www.youtube.com/watch?v=kMgLUrDiYEw)
