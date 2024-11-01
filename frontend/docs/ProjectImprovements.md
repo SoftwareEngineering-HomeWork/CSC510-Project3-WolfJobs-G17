@@ -67,3 +67,19 @@ Previously the jobs did not have the department name. We added department for ea
 #### Styling improvements
 
 Design improvements were made to make the app more user friendly and intuitive. Previously, there were many design inconsistencies like no landing page for the website, the button shapes, icon colors and fonts did not match everywhere. These were fixed by implementing a lot of changes in the frontend. All of these changes can be viewed in the feature videos in the main README.
+
+**Enhanced User Experience, Security, and Functionality!**
+
+- **Strengthened Security**: Enhanced security by implementing password hashing for database storage and using JSON Web Tokens (JWT) to improve authentication processes.
+- **Forgot and Reset Password Functionality**: Added a "Forgot Password" feature, allowing users to securely reset their passwords if needed.
+- **Automated Email Notifications**: Integrated an email service to automatically notify users when they request a password reset, provided their account exists in the database.
+- **Resolved Security Vulnerabilities**: Fixed a critical issue in the previous version that allowed login through direct links, ensuring proper verification of users and passwords for secure access.
+- **Field Validations** : Implemented comprehensive input validations to ensure data accuracy and enhance the reliability of the application. This includes measures to validate user inputs on the frontend, such as enforcing minimum password lengths and ensuring that fields meet specific criteria. Additionally, backend validations have been established to reinforce database security, preventing unauthorized access and safeguarding against potential vulnerabilities.
+
+**Resume Upload Fix, Skill Extraction, Error Handling and Invalid Data Request!**
+
+- **User Experience:** Simplified the job creation process for managers by providing a button to filter and select relevant skills, reducing manual effort.
+- **Autofill & Extract Skills:** Implemented automatic skill extraction from job descriptions, separating skills with commas for easier readability and input.
+- **Resume Upload Issue:** Resolved a critical issue that previously prevented users from uploading resumes, ensuring proper upload and viewing capabilities.
+- **Error Management:** Improved error handling on both the frontend and backend, offering clear, descriptive messages to inform users about the status of their requests.
+- **Handling Invalid Data Request:** Enforced role-based access control for job creation, restricting applicants from adding jobs and ensuring only authorized users have the required permissions.
