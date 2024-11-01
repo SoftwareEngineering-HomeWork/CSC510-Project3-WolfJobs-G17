@@ -8,6 +8,7 @@ import { useJobStore } from "../../store/JobStore";
 import { useApplicationStore } from "../../store/ApplicationStore";
 import JobListTile from "../../components/Job/JobListTile";
 import { Button } from "@mui/material";
+// import Menu from "../../components/Header/Menu";
 
 const Dashboard = () => {
   const naviagte = useNavigate();
@@ -119,6 +120,7 @@ const Dashboard = () => {
     <>
       <div className="content bg-slate-50">
         <div className="flex flex-row" style={{ height: "calc(100vh - 72px)" }}>
+          
           <>
             <div className="w-4/12 pt-2 overflow-x-hidden overflow-y-scroll bg-white/60 px-9">
               <div className="py-4 text-2xl">
