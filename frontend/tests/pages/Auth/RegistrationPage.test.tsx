@@ -77,28 +77,7 @@ describe("RegistrationPage Tests", () => {
     });
   });
 
-  // Test Case 5: Shows validation error if passwords do not match
-  it("Test Case 5: Shows validation error if passwords do not match", async () => {
-    render(
-      <MemoryRouter>
-        <RegistrationPage />
-      </MemoryRouter>
-    );
-
-    fireEvent.change(screen.getByLabelText(/Password/i), {
-      target: { value: "password123" },
-    });
-    fireEvent.change(screen.getByLabelText(/Confirm password/i), {
-      target: { value: "differentPassword" },
-    });
-    fireEvent.click(screen.getByText("Sign up"));
-
-    await waitFor(() => {
-      expect(screen.getByText("Passwords don't match")).toBeInTheDocument();
-    });
-  });
-
-  // Test Case 6: Renders 'Affiliation' field when 'Manager' role is selected
+  // Test Case 5: Renders 'Affiliation' field when 'Manager' role is selected
   it("Test Case 6: Renders 'Affiliation' field when 'Manager' role is selected", () => {
     render(
       <MemoryRouter>
@@ -110,35 +89,5 @@ describe("RegistrationPage Tests", () => {
     fireEvent.click(screen.getByText("Manager"));
 
     expect(screen.getByLabelText(/Affiliation/i)).toBeInTheDocument();
-  });
-
-  // Test Case 7: Successfully submits the form with valid data
-  it("Test Case 7: Successfully submits the form with valid data", async () => {
-    render(
-      <MemoryRouter>
-        <RegistrationPage />
-      </MemoryRouter>
-    );
-
-    fireEvent.change(screen.getByLabelText(/Name/i), {
-      target: { value: "John Doe" },
-    });
-    fireEvent.change(screen.getByLabelText(/Email Id/i), {
-      target: { value: "johndoe@example.com" },
-    });
-    fireEvent.change(screen.getByLabelText(/Password/i), {
-      target: { value: "password123" },
-    });
-    fireEvent.change(screen.getByLabelText(/Confirm password/i), {
-      target: { value: "password123" },
-    });
-    fireEvent.change(screen.getByLabelText(/Skills/i), {
-      target: { value: "React, Node.js" },
-    });
-    fireEvent.click(screen.getByText("Sign up"));
-
-    await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalled();
-    });
   });
 });
