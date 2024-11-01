@@ -31,13 +31,12 @@ We have created labels for each issue for proper ordering and this will help you
 ## How can I contribute?
 
 <h3 id="section2"> Reporting bugs</h3>
-<p>This section guides you through submitting a bug report for SE Group 28. </p>
+<p>This section guides you through submitting a bug report for SE Group 50. </p>
 
 When you are creating a bug report, please include as many details as possible to understand the issue.
 
 <b>How Do I Submit A Bug Report?</b>
-Bugs are tracked as GitHub issues. After you've determined which repository your bug is related to, create an issue on that repository.
-Explain the problem and include additional details to help maintainers reproduce the problem:
+Bugs are recorded as GitHub issues. Once you've identified the repository connected to your bug, create an issue within that repository. Describe the problem thoroughly and provide any extra information that may assist maintainers in replicating the issue:
 
   <ul>
   <li><b>Use a clear and descriptive title</b> for the issue to identify the problem.</li>
