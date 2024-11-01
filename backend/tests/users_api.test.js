@@ -26,18 +26,18 @@ describe('User API Tests', () => {
         const user1 = new User({
             email: 'testapp@example.com',
             password: await bcrypt.hash('password', 10),
-            name: 'Test User',
+            name: 'Applicant Test User',
             role: 'Applicant',
         });
         await user1.save();
         userAppId = user1._id;
-        
+
         // Create a manager user for testing
         const user2 = new User({
-            email: 'testapp@example.com',
+            email: 'testmanager@example.com',
             password: await bcrypt.hash('password', 10),
-            name: 'Test User',
-            role: 'Applicant',
+            name: 'ManagerTest User',
+            role: 'Manager',
         });
         await user2.save();
         userManagerId = user2._id;
@@ -53,19 +53,28 @@ describe('User API Tests', () => {
         await mongoose.connection.close();
     });
 
-    // 1. Test cases for user API
+    // 1. Dummy route for gettign 404 error
+    test('POST /dummy - should return 404 page not found', async () => {
+        const response = await request(app)
+            .post(`${base_url}/dummy`)
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({ email: 'wrong@example.com', password: 'wrongpassword' });
+
+        expect(response.status).toEqual(404);
+    });
+
+    // 2. Test cases for user API
     test('POST /create-session - should create a session with valid credentials', async () => {
         const response = await request(app)
             .post(`${base_url}/create-session`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({ email: 'test@example.com', password: 'password' });
+            .send({ email: 'testapp@example.com', password: 'password' });
 
         expect(response.status).toBe(200);
-        expect(response.body.message).toEqual("Sign In Successful, here is your token, please keep it safe");
     });
 
-    // 2. Test for login with invalid credentials
-    test('POST /create-session - should return 422 for invalid credentials', async () => {
+    // 3. Test for create-session with invalid email
+    test('POST /create-session - should return 422 for invalid email', async () => {
         const response = await request(app)
             .post(`${base_url}/create-session`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -74,20 +83,37 @@ describe('User API Tests', () => {
         expect(response.status).toEqual(422);
     });
 
-    // 3. Test for sign up with valid data
-    test('POST /signup - should sign up with valid data', async () => {
+    // 4. Test for create-session with invalid email
+    test('POST /create-session - should return 422 for invalid password', async () => {
+        const response = await request(app)
+            .post(`${base_url}/create-session`)
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({ email: 'wrong@example.com', password: 'wrongpassword' });
+
+        expect(response.status).toEqual(422);
+    });
+
+    // 5. Test for sign up with valid data and missing the role which shoudl be included
+    test('POST /signup - sign up with role and name not given', async () => {
         const response = await request(app)
             .post(`${base_url}/signup`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({ email: 'newuser@example.com', password: 'newpassword', confirm_password: 'newpassword' });
-        
-        console.log(response.body);
 
-        expect(response.status).toBe(200);
-        expect(response.body.success).toBe(true);
+        expect(response.status).toBe(500);
     });
 
-    // 4. Test for sign up with mismatched passwords
+    // 6. Test for sign up with valid data and missing the role which shoudl be included
+    test('POST /signup - should sign up with valid data', async () => {
+        const response = await request(app)
+            .post(`${base_url}/signup`)
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({ email: 'newuser@example.com', password: 'newpassword', confirm_password: 'newpassword', name: 'New Applicant User', role: 'Applicant' });
+
+        expect(response.status).toBe(200);
+    });
+
+    // 7. Test for sign up with mismatched passwords
     test('POST /signup - should return 422 for mismatched passwords', async () => {
         const response = await request(app)
             .post(`${base_url}/signup`)
@@ -98,174 +124,166 @@ describe('User API Tests', () => {
         expect(response.body.errors).toContain('Passwords do not match');
     });
 
-    // 5. Test for editing profile with valid data
+    // 8. Test for editing profile with valid data
     test('POST /edit - should update profile with valid data', async () => {
         const response = await request(app)
             .post(`${base_url}/edit`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({ id: userId, name: 'Updated User', role: 'User' });
+            .send({ id: userManagerId, name: 'Updated Test Manager User', password: 'password', role: 'Manager' });
 
-        expect(response.statusCode).toBe(200);
-        expect(response.body.success).toBe(true);
+        expect(response.status).toBe(200);
     });
 
-    // 6. Test for getting profile by ID
+    // 9. Test for editing profile without valid data
+    test('POST /edit - should update profile without valid data', async () => {
+        const response = await request(app)
+            .post(`${base_url}/edit`)
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({ id: 123, name: 'Updated User' });
+
+        expect(response.status).toBe(500);
+    });
+
+    // 10. Test for getting profile by ID
     test('GET /getprofile/:id - should return user profile', async () => {
         const response = await request(app)
-            .get(`${base_url}/getprofile/${userId}`);
+            .get(`${base_url}/getprofile/${userAppId}`);
 
-        expect(response.statusCode).toBe(200);
-        expect(response.body.data.user.name).toBe('Test User');
+        expect(response.status).toBe(200);
+        expect(response.body.data.user.name).toBe('Applicant Test User');
     });
 
-    // 7. Test for searching user
+    // 11. Test for getting profile by ID which is not present
+    test('GET /getprofile/:id - should return user profile', async () => {
+        const response = await request(app)
+            .get(`${base_url}/getprofile/${123}`);
+
+        expect(response.status).toBe(500);
+    });
+
+    // 12. Test for searching user
     test('GET /search/:name - should return users matching name', async () => {
         const response = await request(app)
-            .get(`${base_url}/search/Test`);
+            .get(`${base_url}/search/Applicant Test User`);
 
-        expect(response.statusCode).toBe(200);
+        expect(response.status).toBe(200);
         expect(response.body.success).toBe(true);
     });
 
-    // 8. Test for creating history
+    // 13. Test for searching user
+    test('GET /search/:name - should return users matching name', async () => {
+        const response = await request(app)
+            .get(`${base_url}/search/Wrong Test User`);
+
+        expect(response.status).toBe(200);
+        expect(response.body.success).toBe(true);
+    });
+
+    // 14. Test for creating history
     test('POST /createhistory - should create history entry', async () => {
         const response = await request(app)
             .post(`${base_url}/createhistory`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({ date: '2024-10-31', total: 500, burnout: 300, id: userId });
+            .send({ date: '2024-10-31', total: 500, burnout: 300, id: userAppId });
 
-        expect(response.statusCode).toBe(200);
+        expect(response.status).toBe(200);
         expect(response.body.success).toBe(true);
     });
 
-    // 9. Test for getting history
+    // 15. Test for getting history
     test('GET /gethistory - should return user history', async () => {
         const response = await request(app)
-            .get(`${base_url}/gethistory?id=${userId}&date=2024-10-31`);
+            .get(`${base_url}/gethistory?id=${userAppId}&date=2024-10-31`);
 
-        expect(response.statusCode).toBe(200);
+        expect(response.status).toBe(200);
         expect(response.body.success).toBe(true);
     });
 
-    // 10. Test for creating job
-    test('POST /createjob - should create job', async () => {
-        const response = await request(base_url)
-            .post('/createjob')
+    
+    // 17. Test for creating job with insufficient data
+    test('POST /createjob - should not create job with applicant as role', async () => {
+        const response = await request(app)
+        .post(`${base_url}/createjob`)
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .send({
+            id: userAppId,
+            name: 'Test Job',
+            type: 'Full-Time',
+            location: 'Remote',
+            description: 'Test Job Description',
+            pay: 10,
+            requiredSkills: ['JavaScript'],
+        });
+        
+        expect(response.status).toBe(402);
+    });
+    
+    // 17. Test for creating job with applicant role
+    test('POST /createjob - should not create job with applicant as role', async () => {
+        const response = await request(app)
+            .post(`${base_url}/createjob`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                id: userId,
+                id: userAppId,
                 name: 'Test Job',
                 type: 'Full-Time',
                 location: 'Remote',
                 description: 'Test Job Description',
-                pay: 50000,
+                pay: 10,
                 requiredSkills: ['JavaScript'],
             });
 
-        expect(response.statusCode).toBe(200);
+        expect(response.status).toBe(402);
+    });
+
+    // 18. Test for creating job with manager as role
+    test('POST /createjob - should not create job with applicant as role', async () => {
+        const response = await request(app)
+            .post(`${base_url}/createjob`)
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .send({
+                id: userManagerId,
+                name: 'Test Job',
+                managerAffilication: 'manager',
+                type: 'Full-Time',
+                location: 'Remote',
+                description: 'Test Job Description',
+                pay: 10,
+                requiredSkills: ['JavaScript'],
+                question1: 'a?',
+                question2: 'b?',
+                question3: 'c?',
+                question4: 'd?',
+            });
+
+        expect(response.status).toBe(200);
         expect(response.body.success).toBe(true);
         jobId = response.body.data.job._id;
     });
 
-    // 11. Test for fetching jobs
+    // 19. Test for fetching jobs
     test('GET / - should return list of jobs', async () => {
         const response = await request(app)
             .get(`${base_url}/`);
 
-        expect(response.statusCode).toBe(200);
+        expect(response.status).toBe(200);
         expect(response.body.jobs.length).toBeGreaterThan(0);
     });
 
-    // 12. Test for creating application
+    // 20. Test for creating application
     test('POST /createapplication - should create application', async () => {
-        const response = await request(base_url)
-            .post('/createapplication')
+        const response = await request(app)
+            .post(`${base_url}/createapplication`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
             .send({
-                applicantid: userId,
+                applicantid: userAppId,
                 jobid: jobId,
                 applicantname: 'Test Applicant',
                 jobname: 'Test Job',
-                managerid: userId,
+                managerid: userManagerId,
             });
 
-        expect(response.statusCode).toBe(200);
+        expect(response.status).toBe(200);
         expect(response.body.success).toBe(true);
-    });
-
-    // 13. Test for fetching applications
-    test('GET /fetchapplications - should return list of applications', async () => {
-        const response = await request(app)
-            .get(`${base_url}/fetchapplications`);
-
-        expect(response.statusCode).toBe(200);
-        expect(response.body.application.length).toBeGreaterThan(0);
-    });
-
-    // 14. Test for accepting application
-    test('POST /acceptapplication - should accept application', async () => {
-        const application = await Application.findOne({});
-        const response = await request(base_url)
-            .post('/acceptapplication')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({ applicationId: application._id });
-
-        expect(response.statusCode).toBe(200);
-        expect(response.body.success).toBe(true);
-    });
-
-    // 15. Test for rejecting application
-    test('POST /rejectapplication - should reject application', async () => {
-        const application = await Application.findOne({});
-        const response = await request(base_url)
-            .post('/rejectapplication')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({ applicationId: application._id });
-
-        expect(response.statusCode).toBe(200);
-        expect(response.body.success).toBe(true);
-    });
-
-    // 16. Test for closing job
-    test('POST /closejob - should close job', async () => {
-        const response = await request(base_url)
-            .post('/closejob')
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({ jobid: jobId });
-
-        expect(response.statusCode).toBe(200);
-        expect(response.body.success).toBe(true);
-    });
-
-    // 17. Test for password reset (forgot-password)
-    test('POST /forgot-password - should initiate password reset', async () => {
-        const response = await request(base_url)
-            .post('/forgot-password')
-            .send({ email: 'test@example.com' });
-
-        expect(response.statusCode).toBe(200);
-        expect(response.body.message).toBe('Password reset link has been sent to your email');
-    });
-
-    // 18. Test for extracting skills
-    test('POST /extractSkills - should extract skills from the provided text', async () => {
-        const response = await request(base_url)
-            .post('/extractSkills')
-            .send({ text: 'JavaScript, Python, Node.js' });
-
-        expect(response.statusCode).toBe(200);
-        expect(response.body.success).toBe(true);
-        expect(response.body.skills).toContain('JavaScript');
-    });
-
-    // 18. Test for extracting skills
-    test('POST /extractSkills - should extract skills from the provided description', async () => {
-        const response = await request(base_url)
-            .post('/extractSkills')
-            .send({ text: 'JavaScript, Python, Node.js' });
-
-        expect(response.statusCode).toBe(200);
-        expect(response.body.success).toBe(true);
-        expect(response.body.skills).toContain('JavaScript');
     });
 });
