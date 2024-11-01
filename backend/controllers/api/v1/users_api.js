@@ -265,7 +265,7 @@ module.exports.searchUser = async function (req, res) {
   try {
     var regex = new RegExp(req.params.name, "i");
 
-    let users = await Job.find({ name: regex });
+    let users = await User.find({ name: regex });
     res.set("Access-Control-Allow-Origin", "*");
     return res.json(200, {
       message: "The list of Searched Users",

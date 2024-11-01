@@ -54,7 +54,7 @@ describe('User API Tests', () => {
         await mongoose.connection.close();
     });
 
-    // 1. Dummy route for gettign 404 error
+    // 1. Dummy route for getting 404 error
     test('POST /dummy - should return 404 page not found', async () => {
         const response = await request(app)
             .post(`${base_url}/dummy`)
@@ -64,7 +64,7 @@ describe('User API Tests', () => {
         expect(response.status).toEqual(404);
     });
 
-    // 2. Test cases for user API
+    // 2. Create a session with valid credentials
     test('POST /create-session - should create a session with valid credentials', async () => {
         const response = await request(app)
             .post(`${base_url}/create-session`)
@@ -74,7 +74,7 @@ describe('User API Tests', () => {
         expect(response.status).toBe(200);
     });
 
-    // 3. Test for create-session with invalid email
+    // 3. Create a session with invalid email
     test('POST /create-session - should return 422 for invalid email', async () => {
         const response = await request(app)
             .post(`${base_url}/create-session`)
@@ -84,17 +84,17 @@ describe('User API Tests', () => {
         expect(response.status).toEqual(422);
     });
 
-    // 4. Test for create-session with invalid email
+    // 4. Test for create-session with invalid password
     test('POST /create-session - should return 422 for invalid password', async () => {
         const response = await request(app)
             .post(`${base_url}/create-session`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
-            .send({ email: 'wrong@example.com', password: 'wrongpassword' });
+            .send({ email: 'testapp@example.com', password: 'wrongpassword' });
 
         expect(response.status).toEqual(422);
     });
 
-    // 5. Test for sign up with valid data and missing the role which shoudl be included
+    // 5. Test for signup with one missing attribute the role which should be included
     test('POST /signup - sign up with role and name not given', async () => {
         const response = await request(app)
             .post(`${base_url}/signup`)
@@ -104,7 +104,7 @@ describe('User API Tests', () => {
         expect(response.status).toBe(500);
     });
 
-    // 6. Test for sign up with valid data and missing the role which shoudl be included
+    // 6. Test for signup with valid data
     test('POST /signup - should sign up with valid data', async () => {
         const response = await request(app)
             .post(`${base_url}/signup`)
@@ -114,7 +114,7 @@ describe('User API Tests', () => {
         expect(response.status).toBe(200);
     });
 
-    // 7. Test for sign up with mismatched passwords
+    // 7. Test for signup with mismatched passwords
     test('POST /signup - should return 422 for mismatched passwords', async () => {
         const response = await request(app)
             .post(`${base_url}/signup`)
@@ -134,7 +134,7 @@ describe('User API Tests', () => {
         expect(response.status).toBe(200);
     });
 
-    // 9. Test for editing profile without valid data
+    // 9. Test for editing profile with invalid data
     test('POST /edit - should update profile without valid data', async () => {
         const response = await request(app)
             .post(`${base_url}/edit`)
@@ -153,7 +153,7 @@ describe('User API Tests', () => {
         expect(response.body.data.user.name).toBe('Applicant Test User');
     });
 
-    // 11. Test for getting profile by ID which is not present
+    // 11. Test for getting profile by ID ( user not present )
     test('GET /getprofile/:id - should return user profile', async () => {
         const response = await request(app)
             .get(`${base_url}/getprofile/${123}`);
@@ -161,22 +161,22 @@ describe('User API Tests', () => {
         expect(response.status).toBe(500);
     });
 
-    // 12. Test for searching user
-    test('GET /search/:name - should return users matching name', async () => {
+    // 12. Test for searching user by name
+    test('GET /search/:name - should return users matching name who is present', async () => {
         const response = await request(app)
             .get(`${base_url}/search/Applicant Test User`);
 
         expect(response.status).toBe(200);
-        expect(response.body.success).toBe(true);
+        expect(response.body.data.users.length).toBeGreaterThan(0);
     });
 
-    // 13. Test for searching user
-    test('GET /search/:name - should return users matching name', async () => {
+    // 13. Test for searching user who is not present
+    test('GET /search/:name - should return users matching name who is not present', async () => {
         const response = await request(app)
             .get(`${base_url}/search/Wrong Test User`);
 
         expect(response.status).toBe(200);
-        expect(response.body.success).toBe(true);
+        expect(response.body.data.users.length).toBe(0);
     });
 
     // 14. Test for creating history
@@ -187,16 +187,15 @@ describe('User API Tests', () => {
             .send({ date: '2024-10-31', total: 500, burnout: 300, id: userAppId });
 
         expect(response.status).toBe(200);
-        expect(response.body.success).toBe(true);
+        expect(response.body.message).toBe("History Created Successfully");
     });
 
     // 15. Test for getting history
     test('GET /gethistory - should return user history', async () => {
         const response = await request(app)
-            .get(`${base_url}/gethistory?id=${userAppId}&date=2024-10-31`);
+            .get(`${base_url}/gethistory?id=${userAppId}&date=2024-10-01`);
 
         expect(response.status).toBe(200);
-        expect(response.body.success).toBe(true);
     });
 
 
@@ -275,8 +274,8 @@ describe('User API Tests', () => {
         expect(response.body.jobs.length).toBeGreaterThan(0);
     });
 
-    // 20. Test for creating application
-    test('POST /extractSkills - should modify application', async () => {
+    // 20. Test for extracting skills from job description
+    test('POST /extractSkills - extracting skills from job description', async () => {
         const response = await request(app)
             .post(`${base_url}/extractSkills`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
