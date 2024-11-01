@@ -187,3 +187,78 @@ res.json(500, {
       message: "NOT CREATED",
     });
 ```
+
+# APIs
+
+## Forgot Password
+
+Method: `POST`
+
+`/api/v1/users/forgot-password`
+
+Response: 1
+
+```sh
+res.status(404).json({
+      message: "User not found",
+    });
+
+res.status(200).json({
+      message: "Password reset link has been sent to your email",
+    });
+
+res.status(500).json({
+      message: "Internal Server Error",
+    });
+
+
+# APIs
+
+## Reset Password
+
+Method: `POST`
+
+`/api/v1/users/reset-password`
+
+### Description:
+This API allows a user to reset their password using a token received from the password reset email. The request must include the token and the new password.
+
+### Request Body:
+- `token`: The reset token received via email (string, required)
+- `newPassword`: The new password to be set (string, required, minimum 6 characters)
+
+### Response:
+
+**Response 1: User Not Found**
+```sh
+res.status(404).json({
+  message: "User not found",
+});
+
+res.status(200).send({
+  message: "Password reset successful",
+});
+
+res.status(500).json({
+  message: "Internal Server Error",
+});
+
+{
+  "token": "exampleResetToken123",
+  "newPassword": "newSecurePassword"
+}
+
+{
+  "message": "Password reset successful"
+}
+
+{
+  "message": "User not found"
+}
+
+{
+  "message": "Internal Server Error"
+}
+
+This provides a complete and well-formatted description for the **Reset Password** API, including details on the request, expected responses, and example JSON objects.
+
