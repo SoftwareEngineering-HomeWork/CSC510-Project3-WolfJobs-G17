@@ -113,7 +113,7 @@ describe("LoginPage - Tests", () => {
     expect(passwordField).toHaveValue("password123");
   });
 
-  // Test 8: Renders form submit button with correct styling
+  // Test 7: Renders form submit button with correct styling
   it("renders login button with correct styling", () => {
     render(
       <MemoryRouter>
