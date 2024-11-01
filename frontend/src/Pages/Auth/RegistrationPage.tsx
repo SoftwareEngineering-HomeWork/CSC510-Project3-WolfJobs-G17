@@ -239,7 +239,7 @@ const RegistrationPage = () => {
               navigate("/login");
             }}
           >
-            Already have an Account? Login Here
+            Already have an Account? <span className="text-[#656565] text-center hover:text-blue-500 cursor-pointer">Login Here</span>
           </p>
         </div>
       </div>

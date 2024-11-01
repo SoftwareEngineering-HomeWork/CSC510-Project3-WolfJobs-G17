@@ -136,7 +136,7 @@ const LoginPage = () => {
           </div>
           <br />
           <p
-            className="text-[#656565] text-center"
+            className="text-[#656565] text-center hover:text-blue-500 cursor-pointer"
             onClick={() => {
               navigate("/register");
             }}
