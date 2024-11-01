@@ -4,6 +4,8 @@
     "natural": "^8.0.1"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.0.1",
+    "@types/testing-library__react": "^10.0.1",
     "prettier": "^3.3.3"
   },
   "scripts": {
