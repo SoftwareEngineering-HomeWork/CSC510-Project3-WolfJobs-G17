@@ -1,12 +1,11 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
-import LoginPage from "../../../src/Pages/Auth/LoginPage"; // Adjust the import path as necessary
+import LoginPage from "../../../src/Pages/Auth/LoginPage";
 import { MemoryRouter } from "react-router";
 import axios from "axios";
 import { vi } from "vitest";
-import { login } from "../../../src/deprecateded/auth"; // Adjust the import path as necessary
+import { login } from "../../../src/deprecateded/auth";
 
-// Mock axios and login requests
 vi.mock("axios");
 vi.mock("../../../src/deprecateded/auth", () => ({
   login: vi.fn(),
@@ -21,7 +20,6 @@ describe("LoginPage - Tests", () => {
     mockedAxios.post = vi.fn();
   });
 
-  // Test 1: Renders the LoginPage component
   it("renders LoginPage with essential elements", () => {
     render(
       <MemoryRouter>
@@ -34,7 +32,6 @@ describe("LoginPage - Tests", () => {
     expect(screen.getByText("Sign In to your Account")).toBeInTheDocument();
   });
 
-  // Test 2: Shows validation error when email is empty
   it("shows email validation error when empty", async () => {
     render(
       <MemoryRouter>
@@ -48,7 +45,6 @@ describe("LoginPage - Tests", () => {
     });
   });
 
-  // Test 3: Shows validation error when password is empty
   it("shows password validation error when empty", async () => {
     render(
       <MemoryRouter>
@@ -62,7 +58,6 @@ describe("LoginPage - Tests", () => {
     });
   });
 
-  // Test 4: Displays email format error for invalid email
   it("shows email format error when email is invalid", async () => {
     render(
       <MemoryRouter>
@@ -80,7 +75,6 @@ describe("LoginPage - Tests", () => {
     });
   });
 
-  // Test 5: Allows valid email format without errors
   it("accepts a valid email format", async () => {
     render(
       <MemoryRouter>
@@ -100,7 +94,6 @@ describe("LoginPage - Tests", () => {
     });
   });
 
-  // Test 6: Allows typing in password field
   it("accepts input in the password field", () => {
     render(
       <MemoryRouter>
@@ -113,7 +106,6 @@ describe("LoginPage - Tests", () => {
     expect(passwordField).toHaveValue("password123");
   });
 
-  // Test 7: Renders form submit button with correct styling
   it("renders login button with correct styling", () => {
     render(
       <MemoryRouter>
@@ -124,10 +116,57 @@ describe("LoginPage - Tests", () => {
     const loginButton = screen.getByRole("button", { name: /login/i });
     expect(loginButton).toBeInTheDocument();
     expect(loginButton).toHaveStyle({
-      background: "#FF5353", // Adjust to your actual button styling
+      background: "#FF5353",
       borderRadius: "10px",
       textTransform: "none",
       fontSize: "16px",
     });
+  });
+
+  it("toggles password visibility when icon is clicked", () => {
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
+
+    const passwordField = screen.getByLabelText(/Password/i);
+    const passwordFieldParent = passwordField.parentElement!;
+    const toggleButton = passwordFieldParent.querySelector("button");
+
+    expect(toggleButton).toBeInTheDocument();
+    expect(passwordField).toHaveAttribute("type", "password");
+
+    fireEvent.click(toggleButton!);
+    expect(passwordField).toHaveAttribute("type", "text");
+
+    fireEvent.click(toggleButton!);
+    expect(passwordField).toHaveAttribute("type", "password");
+  });
+
+  it("navigates to Forgot Password page on link click", () => {
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
+
+    const forgotPasswordLink = screen.getByText("Forgot Password?");
+    expect(forgotPasswordLink).toBeInTheDocument();
+
+    fireEvent.click(forgotPasswordLink);
+  });
+
+  it("navigates to Register page on link click", () => {
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
+
+    const registerLink = screen.getByText("Create a new account");
+    expect(registerLink).toBeInTheDocument();
+
+    fireEvent.click(registerLink);
   });
 });
