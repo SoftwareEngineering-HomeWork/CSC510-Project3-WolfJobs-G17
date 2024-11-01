@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-      process.env.SENDGRID_API_KEY,
+        process.env.SENDGRID_API_KEY,
     }
   })
 );
@@ -296,35 +296,42 @@ module.exports.getHistory = async function (req, res) {
 module.exports.createJob = async function (req, res) {
   let user = await User.findOne({ _id: req.body.id });
   check = req.body.skills;
-  try {
-    let job = await Job.create({
-      name: req.body.name,
-      managerid: user._id,
-      managerAffilication: user.affiliation,
-      type: req.body.type,
-      location: req.body.location,
-      description: req.body.description,
-      pay: req.body.pay,
-      requiredSkills: req.body.requiredSkills,
-      question1: req.body.question1,
-      question2: req.body.question2,
-      question3: req.body.question3,
-      question4: req.body.question4,
-    });
-    res.set("Access-Control-Allow-Origin", "*");
-    return res.json(200, {
-      data: {
-        job: job,
-        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
-      },
-      message: "Job Created!!",
-      success: true,
-    });
-  } catch (err) {
-    console.log(err);
 
-    return res.json(500, {
-      message: "NOT CREATED",
+  if (user.role === 'Manager') {
+    try {
+      let job = await Job.create({
+        name: req.body.name,
+        managerid: user._id,
+        managerAffilication: user.affiliation,
+        type: req.body.type,
+        location: req.body.location,
+        description: req.body.description,
+        pay: req.body.pay,
+        requiredSkills: req.body.requiredSkills,
+        question1: req.body.question1,
+        question2: req.body.question2,
+        question3: req.body.question3,
+        question4: req.body.question4,
+      });
+      res.set("Access-Control-Allow-Origin", "*");
+      return res.json(200, {
+        data: {
+          job: job,
+          //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
+        },
+        message: "Job Created!!",
+        success: true,
+      });
+    } catch (err) {
+      console.log(err);
+
+      return res.json(500, {
+        message: "NOT CREATED",
+      });
+    }
+  } else {
+    return res.json(402, {
+      message: "Not authorized",
     });
   }
 };
