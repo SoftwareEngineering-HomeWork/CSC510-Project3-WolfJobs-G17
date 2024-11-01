@@ -1,168 +1,125 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import LandingPage from "../../../src/Pages/Auth/landingPage";
-import { useNavigate } from "react-router-dom";
-import { axe, toHaveNoViolations } from "jest-axe";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import React from "react";
+import LoginPage from "../../../src/Pages/Auth/LoginPage";
+import { MemoryRouter } from "react-router";
+import axios from "axios";
+import { vi } from "vitest";
+import { login } from "../../../src/deprecateded/auth";
 
-expect.extend(toHaveNoViolations);
-
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: jest.fn(),
+vi.mock("axios");
+vi.mock("../../../src/deprecateded/auth", () => ({
+  login: vi.fn(),
 }));
 
-describe("LandingPage Component", () => {
-  const navigate = useNavigate();
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+const mockedLogin = login as jest.Mock;
 
-
-  test("renders heading text correctly", () => {
-    render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>
-    );
-
-    const headingText = screen.getByText(/We understand that being a student can be/i);
-    expect(headingText).toBeInTheDocument();
+describe("LoginPage - Tests", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockedAxios.post = vi.fn();
   });
 
-  test("renders description text correctly", () => {
+  it("renders LoginPage with essential elements", () => {
     render(
       <MemoryRouter>
-        <LandingPage />
+        <LoginPage />
       </MemoryRouter>
     );
 
-    const descriptionText = screen.getByText(/Join our dynamic team right here on campus/i);
-    expect(descriptionText).toBeInTheDocument();
+    expect(screen.getByLabelText(/Email Id/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
+    expect(screen.getByText("Sign In to your Account")).toBeInTheDocument();
   });
 
-  test("renders Sign Up and Login buttons", () => {
+  it("shows email validation error when empty", async () => {
     render(
       <MemoryRouter>
-        <LandingPage />
+        <LoginPage />
       </MemoryRouter>
     );
 
-    const signUpButton = screen.getByRole("button", { name: /Sign Up/i });
-    const loginButton = screen.getByRole("button", { name: /Login/i });
-    
-    expect(signUpButton).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Login"));
+    await waitFor(() => {
+      expect(screen.getByText("Email is required")).toBeInTheDocument();
+    });
+  });
+
+  it("shows password validation error when empty", async () => {
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
+
+    fireEvent.click(screen.getByText("Login"));
+    await waitFor(() => {
+      expect(screen.getByText("Password is required")).toBeInTheDocument();
+    });
+  });
+
+  it("shows email format error when email is invalid", async () => {
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
+
+    fireEvent.change(screen.getByLabelText(/Email Id/i), {
+      target: { value: "invalid-email" },
+    });
+    fireEvent.click(screen.getByText("Login"));
+
+    await waitFor(() => {
+      expect(screen.getByText("Email format is not valid")).toBeInTheDocument();
+    });
+  });
+
+  it("accepts a valid email format", async () => {
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
+
+    fireEvent.change(screen.getByLabelText(/Email Id/i), {
+      target: { value: "test@example.com" },
+    });
+    fireEvent.click(screen.getByText("Login"));
+
+    await waitFor(() => {
+      expect(
+        screen.queryByText("Email format is not valid")
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  it("accepts input in the password field", () => {
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
+
+    const passwordField = screen.getByLabelText(/Password/i);
+    fireEvent.change(passwordField, { target: { value: "password123" } });
+    expect(passwordField).toHaveValue("password123");
+  });
+
+  it("renders login button with correct styling", () => {
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
+
+    const loginButton = screen.getByRole("button", { name: /login/i });
     expect(loginButton).toBeInTheDocument();
-  });
-
-  test("renders image with alt text", () => {
-    render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>
-    );
-
-    const image = screen.getByAltText("Landing Page Image");
-    expect(image).toBeInTheDocument();
-  });
-
-
-  test("navigates to register page on Sign Up click", () => {
-    render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>
-    );
-
-    const signUpButton = screen.getByRole("button", { name: /Sign Up/i });
-    fireEvent.click(signUpButton);
-
-    expect(navigate).toHaveBeenCalledWith("/register");
-  });
-
-  test("navigates to login page on Login click", () => {
-    render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>
-    );
-
-    const loginButton = screen.getByRole("button", { name: /Login/i });
-    fireEvent.click(loginButton);
-
-    expect(navigate).toHaveBeenCalledWith("/login");
-  });
-
-
-  test("matches snapshot", () => {
-    const { asFragment } = render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>
-    );
-
-    expect(asFragment()).toMatchSnapshot();
-  });
-
- 
-  test("should have no accessibility violations", async () => {
-    const { container } = render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>
-    );
-
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
-  });
-
-
-  test("renders correctly on mobile screen", () => {
-    window.innerWidth = 375; 
-    render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>
-    );
-
-    const headingText = screen.getByText(/challenging/i);
-    expect(headingText).toBeInTheDocument();
-  });
-
-  test("renders correctly on desktop screen", () => {
-    window.innerWidth = 1280; 
-    render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>
-    );
-
-    const headingText = screen.getByText(/challenging/i);
-    expect(headingText).toBeInTheDocument();
-  });
-
-  test("focus moves to Sign Up button on Tab key press", () => {
-    render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>
-    );
-
-    const signUpButton = screen.getByRole("button", { name: /Sign Up/i });
-    signUpButton.focus();
-    expect(signUpButton).toHaveFocus();
-  });
-
-  test("focus moves to Login button on Tab key press after Sign Up button", () => {
-    render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>
-    );
-
-    const signUpButton = screen.getByRole("button", { name: /Sign Up/i });
-    const loginButton = screen.getByRole("button", { name: /Login/i });
-
-    signUpButton.focus();
-    expect(signUpButton).toHaveFocus();
-
-    loginButton.focus();
-    expect(loginButton).toHaveFocus();
+    expect(loginButton).toHaveStyle({
+      background: "#FF5353",
+      borderRadius: "10px",
+      textTransform: "none",
+      fontSize: "16px",
+    });
   });
 });
