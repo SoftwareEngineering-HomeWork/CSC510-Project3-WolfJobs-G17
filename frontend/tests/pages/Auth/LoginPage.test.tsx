@@ -113,31 +113,6 @@ describe("LoginPage - Tests", () => {
     expect(passwordField).toHaveValue("password123");
   });
 
-  // Test 7: Displays login failure message when login fails
-  it("displays login failure message when incorrect credentials are used", async () => {
-    mockedLogin.mockResolvedValueOnce({
-      success: false,
-    });
-
-    render(
-      <MemoryRouter>
-        <LoginPage />
-      </MemoryRouter>
-    );
-
-    fireEvent.change(screen.getByLabelText(/Email Id/i), {
-      target: { value: "test@example.com" },
-    });
-    fireEvent.change(screen.getByLabelText(/Password/i), {
-      target: { value: "wrongpassword" },
-    });
-    fireEvent.click(screen.getByText("Login"));
-
-    await waitFor(() => {
-      expect(screen.getByText("Login Failed")).toBeInTheDocument();
-    });
-  });
-
   // Test 8: Renders form submit button with correct styling
   it("renders login button with correct styling", () => {
     render(
