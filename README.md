@@ -70,7 +70,11 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 
 ### Signup & Login
 
-![Signup & Login](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Student%20-%20Sign%20Up%20%26%20Login.gif)
+![Signup & Login](https://github.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/blob/New_CSC510-G50-WolfJobs/GIFs/login-signup_Til7yvJH.mp4)
+
+### Reset Password
+
+![Reset Password](https://github.com/CSC510-SE-Uddharsh-Vineel-Chandrakant/CSC510-WolfJobs-G50/blob/New_CSC510-G50-WolfJobs/GIFs/reset-password.mov)
 
 ### Student Applies for Job
 
