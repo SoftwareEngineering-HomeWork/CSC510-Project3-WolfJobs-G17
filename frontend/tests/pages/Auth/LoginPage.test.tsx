@@ -94,7 +94,9 @@ describe("LoginPage - Tests", () => {
     fireEvent.click(screen.getByText("Login"));
 
     await waitFor(() => {
-      expect(screen.queryByText("Email format is not valid")).not.toBeInTheDocument();
+      expect(
+        screen.queryByText("Email format is not valid")
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -153,5 +155,4 @@ describe("LoginPage - Tests", () => {
       fontSize: "16px",
     });
   });
-
 });

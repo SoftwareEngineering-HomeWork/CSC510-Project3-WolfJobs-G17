@@ -4,7 +4,13 @@ import { login } from "../../deprecateded/auth";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Stack, TextField, Button, InputAdornment, IconButton } from "@mui/material";
+import {
+  Stack,
+  TextField,
+  Button,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material"; // Import icons
 
 type FormValues = {
@@ -82,7 +88,8 @@ const LoginPage = () => {
                         onClick={() => setShowPassword((prev) => !prev)} // Toggle password visibility
                         edge="end"
                       >
-                        {showPassword ? <VisibilityOff /> : <Visibility />} {/* Show icon based on state */}
+                        {showPassword ? <VisibilityOff /> : <Visibility />}{" "}
+                        {/* Show icon based on state */}
                       </IconButton>
                     </InputAdornment>
                   ),

@@ -5,8 +5,8 @@ import { useUserStore } from "../../store/UserStore";
 import { toast } from "react-toastify";
 
 const Resume: React.FC = () => {
-  const [file, setFile] = useState<File | null>(null);           // Stores the file selected for upload
-  const [fileUrl, setFileUrl] = useState<string | null>(null);    // Stores the URL for viewing the resume
+  const [file, setFile] = useState<File | null>(null); // Stores the file selected for upload
+  const [fileUrl, setFileUrl] = useState<string | null>(null); // Stores the URL for viewing the resume
 
   // Get existing resume details from the global store
   const resumeName = useUserStore((state) => state.resume);
@@ -32,20 +32,26 @@ const Resume: React.FC = () => {
     formData.append("id", userId);
 
     try {
-      const response = await axios.post("http://localhost:8000/users/uploadresume", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await axios.post(
+        "http://localhost:8000/users/uploadresume",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       if (response.status === 201) {
         const { fileUrl: newFileUrl } = response.data;
 
         if (newFileUrl) {
-          setFileUrl(newFileUrl);  // Update local file URL for immediate view
-          updateResume(file.name);  // Update resume name in the global store
-          updateResumeId(userId);   // Update resume ID in the global store
+          setFileUrl(newFileUrl); // Update local file URL for immediate view
+          updateResume(file.name); // Update resume name in the global store
+          updateResumeId(userId); // Update resume ID in the global store
         }
-        
-        toast.success("Resume uploaded successfully! Please sign out and sign in to view changes");
+
+        toast.success(
+          "Resume uploaded successfully! Please sign out and sign in to view changes"
+        );
       } else {
         toast.error("Unexpected response status. Please try again.");
         console.error("Unexpected response status:", response.status);
@@ -59,7 +65,9 @@ const Resume: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="w-1/3">
-        <ResumeDropzone onFileUpload={(acceptedFiles) => setFile(acceptedFiles[0])} />
+        <ResumeDropzone
+          onFileUpload={(acceptedFiles) => setFile(acceptedFiles[0])}
+        />
         <div className="flex flex-row">
           <button
             onClick={handleSubmit}

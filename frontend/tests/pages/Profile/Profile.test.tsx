@@ -4,7 +4,6 @@ import { MemoryRouter } from "react-router-dom";
 import Profile from "../../../src/Pages/Profile/Profile";
 
 describe("Profile Component", () => {
-  
   it("renders Profile component without crashing", () => {
     // Render the Profile component inside a memory router
     render(
@@ -41,12 +40,11 @@ describe("Profile Component", () => {
       </MemoryRouter>
     );
 
-    const editIcon = screen.queryByText(/pencil/i); 
+    const editIcon = screen.queryByText(/pencil/i);
     if (editIcon) {
       fireEvent.click(editIcon);
 
-
-      expect(screen.queryByText("Editing Profile")).toBeInTheDocument(); 
+      expect(screen.queryByText("Editing Profile")).toBeInTheDocument();
     }
   });
   it("renders the close icon in edit mode", () => {
@@ -59,7 +57,7 @@ describe("Profile Component", () => {
     const editIcon = screen.queryByText(/pencil/i);
     if (editIcon) {
       fireEvent.click(editIcon);
-      const closeIcon = screen.queryByText(/close/i); 
+      const closeIcon = screen.queryByText(/close/i);
       expect(closeIcon).toBeInTheDocument();
     }
   });
@@ -69,7 +67,6 @@ describe("Profile Component", () => {
         <Profile />
       </MemoryRouter>
     );
-
 
     expect(screen.queryByText("Profile")).toBeInTheDocument();
   });
@@ -90,17 +87,16 @@ describe("Profile Component", () => {
       fireEvent.click(closeIcon); // Toggle back to view mode
     }
 
-
     expect(screen.queryByText("Profile")).toBeInTheDocument();
   });
-  
+
   it("does not display close icon initially", () => {
     render(
       <MemoryRouter>
         <Profile />
       </MemoryRouter>
     );
-  
+
     expect(screen.queryByText(/close/i)).not.toBeInTheDocument();
   });
   it("displays profile information correctly after entering edit mode", () => {
@@ -109,12 +105,10 @@ describe("Profile Component", () => {
         <Profile />
       </MemoryRouter>
     );
-  
 
     const editIcon = screen.queryByText(/pencil/i);
     if (editIcon) {
       fireEvent.click(editIcon);
-  
 
       expect(screen.queryByText("Editing Profile")).toBeInTheDocument();
     }
@@ -125,52 +119,43 @@ describe("Profile Component", () => {
         <Profile />
       </MemoryRouter>
     );
-  
+
     expect(screen.queryByText("Profile")).toBeInTheDocument();
-  
 
     const editIcon = screen.queryByText(/pencil/i);
     if (editIcon) {
       fireEvent.click(editIcon);
     }
-  
 
     expect(screen.queryByText("Profile")).toBeInTheDocument();
-  
 
     const closeIcon = screen.queryByText(/close/i);
     if (closeIcon) {
       fireEvent.click(closeIcon);
     }
-  
 
     expect(screen.queryByText("Profile")).toBeInTheDocument();
   });
-  
+
   it("can toggle to edit mode and back to view mode without errors", () => {
     render(
       <MemoryRouter>
         <Profile />
       </MemoryRouter>
     );
-  
- 
+
     const editIcon = screen.queryByText(/pencil/i);
     if (editIcon) {
       fireEvent.click(editIcon);
 
       expect(screen.queryByText(/close/i)).toBeInTheDocument();
     }
-  
 
     const closeIcon = screen.queryByText(/close/i);
     if (closeIcon) {
       fireEvent.click(closeIcon);
-  
+
       expect(screen.queryByText(/pencil/i)).toBeInTheDocument();
     }
   });
-  
-  
-  
 });

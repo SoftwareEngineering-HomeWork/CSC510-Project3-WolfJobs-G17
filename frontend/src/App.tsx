@@ -84,12 +84,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/resumeviewer/:applicantId"
-            element={
-                <ResumeViewer />
-            }
-          />
+          <Route path="/resumeviewer/:applicantId" element={<ResumeViewer />} />
           <Route
             path="/resume"
             element={
