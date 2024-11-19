@@ -12,12 +12,20 @@ def fetch_wolfjobs():
         response = requests.get(url)
         response.raise_for_status()
         tree = html.fromstring(response.content)
-        positions = tree.xpath('//a[@class="ce-jazzhr-job"]')
-        total_listings = len(positions)
-        departments = tree.xpath('//a[@class="ce-jazzhr-dept"]')
-        total_dept = len(departments)
+        listings = tree.xpath('//a[@class="ce-jazzhr-job"]')
+        total_listings = len(listings)
+        dept = tree.xpath('//a[@class="ce-jazzhr-dept"]')
+        
+        i=0
+        positions = []
+        links = []
+        departments = []
 
-        print(total_listings, total_dept)
+        while i<total_listings:
+            positions.append(listings[i].text_content().strip())
+            links.append(listings[i].get('href').strip())
+            departments.append(dept[i].text_content().strip())
+            i += 1
     
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {e}")
