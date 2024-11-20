@@ -19,6 +19,7 @@ import JobPreview from "./Pages/CreateJob/jobPreview";
 import Resume from "./Pages/Resume/Resume";
 import ResumeViewer from "./components/Resume/ResumeViewer";
 import Notifications from "./Pages/Notifications/Notifications";
+import OTPVerification from "./Pages/Auth/OTPVerification";
 
 const App = () => {
   return (
@@ -84,6 +85,12 @@ const App = () => {
             path="/resumeviewer/:applicantId"
             element={
                 <ResumeViewer />
+            }
+          />
+          <Route
+            path="/verify-otp"
+            element={
+                <OTPVerification />
             }
           />
           <Route

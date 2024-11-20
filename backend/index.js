@@ -27,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static("./assets"));
 
 app.use(expressLayouts);
+app.use(express.json())
 
 app.set("layout extractStyles", true);
 app.set("layout extractScripts", true);
@@ -59,6 +60,7 @@ app.use(passport.setAuthenticatedUser);
 //Use express router
 
 app.use("/", require("./routes"));
+app.use('/api/auth', require('./routes/auth'));
 
 app.listen(port, function (err) {
   if (err) {
