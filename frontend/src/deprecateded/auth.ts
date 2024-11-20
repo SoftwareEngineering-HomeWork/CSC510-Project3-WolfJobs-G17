@@ -52,7 +52,7 @@ export function signup(
     .then((data) => {
       if (data.success) {
         localStorage.setItem("token", data.data.token);
-        navigate("/dashboard");
+        navigate("/login");
         return;
       }
       toast.error("Sign up Failed");
