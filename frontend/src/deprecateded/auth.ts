@@ -3,37 +3,40 @@ import { getFormBody } from "./apiUtils";
 import { loginURL, signupURL } from "../api/constants";
 
 export async function login(email: string, password: string, navigate: any) {
-  const url = loginURL;
   try {
-    const response = await fetch(url, {
+    const loginResponse = await fetch(loginURL, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: getFormBody({ email, password }),
     });
-    const data = await response.json();
+    const loginData = await loginResponse.json();
     
-    if (data.success) {
-      // Instead of directly navigating, we'll trigger OTP generation
+    if (loginData.success) {
+      // Generate OTP
       const otpResponse = await fetch('http://localhost:8000/api/auth/generate-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, userId: data.data.user._id }),
+        body: JSON.stringify({ 
+          email, 
+          userId: loginData.data.user._id 
+        }),
       });
+      
       const otpData = await otpResponse.json();
       
       if (otpData.success) {
-        // Store temporary token for OTP verification
-        localStorage.setItem("tempToken", data.data.token);
+        localStorage.setItem("tempToken", loginData.data.token);
         navigate("/verify-otp", { state: { email } });
         return;
       }
     }
     toast.error("Login Failed");
   } catch (error) {
+    console.error("Login error:", error);
     toast.error("Login Failed");
   }
 }

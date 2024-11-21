@@ -2,14 +2,30 @@ const User = require("../models/user");
 const AuthOtp = require("../models/authOtp");
 const nodemailer = require("nodemailer");
 require('dotenv').config();
+const { generateOTPEmailTemplate } = require('../utils/emailTemplates');
 
 // Configure nodemailer
 const transporter = nodemailer.createTransport({
   service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  tls: {
+    rejectUnauthorized: false
+  }
+});
+
+// Test the connection
+transporter.verify(function(error, success) {
+  if (error) {
+    console.log("Email configuration error:", error);
+  } else {
+    console.log("Email server is ready to send messages");
+  }
 });
 
 module.exports.generateOTP = async function(req, res) {
@@ -20,7 +36,7 @@ module.exports.generateOTP = async function(req, res) {
     
     // Generate 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    
+    console.log("OTP generated");
     // Save OTP to database
     await AuthOtp.create({
       userId,
@@ -28,12 +44,19 @@ module.exports.generateOTP = async function(req, res) {
     });
 
     // Send email
-    await transporter.sendMail({
+    const firstName = email.split('@')[0]; // Simple way to get a name, adjust as needed
+    const htmlContent = generateOTPEmailTemplate(firstName, otp);
+    console.log("Email Created");
+
+    const mailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: "Login Verification Code",
-      text: `Your verification code is: ${otp}. This code will expire in 10 minutes.`,
-    });
+      subject: 'Your OTP for WolfJobs Verification',
+      html: htmlContent,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("Email Sent");
 
     return res.json({
       success: true,
