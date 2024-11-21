@@ -2,6 +2,9 @@ const mjml = require('mjml');
 
 const generateOTPEmailTemplate = (firstName, otp) => {
   try {
+    // Use a direct, publicly accessible URL for the image
+    const imageUrl = "https://i.ibb.co/D4h3FBS/wolfjobs.jpg"; // Replace with your actual hosted image URL
+
     const mjmlTemplate = `
     <mjml>
       <mj-head>
@@ -13,8 +16,9 @@ const generateOTPEmailTemplate = (firstName, otp) => {
         <mj-wrapper padding="0">
           <mj-section background-color="#fff" padding="20px 0">
             <mj-column>
-              <mj-image src="https://drive.google.com/file/d/1mZ_AoExkhS3MiU4xBOrTarfhwIfYnRT6/view?usp=sharing" 
-                       width="100px" 
+              <mj-image src="${imageUrl}" 
+                       alt="WolfJobs Logo"
+                       width="200px" 
                        padding="10px 0" />
             </mj-column>
           </mj-section>
@@ -22,7 +26,7 @@ const generateOTPEmailTemplate = (firstName, otp) => {
           <mj-section background-color="#356cc9" padding="0">
             <mj-column>
               <mj-text align="center" 
-                      color="#ABCDEA" 
+                      color="#ABCDEA"
                       font-size="13px" 
                       padding="28px 25px 18px">
                 HELLO
@@ -40,9 +44,9 @@ const generateOTPEmailTemplate = (firstName, otp) => {
               <mj-text align="center" 
                       color="#FFF" 
                       padding="28px 25px">
-                <span style="font-size:20px; font-weight:bold">Here is your One Time Password</span>
+                <span style="font-size:20px; font-weight:bold; ">Here is your One Time Password</span>
                 <br /><br />
-                <span style="font-size:15px">The below OTP will expire in 10 mins</span>
+                <span style="font-size:15px; ">The below OTP will expire in 10 mins</span>
                 <p style="font-size:16px; color:white; margin: 10px 0">${otp}</p>
               </mj-text>
             </mj-column>
