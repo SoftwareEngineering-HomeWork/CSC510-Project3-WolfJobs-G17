@@ -19,6 +19,7 @@ import JobPreview from "./Pages/CreateJob/jobPreview";
 import Resume from "./Pages/Resume/Resume";
 import ResumeViewer from "./components/Resume/ResumeViewer";
 import Notifications from "./Pages/Notifications/Notifications";
+import Explore_live_jobs from "./Pages/Explore/Explore_live_jobs";
 
 const App = () => {
   return (
@@ -44,6 +45,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Explore />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/livejobs"
+            element={
+              <ProtectedRoute>
+                <Explore_live_jobs />
               </ProtectedRoute>
             }
           />

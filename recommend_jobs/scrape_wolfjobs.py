@@ -26,6 +26,8 @@ def fetch_wolfjobs():
             links.append(listings[i].get('href').strip())
             departments.append(dept[i].text_content().strip())
             i += 1
+        
+        return positions,links,departments
     
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {e}")
@@ -35,4 +37,17 @@ def fetch_wolfjobs():
         print(f"Unexpected error: {e}")
         raise Exception(f"Unexpected error: {str(e)}")
         
-fetch_wolfjobs()
+@app.route('/live-wolfjobs', methods=['GET'])
+def get_lists():
+    try:
+        positions, links, departments = fetch_wolfjobs()
+        return jsonify({
+            "positions": positions,
+            "links": links,
+            "departments": departments
+        }), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5007,debug=True)
