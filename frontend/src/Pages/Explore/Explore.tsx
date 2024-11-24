@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 
 import JobsListView from "../../components/Job/JobListView";
 import JobDetailView from "../../components/Job/JobDetailView";
-import LiveJobsView from "../../components/Job/LiveJobsView";
 import { useJobStore } from "../../store/JobStore";
 import { useApplicationStore } from "../../store/ApplicationStore";
 // const userId = useUserStore((state) => state.id);
@@ -26,9 +25,8 @@ const Explore = () => {
   const updateGender = useUserStore((state) => state.updateGender);
   const updateHours = useUserStore((state) => state.updateHours);
   const updateIsLoggedIn = useUserStore((state) => state.updateIsLoggedIn);
-  const updateResume = useUserStore((state) => state.updateResume)
+  const updateResume = useUserStore((state) => state.updateResume);
   const updateResumeId = useUserStore((state) => state.updateResumeId);
-
 
   const updateApplicationList = useApplicationStore(
     (state) => state.updateApplicationList
@@ -46,10 +44,10 @@ const Explore = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredJobList, setFilteredJobList] = useState<Job[]>([]);
   const [sortHighestPay, setSortHighestPay] = useState(false);
-  const [sortAlphabeticallyByCity, setSortAlphabeticallyByCity] = useState(false);
+  const [sortAlphabeticallyByCity, setSortAlphabeticallyByCity] =
+    useState(false);
   const [sortByEmploymentType, setSortByEmploymentType] = useState(false);
-  const [showOpenJobs, setShowOpenJobs] = useState(true);  // true for open jobs, false for closed jobs
-  const [activeTab, setActiveTab] = useState("allJobs");
+  const [showOpenJobs, setShowOpenJobs] = useState(true); // true for open jobs, false for closed jobs
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -130,32 +128,37 @@ const Explore = () => {
       );
     }
 
-    if (activeTab == "allJobs") {
-      if (sortHighestPay) {
-        updatedList = [...updatedList].sort((a, b) => parseFloat(b.pay) - parseFloat(a.pay));
-      }
-  
-      if (sortAlphabeticallyByCity) {
-  
-        updatedList = [...updatedList].sort((a, b) => {
-          return a.location.localeCompare(b.location)
-        });
-      }
-  
-      if (sortByEmploymentType) {
-  
-        updatedList = [...updatedList].sort((a, b) => {
-          return a.type.localeCompare(b.type)
-        });
-      }
-  
-      updatedList = updatedList.filter(job => showOpenJobs ? job.status === "open" : job.status === "closed");
-  
+    if (sortHighestPay) {
+      updatedList = [...updatedList].sort(
+        (a, b) => parseFloat(b.pay) - parseFloat(a.pay)
+      );
     }
 
-    
+    if (sortAlphabeticallyByCity) {
+      updatedList = [...updatedList].sort((a, b) => {
+        return a.location.localeCompare(b.location);
+      });
+    }
+
+    if (sortByEmploymentType) {
+      updatedList = [...updatedList].sort((a, b) => {
+        return a.type.localeCompare(b.type);
+      });
+    }
+
+    updatedList = updatedList.filter((job) =>
+      showOpenJobs ? job.status === "open" : job.status === "closed"
+    );
+
     setFilteredJobList(updatedList);
-  }, [searchTerm, jobList, sortHighestPay, sortAlphabeticallyByCity, sortByEmploymentType, showOpenJobs]);
+  }, [
+    searchTerm,
+    jobList,
+    sortHighestPay,
+    sortAlphabeticallyByCity,
+    sortByEmploymentType,
+    showOpenJobs,
+  ]);
 
   return (
     <>
@@ -171,34 +174,31 @@ const Explore = () => {
             />
           </div>
           <div>
-            <button onClick={() => setActiveTab("allJobs")} className="p-2 ml-2 border">
-              All Jobs
+            <button onClick={handleSortChange} className="p-2 ml-2 border">
+              {sortHighestPay
+                ? "Sort by High Pay : On"
+                : "Sort by Highest Pay : Off"}
             </button>
-            <button onClick={() => setActiveTab("liveJobs")} className="p-2 ml-2 border">
-              Live Jobsss
+            <button onClick={handleSortCityChange} className="p-2 ml-2 border">
+              {sortAlphabeticallyByCity
+                ? "Sort by City : On"
+                : "Sort by City : Off"}
             </button>
-            {activeTab === "allJobs" && (
-              <>
-                <button onClick={handleSortChange} className="p-2 ml-2 border">
-                  {sortHighestPay ? "Sort by High Pay : On" : "Sort by Highest Pay : Off"}
-                </button>
-                <button onClick={handleSortCityChange} className="p-2 ml-2 border">
-                  {sortAlphabeticallyByCity ? "Sort by City : On" : "Sort by City : Off"}
-                </button>
-                <button onClick={handleSortEmploymenyTypeChange} className="p-2 ml-2 border">
-                  {sortByEmploymentType ? "Sort by Employment Type : On" : "Sort by Employment Type : Off"}
-                </button>
-                <button onClick={toggleJobStatus} className="p-2 ml-2 border">
-                  {showOpenJobs ? "Show Closed Jobs" : "Show Open Jobs"}
-                </button>
-              </>
-            )}
+            <button
+              onClick={handleSortEmploymenyTypeChange}
+              className="p-2 ml-2 border"
+            >
+              {sortByEmploymentType
+                ? "Sort by Employment Type : On"
+                : "Sort by Employment Type : Off"}
+            </button>
+            <button onClick={toggleJobStatus} className="p-2 ml-2 border">
+              {showOpenJobs ? "Show Closed Jobs" : "Show Open Jobs"}
+            </button>
           </div>
-          
         </div>
         <div className="flex flex-row" style={{ height: "calc(100vh - 72px)" }}>
-          {activeTab === "allJobs" && <JobsListView jobsList={filteredJobList} />}
-          {activeTab === "liveJobs" && <LiveJobsView />} {/* Render Live Jobs */}
+          <JobsListView jobsList={filteredJobList} />
           <JobDetailView />
         </div>
       </div>
