@@ -86,6 +86,11 @@ const applicationSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  videoblob:
+  {
+    type:Buffer,
+    default:""
+  }
 });
 
 const Application = mongoose.model("Application", applicationSchema);
