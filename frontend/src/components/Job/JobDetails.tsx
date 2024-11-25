@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { useApplicationStore } from "../../store/ApplicationStore";
 import { Stack, TextField } from "@mui/material";
 import JobManagerView from "./JobManagerView";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 type FormValues = {
   answer1: string;
@@ -17,6 +19,8 @@ type FormValues = {
 
 const JobDetail = (props: any) => {
   const { jobData }: { jobData: Job } = props;
+  const navigate = useNavigate();
+  const locations = useLocation();
 
   const jobType = jobData.type === "part-time" ? "Part time" : "Full time";
 
@@ -94,7 +98,50 @@ const JobDetail = (props: any) => {
       jobid: jobData._id,
     };
 
-    axios
+    // axios
+    //   .post("http://localhost:8000/api/v1/users/createapplication", body)
+    //   .then((res) => {
+    //     if (res.status !== 200) {
+    //       toast.error("Failed to apply");
+    //       return;
+    //     }
+    //     location.reload();
+    //     toast.success("Applied successfully");
+    //   });
+    navigate('/recordvideo', { 
+      state: { 
+        jobData, 
+        applicationData: body,
+        isVideoSubmission: false 
+      } 
+    });
+  };
+
+  useEffect(() => {
+    // Only run this effect when returning from video recording with a completed video
+    if (locations.state?.isVideoSubmission && locations.state?.blob) {
+      const { blob, applicationData } = locations.state;
+      
+      
+      // Convert blob to base64 or appropriate format for transmission
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = function() {
+        const base64Data = reader.result;
+        
+        const body = {
+          applicantname: applicantname,
+          applicantid: userId,
+          applicantemail: applicantemail,
+          applicantSkills: applicantSkills,
+          phonenumber: applicantNumber,
+          managerid: applicationData.managerid,
+          jobname: applicationData.jobname,
+          jobid: applicationData.jobid,
+          // videoblob: base64Data, // Send the converted blob          
+        };
+  
+      axios
       .post("http://localhost:8000/api/v1/users/createapplication", body)
       .then((res) => {
         if (res.status !== 200) {
@@ -103,8 +150,18 @@ const JobDetail = (props: any) => {
         }
         location.reload();
         toast.success("Applied successfully");
+      })
+      .catch((error) => {
+        console.error('Error submitting application:', error);
+        toast.error("Failed to apply");
+      })
+      .finally(() => {
+        // Reset isVideoSubmission to false after the request
+        navigate(location.pathname, { state: { ...locations.state, isVideoSubmission: false } });
       });
-  };
+  }
+    }
+  }, [locations.state]);
 
   const handleAnswerQuestionnaire = (data: FormValues) => {
     const url = "http://localhost:8000/api/v1/users/modifyApplication";
