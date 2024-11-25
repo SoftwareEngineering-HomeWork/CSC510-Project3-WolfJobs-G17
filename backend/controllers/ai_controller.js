@@ -2,7 +2,7 @@ const { OpenAI } = require("openai");
 require("dotenv").config();
 
 // Initialize OpenAI API client
-const openai = new OpenAI({apiKey: "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"});
+const openai = new OpenAI({apiKey: ""});
 
 async function extractSkillsFromText(inputText) {
   try {
