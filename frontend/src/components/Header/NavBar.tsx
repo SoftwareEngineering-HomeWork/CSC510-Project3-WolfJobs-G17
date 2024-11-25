@@ -6,6 +6,7 @@ import NavBarItem from "./NavBarItem";
 const NavBar = () => {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   const role = useUserStore((state) => state.role);
+  const userId = useUserStore((state) => state.id);
 
   const [notificationCount, setNotificationCount] = useState(0);
 
