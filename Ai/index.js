@@ -15,11 +15,6 @@ const model = new ChatGroq({
   apiKey:""
 })
 
-// const model = new ChatAnthropic({
-//   model: "claude-3-5-sonnet-20240620",
-//   apiKey:"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"
-// });
-
 
 app.post('/api/ai', async (req, res) => {
   try {
