@@ -309,10 +309,42 @@ module.exports.fetchApplication = async function (req, res) {
   });
 };
 
+module.exports.fetchspecificApplication=async function(req,res)
+{
+  console.log("Okkay we are here")
+  try {
+    const existingApplication = await Application.findOne({
+      applicantid: req.query.applicantId
+    });
+
+
+    console.log(existingApplication.videourl);
+
+    if(!existingApplication)
+    {
+      return res.json(400,{
+        data:"Application not found"
+      })
+    }
+
+    return res.json(200, {
+        blob:existingApplication.videoblob,
+    });
+  }
+  catch(err){
+    console.log(err);
+
+    return res.json(500, {
+      message: "NOT FOUND",
+    });
+  }
+}
+
 module.exports.createApplication = async function (req, res) {
   // let user = await User.findOne({ _id: req.body.id });
   // check = req.body.skills;
 
+  console.log("This is the request body",req.body);
   try {
     const existingApplication = await Application.findOne({
       applicantid: req.body.applicantId,
@@ -342,6 +374,7 @@ module.exports.createApplication = async function (req, res) {
       jobname: req.body.jobname,
       jobid: req.body.jobid,
       managerid: req.body.managerid,
+      videoblob:req.body.videoblob
     });
     res.set("Access-Control-Allow-Origin", "*");
     return res.json(200, {
