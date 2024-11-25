@@ -16,6 +16,7 @@ const model = new ChatGroq({
 })
 
 
+
 app.post('/api/ai', async (req, res) => {
   try {
     const message = req.body.text;
@@ -38,7 +39,6 @@ app.post('/api/ai', async (req, res) => {
       Non-Technical Skills:
 
       1. Strong leadership and teamwork skills, as demonstrated by taking lead in ideation and development of projects and working as part of a team to improve overall engineer experience.`
-      // string = "Technical Skills: Java, Javascript Node Non-Technical Skills Communication Teamwork Collaboration "
     }
 
     //Now that we have generated the string we store it 
