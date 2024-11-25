@@ -12,7 +12,7 @@ const parser = new StringOutputParser();
 
 const model = new ChatGroq({
   model: "mixtral-8x7b-32768",
-  apiKey:"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"
+  apiKey:""
 })
 
 // const model = new ChatAnthropic({
