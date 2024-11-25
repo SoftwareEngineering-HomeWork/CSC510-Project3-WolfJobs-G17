@@ -19,6 +19,8 @@ import JobPreview from "./Pages/CreateJob/jobPreview";
 import Resume from "./Pages/Resume/Resume";
 import ResumeViewer from "./components/Resume/ResumeViewer";
 import Notifications from "./Pages/Notifications/Notifications";
+import VideoRecorder from "./components/VideoPlayer/VideoRecorder.js";
+import PDFTextExtractor from "./components/Resume/PDFTextExtractor.js";
 
 const App = () => {
   return (
@@ -87,10 +89,24 @@ const App = () => {
             }
           />
           <Route
+            path="/resumeanalysis/:applicantId"
+            element={
+                <PDFTextExtractor />
+            }
+          />
+          <Route
             path="/resume"
             element={
               <ProtectedRoute>
                 <Resume />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/recordvideo"
+            element={
+              <ProtectedRoute>
+                <VideoRecorder />
               </ProtectedRoute>
             }
           />
