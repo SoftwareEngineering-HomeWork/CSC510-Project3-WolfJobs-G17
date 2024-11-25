@@ -359,6 +359,8 @@ module.exports.createApplication = async function (req, res) {
       });
     }
 
+    const randomBlob = Buffer.from(Math.random().toString(36)).toString('base64');
+
     let application = await Application.create({
       // applicantemail: req.body.applicantemail,
       applicantid: req.body.applicantid,
@@ -374,7 +376,7 @@ module.exports.createApplication = async function (req, res) {
       jobname: req.body.jobname,
       jobid: req.body.jobid,
       managerid: req.body.managerid,
-      videoblob:req.body.videoblob
+      videoblob:randomBlob
     });
     res.set("Access-Control-Allow-Origin", "*");
     return res.json(200, {
