@@ -1,4 +1,3 @@
-// path/to/LiveJobsView.tsx
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -24,6 +23,10 @@ const LiveJobsView = () => {
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
+
+    if (liveJobs && liveJobs.positions.length === 0) {
+        return <div>No live jobs available</div>;
+    }
 
     return (
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', backgroundColor: '#f9f9f9', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)' }}>
