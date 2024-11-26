@@ -204,12 +204,16 @@ Your app is ready to be deployed!
     <td align="center"><a href="https://github.com/Harris-A-Khan"><img src="https://avatars.githubusercontent.com/Harris-A-Khan" width="100px;" alt=""/><br /><b>Harris Khan </b></a><br /></td>
     <td align="center"><a href="https://github.com/Sarvesh-Somasundaram"><img src="https://avatars.githubusercontent.com/Sarvesh-Somasundaram" width="100px;" alt=""/><br /><b>Sarvesh Somasundaram</b></a><br /></td>
 
+    
+  </tr>
+
 ## Iteration 4:
  <table>
   <tr>
     <td align="center"><a href="https://github.com/valorant-dhruv"><img src="https://avatars.githubusercontent.com/valorant-dhruv" width="100px;" alt=""/><br /><b>Dhruv Soni</b></a></td>
     <td align="center"><a href="https://github.com/sweekar52"><img src="https://avatars.githubusercontent.com/sweekar52" width="100px;" alt=""/><br /><b>Sweekar Burji</b></a><br /></td>
     <td align="center"><a href="https://github.com/prithishsamanta"><img src="https://avatars.githubusercontent.com/prithishsamanta" width="100px;" alt=""/><br /><b>Prithish Samanta</b></a><br /></td>
+
    
   </tr>
 </table>
