@@ -206,6 +206,7 @@ Your app is ready to be deployed!
 
     
   </tr>
+  </table>
 
 ## Iteration 4:
  <table>
