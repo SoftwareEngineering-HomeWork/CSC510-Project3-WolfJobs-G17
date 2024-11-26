@@ -1,21 +1,20 @@
 ![Banner](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Banner.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm-build](https://github.com/deepr41/WolfJobs/actions/workflows/build-checker.yml/badge.svg)](https://github.com/deepr41/WolfJobs/actions/workflows/build-checker.yml)
-[![npm-build](https://github.com/deepr41/WolfJobs/actions/workflows/build-test-upload.yml/badge.svg)](https://github.com/deepr41/WolfJobs/actions/workflows/build-test-upload.yml)
+[![npm-build](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17/actions/workflows/build-checker.yml/badge.svg)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17/actions/workflows/build-checker.yml)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
-[![Issues](https://img.shields.io/github/issues/deepr41/wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
-[![Issues Closed](https://img.shields.io/github/issues-closed/deepr41/wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
-![last commit](https://img.shields.io/github/last-commit/deepr41/Wolfjobs)
+[![GitHub issues](https://img.shields.io/github/issues/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17/issues)
+[![Github closes issues](https://img.shields.io/github/issues-closed-raw/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17/issues?q=is%3Aissue+is%3Aclosed)
+![last commit](https://img.shields.io/github/last-commit/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)
 ![Lines of code](https://tokei.rs/b1/github/deepr41/wolfjobs)
-[![Repo-size](https://img.shields.io/github/repo-size/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
-[![file_count](https://img.shields.io/github/directory-file-count/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
-[![language_count](https://img.shields.io/github/languages/count/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
-[![Downloads](https://img.shields.io/github/downloads/deepr41/WolfJobs/total)](https://GitHub.com/deepr41/Wolfjobs/)
-[![Top Language](https://img.shields.io/github/languages/top/deepr41/wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
+[![Repo-size](https://img.shields.io/github/repo-size/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)
+[![file_count](https://img.shields.io/github/directory-file-count/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)
+[![language_count](https://img.shields.io/github/languages/count/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)
+[![Downloads](https://img.shields.io/github/downloads/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17/total)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)
+[![Top Language](https://img.shields.io/github/languages/top/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)
 [![DOI](https://zenodo.org/badge/429097663.svg)](https://zenodo.org/badge/latestdoi/429097663)
-[![Release](https://img.shields.io/github/v/release/deepr41/wolfjobs)](https://gitHub.com/deepr41/Wolfjobs)
-[![codecov](https://codecov.io/gh/deepr41/WolfJobs/graph/badge.svg?token=RH472ZM4PT)](https://codecov.io/gh/deepr41/WolfJobs)
+[![Release](https://img.shields.io/github/v/release/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)
+[![codecov](https://codecov.io/gh/deepr41/WolfJobs/graph/badge.svg?token=RH472ZM4PT)](https://app.codecov.io/gh/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)
 
 <!-- ![Static Badge](https://img.shields.io/badge/any_text-i_like-blue) -->
 
@@ -31,16 +30,21 @@
 
 # What's New:
 
- - **New Screens Added!**
- - Branding, Colours and Typography
- - Components & States
- - Mutliple UI Screens _flows_ for Student & Manager Roles
- - [https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs](https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs)
+We've expanded the functionality of this project by adding several innovative features to enhance user experience and streamline job-seeking and recruitment processes. Below are the key updates we've implemented:
 
- - Seamless Resume Upload and Parsing: We've made it a breeze for applicants to submit their resumes for each job posting, while employers can effortlessly access and view the stored PDFs in MongoDB.
- - Precision Application Matching: Say goodbye to the uncertainty of job applications! With our enhanced system, applicants now have the power to identify which jobs align perfectly with their skills and qualifications. WolfJobs will analyze your profile and inform you if you're a strong fit for a position.
- - Revamped Job Sorting and Search:  Our revamped job sorting and search features allows you to easily organize opportunities by pay, city, and employment type. Plus, you can perform specific job searches to find the perfect match.
-- Stay Informed with the Notifications Tab: Introduced our brand-new Notifications tab to WolfJobs. Now, you can receive timely updates on the status of your applications, ensuring you're always in the know about your job prospects. 
+- **Two-Factor Authentication (2FA):** Enhanced account security by implementing 2FA via email, ensuring a safer login process for users.
+
+- **Job Filtering Based on Pay:** Added the ability for users to filter job postings by salary, making it easier to find roles that match their financial expectations.
+
+- **Resume Parsing and Skill Extraction:** Integrated a resume parser that analyzes uploaded resumes and automatically extracts technical and non-technical skills. Utilized AI to categorize skills, providing users and recruiters with deeper insights into candidate capabilities.
+
+- **Video Interview Integration:** Incorporated video interview functionality, enabling candidates to record video interviews and recruiters to stream them directly through the platform.
+
+- **Job Recommendations for Students:** Implemented web scraping of university websites to gather relevant job listings and suggest tailored opportunities to students based on their background.
+  
+These additions aim to improve usability and cater to the diverse needs of both job seekers and recruiters, making the platform more efficient and user-friendly.
+
+
 
 
 # Presentation Video
@@ -120,7 +124,15 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 
 - Start the backend service with the following command: _npm start_
 
-**Step 3: Frontend Setup**
+**Step 3: AI Backend Setup**
+
+- Open a terminal window and navigate to the Ai directory by executing the command: _cd Ai_
+
+- Install the necessary packages by running: _npm install_
+
+- Start the service with the following command: _npm start_
+
+**Step 4: Frontend Setup**
 
 - Open a new terminal window and navigate to the frontend directory: _cd frontend_
 
@@ -128,7 +140,7 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 
 - Start the development server: _npm run dev_
 
-**Step 4: Open [http://localhost:5173](http://localhost:5173) to view it in the browser.**
+**Step 5: Open [http://localhost:5173](http://localhost:5173) to view it in the browser.**
 
 **Congratulations! The project should now be up and running successfully.**
 
@@ -153,21 +165,15 @@ Your app is ready to be deployed!
 
 # Future Improvements✨
 
-**1. Email Service📧** - On getting selected/rejected to a job, the applicant should be getting an email about it.
+**1. Application Insights📧** - Provide insights such as number of applications, accepts and rejects in the form of visualizations including dashboards, charts and graphs.
 
-**2. Interview Video Submission** - Managers can request applicants to submit a video screening file and applicants can upload a video on their side of the portal.
+**2. Interview Video Summarization** - Managers can ask for a video transcript to summarize the candidate's video interview.
 
-**3. Job Analysis🔍** – WolfJobs will provide the functionality of analysing various aspects of a job. Job Analysis based on various parameters using graphical representation will help in making prediction on which jobs are more preferred and for which jobs applicants have more inclination. Hiring managers can then decide what rewards and salary to be given to the applicants of that job. Even applicants will get to know, which job is being preferred among other applicants.
+**3. Chatbot Integration🤖** – Our platform WolfJobs will also provide the functionality of Chatbot integrated with our website so that user can easily interact with the bot and get to know about various features of our web application and have a nice interactive experience.
 
-**4. Chatbot Integration🤖** – Our platform WolfJobs will also provide the functionality of Chatbot integrated with our website so that user can easily interact with the bot and get to know about various features of our web application and have a nice interactive experience.
+**4. Database Security and Hashing** – WolfJobs currently does not securely store the password and user information in the database. This data needs to be protected and hashed to ensure security.
 
-**5. Interview Appointment Scheduling📆** – WolfJobs will also provide the facility for the hiring manager to organize an interview appointment for the job based on applicant’s availability and convenient time uploaded by the hiring manager. Either of the users can upload their availability time in the G-sheet and using google calendar appointments can be organised.
-
-**6. Candidate Matching Percentage** – WolfJobs applicant skill matching feature will include a percentage to how fit a candidate's skills are based on the job's required skills. Applicants will see a match percentage indicating how likely they are to get accepted and recieve an interview. 
-
-**7. Matching based on Resume** – WolfJobs applicants will be able to parse their resume and WolfJobs will extract key skills from the resume and compare it with required job skills to give candidates job matching status.
-
-**8. Database Security and Hashing** – WolfJobs currently does not securely store the password and user information in the database. This data needs to be protected and hashed to ensure security.
+**5. Expand Network** - Right now wolfjobs is focused on providing on campus opportunities within NC State. There is a potential to expand to more university networks. 
 
 
 # Contributors
@@ -192,6 +198,16 @@ Your app is ready to be deployed!
     <td align="center"><a href="https://github.com/Harris-A-Khan"><img src="https://avatars.githubusercontent.com/Harris-A-Khan" width="100px;" alt=""/><br /><b>Harris Khan </b></a><br /></td>
     <td align="center"><a href="https://github.com/Sarvesh-Somasundaram"><img src="https://avatars.githubusercontent.com/Sarvesh-Somasundaram" width="100px;" alt=""/><br /><b>Sarvesh Somasundaram</b></a><br /></td>
 
+    
+  </tr>
+  </table>
+
+## Iteration 4:
+ <table>
+  <tr>
+    <td align="center"><a href="https://github.com/valorant-dhruv"><img src="https://avatars.githubusercontent.com/valorant-dhruv" width="100px;" alt=""/><br /><b>Dhruv Soni</b></a></td>
+    <td align="center"><a href="https://github.com/sweekar52"><img src="https://avatars.githubusercontent.com/sweekar52" width="100px;" alt=""/><br /><b>Sweekar Burji</b></a><br /></td>
+    <td align="center"><a href="https://github.com/prithishsamanta"><img src="https://avatars.githubusercontent.com/prithishsamanta" width="100px;" alt=""/><br /><b>Prithish Samanta</b></a><br /></td>
 
    
   </tr>

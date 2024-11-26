@@ -44,8 +44,8 @@ const Explore = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredJobList, setFilteredJobList] = useState<Job[]>([]);
   const [sortHighestPay, setSortHighestPay] = useState(false);
-  const [sortAlphabeticallyByCity, setSortAlphabeticallyByCity] =
-    useState(false);
+  const [sortSpecificPayValue, setSortSpecificPayValue] = useState('');
+  const [sortAlphabeticallyByCity, setSortAlphabeticallyByCity] = useState(false);
   const [sortByEmploymentType, setSortByEmploymentType] = useState(false);
   const [showOpenJobs, setShowOpenJobs] = useState(true); // true for open jobs, false for closed jobs
 
@@ -134,6 +134,20 @@ const Explore = () => {
       );
     }
 
+    if (sortSpecificPayValue!="") {
+      console.log("Okkay we are here");
+      updatedList = [...updatedList].filter((a)=>
+      {
+        console.log(parseInt((a.pay)));
+        console.log(parseInt(sortSpecificPayValue))
+        if(parseFloat((a.pay))>=parseFloat(sortSpecificPayValue))
+        {
+          return a
+        }
+      })
+      console.log(updatedList);
+    }
+
     if (sortAlphabeticallyByCity) {
       updatedList = [...updatedList].sort((a, b) => {
         return a.location.localeCompare(b.location);
@@ -151,14 +165,7 @@ const Explore = () => {
     );
 
     setFilteredJobList(updatedList);
-  }, [
-    searchTerm,
-    jobList,
-    sortHighestPay,
-    sortAlphabeticallyByCity,
-    sortByEmploymentType,
-    showOpenJobs,
-  ]);
+  },[searchTerm, jobList, sortHighestPay, sortAlphabeticallyByCity, sortByEmploymentType, showOpenJobs,sortSpecificPayValue]);
 
   return (
     <>
@@ -195,6 +202,12 @@ const Explore = () => {
             <button onClick={toggleJobStatus} className="p-2 ml-2 border">
               {showOpenJobs ? "Show Closed Jobs" : "Show Open Jobs"}
             </button>
+              <input placeholder="Filter by minimum pay..."
+              className="p-2 ml-2 border rounded focus:outline-none focus:border-blue-500" value={sortSpecificPayValue} onChange={(e)=>
+                {
+                  setSortSpecificPayValue(e.target.value)
+                }
+              }></input>
           </div>
         </div>
         <div className="flex flex-row" style={{ height: "calc(100vh - 72px)" }}>
