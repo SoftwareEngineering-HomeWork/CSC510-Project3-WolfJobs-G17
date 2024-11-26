@@ -19,6 +19,10 @@
 
 <!-- ![Static Badge](https://img.shields.io/badge/any_text-i_like-blue) -->
 
+# Animation Video:
+
+<p align="center"><img width="700" src="./animation_video/animation_video.mp4"></p>
+
 # Tech Stack:
 
 <!-- - ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) -->
