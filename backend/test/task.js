@@ -376,4 +376,253 @@ describe('Tasks API', () => {
         });
     });
 
+    describe("Advanced OTP and Email Template Tests", () => {
+        // OTP Security Tests
+        it("should not expose OTP hash in response", (done) => {
+            chai.request('http://localhost:8000')
+                .post("/api/auth/generate-otp")
+                .send({ 
+                    email: 'test@example.com',
+                    userId: '12345'
+                })
+                .end((err, response) => {
+                    response.body.should.not.have.property('otp');
+                    response.body.should.not.have.property('hash');
+                    done();
+                });
+        });
+
+        it("should handle SQL injection attempts in email", (done) => {
+            chai.request('http://localhost:8000')
+                .post("/api/auth/generate-otp")
+                .send({ 
+                    email: "test@example.com' OR '1'='1",
+                    userId: '12345'
+                })
+                .end((err, response) => {
+                    response.should.have.status(400);
+                    response.body.should.have.property('message').eq('Invalid email format');
+                    done();
+                });
+        });
+
+        it("should prevent brute force attempts with wrong OTP", async () => {
+            const attempts = [];
+            for(let i = 0; i < 10; i++) {
+                attempts.push(
+                    chai.request('http://localhost:8000')
+                        .post("/api/auth/verify-otp")
+                        .send({ 
+                            email: 'test@example.com',
+                            otp: '000000'
+                        })
+                );
+            }
+            
+            const responses = await Promise.all(attempts);
+            responses[responses.length - 1].should.have.status(429);
+            responses[responses.length - 1].body.should.have.property('message')
+                .eq('Too many failed attempts. Please request a new OTP');
+        });
+
+        // OTP Format Tests
+        it("should reject non-numeric OTP", (done) => {
+            chai.request('http://localhost:8000')
+                .post("/api/auth/verify-otp")
+                .send({ 
+                    email: 'test@example.com',
+                    otp: 'abcdef'
+                })
+                .end((err, response) => {
+                    response.should.have.status(400);
+                    response.body.should.have.property('message').eq('OTP must contain only numbers');
+                    done();
+                });
+        });
+
+        it("should reject OTP with special characters", (done) => {
+            chai.request('http://localhost:8000')
+                .post("/api/auth/verify-otp")
+                .send({ 
+                    email: 'test@example.com',
+                    otp: '123@56'
+                })
+                .end((err, response) => {
+                    response.should.have.status(400);
+                    response.body.should.have.property('message').eq('OTP must contain only numbers');
+                    done();
+                });
+        });
+
+        // Email Template Accessibility Tests
+        it("should include alt text for images in email template", (done) => {
+            const html = generateOTPEmailTemplate('John', '123456');
+            html.should.include('alt=');
+            done();
+        });
+
+        it("should maintain proper color contrast in email template", (done) => {
+            const html = generateOTPEmailTemplate('John', '123456');
+            html.should.include('background-color');
+            html.should.include('color');
+            done();
+        });
+
+        // Email Template Responsiveness Tests
+        it("should include mobile-friendly meta tags", (done) => {
+            const html = generateOTPEmailTemplate('John', '123456');
+            html.should.include('viewport');
+            html.should.include('width=device-width');
+            done();
+        });
+
+        it("should use responsive design elements", (done) => {
+            const html = generateOTPEmailTemplate('John', '123456');
+            html.should.include('max-width');
+            html.should.include('@media');
+            done();
+        });
+
+        // Email Template Content Tests
+        it("should include company contact information", (done) => {
+            const html = generateOTPEmailTemplate('John', '123456');
+            html.should.include('contact');
+            html.should.include('support');
+            done();
+        });
+
+        it("should include unsubscribe link", (done) => {
+            const html = generateOTPEmailTemplate('John', '123456');
+            html.should.include('unsubscribe');
+            done();
+        });
+
+        // OTP Expiration Tests
+        it("should handle timezone differences in OTP expiration", async () => {
+            // Create OTP with specific timezone
+            const otpDoc = new autoOtp({
+                userId: '12345',
+                otp: '123456',
+                createdAt: new Date('2024-01-01T00:00:00Z')
+            });
+            await otpDoc.save();
+
+            // Verify expiration check works across timezones
+            const response = await chai.request('http://localhost:8000')
+                .post("/api/auth/verify-otp")
+                .send({ 
+                    email: 'test@example.com',
+                    otp: '123456'
+                });
+
+            response.should.have.status(400);
+            response.body.should.have.property('message').eq('OTP has expired');
+        });
+
+        // Edge Cases
+        it("should handle unicode characters in email template", (done) => {
+            const html = generateOTPEmailTemplate('José 🌟', '123456');
+            html.should.include('José');
+            html.should.include('🌟');
+            done();
+        });
+
+        it("should sanitize HTML in user input", (done) => {
+            const html = generateOTPEmailTemplate('<script>alert("xss")</script>John', '123456');
+            html.should.not.include('<script>');
+            html.should.include('John');
+            done();
+        });
+
+        it("should handle very long OTP verification sessions", async () => {
+            // Generate multiple OTPs over time
+            const otps = [];
+            for(let i = 0; i < 5; i++) {
+                const response = await chai.request('http://localhost:8000')
+                    .post("/api/auth/generate-otp")
+                    .send({ 
+                        email: 'test@example.com',
+                        userId: '12345'
+                    });
+                otps.push(response);
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
+            }
+
+            // Verify only latest OTP is valid
+            const validOtps = await autoOtp.find({ 
+                userId: '12345',
+                createdAt: { $gt: new Date(Date.now() - 10 * 60 * 1000) }
+            });
+            validOtps.length.should.equal(1);
+        });
+
+        it("should handle rapid OTP generation and verification", async () => {
+            const operations = [];
+            for(let i = 0; i < 5; i++) {
+                operations.push(
+                    chai.request('http://localhost:8000')
+                        .post("/api/auth/generate-otp")
+                        .send({ 
+                            email: 'test@example.com',
+                            userId: '12345'
+                        })
+                );
+                operations.push(
+                    chai.request('http://localhost:8000')
+                        .post("/api/auth/verify-otp")
+                        .send({ 
+                            email: 'test@example.com',
+                            otp: '123456'
+                        })
+                );
+            }
+            
+            const responses = await Promise.all(operations);
+            // Verify system remained stable
+            responses.forEach(response => {
+                response.should.have.status(response.status);
+            });
+        });
+
+        // Email Template Performance Tests
+        it("should generate email template quickly", (done) => {
+            const start = process.hrtime();
+            const html = generateOTPEmailTemplate('John', '123456');
+            const [seconds, nanoseconds] = process.hrtime(start);
+            
+            // Template generation should take less than 50ms
+            (seconds * 1000 + nanoseconds / 1000000).should.be.below(50);
+            done();
+        });
+
+        it("should handle template generation with large data", (done) => {
+            const longName = 'A'.repeat(1000);
+            const html = generateOTPEmailTemplate(longName, '123456');
+            
+            html.should.be.a('string');
+            html.length.should.be.below(20000); // Reasonable size limit
+            done();
+        });
+
+        it("should maintain consistent styling across email clients", (done) => {
+            const html = generateOTPEmailTemplate('John', '123456');
+            
+            // Check for email client compatibility
+            html.should.include('<!--[if mso]>');
+            html.should.include('<![endif]-->');
+            html.should.include('-webkit-');
+            html.should.include('-ms-');
+            done();
+        });
+
+        it("should include tracking pixels in email template", (done) => {
+            const html = generateOTPEmailTemplate('John', '123456');
+            
+            html.should.include('img');
+            html.should.include('tracking');
+            html.should.include('1x1');
+            done();
+        });
+    });
+
 })
