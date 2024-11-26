@@ -21,7 +21,7 @@
 
 # Animation Video:
 
-<p align="center"><img width="700" src="./animation_video/animation_video.mp4"></p>
+<p align="center"><img width="700" src="./animation_video/animation_video.gif"></p>
 
 # Tech Stack:
 
