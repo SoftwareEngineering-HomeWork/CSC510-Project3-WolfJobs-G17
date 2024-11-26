@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm-build](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17/actions/workflows/build-checker.yml/badge.svg)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17/actions/workflows/build-checker.yml)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
+[![Static Badge][prettier-badge]](https://img.shields.io/badge/code--formatter-Prettier-blue)
 [![GitHub issues](https://img.shields.io/github/issues/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17/issues)
 [![Github closes issues](https://img.shields.io/github/issues-closed-raw/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17/issues?q=is%3Aissue+is%3Aclosed)
 ![last commit](https://img.shields.io/github/last-commit/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)
