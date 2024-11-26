@@ -5,7 +5,7 @@
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 [![GitHub issues](https://img.shields.io/github/issues/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17/issues)
 [![Github closes issues](https://img.shields.io/github/issues-closed-raw/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)](https://github.com/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17/issues?q=is%3Aissue+is%3Aclosed)
-![last commit](https://img.shields.io/github/last-commit/deepr41/Wolfjobs)
+![last commit](https://img.shields.io/github/last-commit/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)
 ![Lines of code](https://tokei.rs/b1/github/deepr41/wolfjobs)
 [![Repo-size](https://img.shields.io/github/repo-size/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
 [![file_count](https://img.shields.io/github/directory-file-count/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
