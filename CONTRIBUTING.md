@@ -66,3 +66,5 @@ The process described here has several goals:
 - Fix problems that are important to users
 - Engage the community in working toward the best possible WolfJobs
 - Enable a sustainable system for Atom's maintainers to review contributions
+
+Email ID's of teammates: dbsoni@ncsu.edu, psamant2@ncsu.edu, sburji@ncsu.edu
