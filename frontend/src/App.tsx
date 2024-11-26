@@ -19,6 +19,7 @@ import JobPreview from "./Pages/CreateJob/jobPreview";
 import Resume from "./Pages/Resume/Resume";
 import ResumeViewer from "./components/Resume/ResumeViewer";
 import Notifications from "./Pages/Notifications/Notifications";
+import OTPVerification from "./Pages/Auth/OTPVerification";
 import Explore_live_jobs from "./Pages/Explore/Explore_live_jobs";
 import VideoRecorder from "./components/VideoPlayer/VideoRecorder.js";
 import PDFTextExtractor from "./components/Resume/PDFTextExtractor.js";
@@ -100,7 +101,13 @@ const App = () => {
           <Route
             path="/resumeanalysis/:applicantId"
             element={
-                <PDFTextExtractor />
+               <PDFTextExtractor />
+            }
+          />
+          <Route
+            path="/verify-otp"
+            element={
+                <OTPVerification />
             }
           />
           <Route
