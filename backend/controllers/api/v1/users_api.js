@@ -12,6 +12,14 @@ require("dotenv").config();
 
 module.exports.createSession = async function (req, res) {
   try {
+    console.log('Login attempt:', req.body);
+    
+    if (!req.body.email || !req.body.password) {
+      return res.status(422).json({
+        message: 'Missing required fields'
+      });
+    }
+    
     let user = await User.findOne({ email: req.body.email });
     res.set("Access-Control-Allow-Origin", "*");
     if (!user || user.password != req.body.password) {
@@ -29,9 +37,9 @@ module.exports.createSession = async function (req, res) {
       success: true,
     });
   } catch (err) {
-    console.log("*******", err);
-    return res.json(500, {
-      message: "Internal Server Error",
+    console.error('Login error:', err);
+    return res.status(500).json({
+      message: 'Internal server error'
     });
   }
 };

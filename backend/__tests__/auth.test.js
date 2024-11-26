@@ -1,12 +1,18 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
-const app = require('../app'); // Your Express app
+const app = require('../routes/auth.js'); // Your Express app
 const AuthOtp = require('../models/authOtp');
 const User = require('../models/user');
 const nodemailer = require('nodemailer');
 
 // Mock nodemailer
 jest.mock('nodemailer');
+
+// Add this mock implementation
+nodemailer.createTransport.mockReturnValue({
+  verify: jest.fn().mockImplementation((callback) => callback(null, true)),
+  sendMail: jest.fn().mockResolvedValue(true)
+});
 
 describe('OTP Authentication Tests', () => {
   let testUser;
