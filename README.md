@@ -124,7 +124,7 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 
 - Start the backend service with the following command: _npm start_
 
-  **Step 3: AI Backend Setup**
+**Step 3: AI Backend Setup**
 
 - Open a terminal window and navigate to the Ai directory by executing the command: _cd Ai_
 
@@ -165,9 +165,9 @@ Your app is ready to be deployed!
 
 # Future Improvements✨
 
-**1. Email Service📧** - On getting selected/rejected to a job, the applicant should be getting an email about it.
+**1. Application Insights📧** - Provide insights such as number of applications, accepts and rejects in the form of visualizations including dashboards, charts and graphs.
 
-**2. Interview Video Submission** - Managers can request applicants to submit a video screening file and applicants can upload a video on their side of the portal.
+**2. Interview Video Summarization** - Managers can ask for a video transcript to summarize the candidate's video interview.
 
 **3. Job Analysis🔍** – WolfJobs will provide the functionality of analysing various aspects of a job. Job Analysis based on various parameters using graphical representation will help in making prediction on which jobs are more preferred and for which jobs applicants have more inclination. Hiring managers can then decide what rewards and salary to be given to the applicants of that job. Even applicants will get to know, which job is being preferred among other applicants.
 
