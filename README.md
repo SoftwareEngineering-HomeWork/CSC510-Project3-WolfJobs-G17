@@ -30,16 +30,31 @@
 
 # What's New:
 
- - **New Screens Added!**
- - Branding, Colours and Typography
- - Components & States
- - Mutliple UI Screens _flows_ for Student & Manager Roles
- - [https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs](https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs)
+We've expanded the functionality of this project by adding several innovative features to enhance user experience and streamline job-seeking and recruitment processes. Below are the key updates we've implemented:
 
- - Seamless Resume Upload and Parsing: We've made it a breeze for applicants to submit their resumes for each job posting, while employers can effortlessly access and view the stored PDFs in MongoDB.
- - Precision Application Matching: Say goodbye to the uncertainty of job applications! With our enhanced system, applicants now have the power to identify which jobs align perfectly with their skills and qualifications. WolfJobs will analyze your profile and inform you if you're a strong fit for a position.
- - Revamped Job Sorting and Search:  Our revamped job sorting and search features allows you to easily organize opportunities by pay, city, and employment type. Plus, you can perform specific job searches to find the perfect match.
-- Stay Informed with the Notifications Tab: Introduced our brand-new Notifications tab to WolfJobs. Now, you can receive timely updates on the status of your applications, ensuring you're always in the know about your job prospects. 
+# Two-Factor Authentication (2FA)
+
+Enhanced account security by implementing 2FA via email, ensuring a safer login process for users.
+
+# Job Filtering Based on Pay
+
+Added the ability for users to filter job postings by salary, making it easier to find roles that match their financial expectations.
+
+# Resume Parsing and Skill Extraction
+
+Integrated a resume parser that analyzes uploaded resumes and automatically extracts technical and non-technical skills.
+Utilized AI to categorize skills, providing users and recruiters with deeper insights into candidate capabilities.
+
+# Video Interview Integration
+
+Incorporated video interview functionality, enabling candidates to record video interviews and recruiters to stream them directly through the platform.
+
+# Job Recommendations for Students
+
+Implemented web scraping of university websites to gather relevant job listings and suggest tailored opportunities to students based on their background.
+These additions aim to improve usability and cater to the diverse needs of both job seekers and recruiters, making the platform more efficient and user-friendly.
+
+
 
 
 # Presentation Video
