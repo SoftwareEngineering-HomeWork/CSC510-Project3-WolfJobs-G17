@@ -124,7 +124,15 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 
 - Start the backend service with the following command: _npm start_
 
-**Step 3: Frontend Setup**
+  **Step 3: AI Backend Setup**
+
+- Open a terminal window and navigate to the Ai directory by executing the command: _cd Ai_
+
+- Install the necessary packages by running: _npm install_
+
+- Start the service with the following command: _npm start_
+
+**Step 4: Frontend Setup**
 
 - Open a new terminal window and navigate to the frontend directory: _cd frontend_
 
@@ -132,7 +140,7 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 
 - Start the development server: _npm run dev_
 
-**Step 4: Open [http://localhost:5173](http://localhost:5173) to view it in the browser.**
+**Step 5: Open [http://localhost:5173](http://localhost:5173) to view it in the browser.**
 
 **Congratulations! The project should now be up and running successfully.**
 
@@ -196,7 +204,12 @@ Your app is ready to be deployed!
     <td align="center"><a href="https://github.com/Harris-A-Khan"><img src="https://avatars.githubusercontent.com/Harris-A-Khan" width="100px;" alt=""/><br /><b>Harris Khan </b></a><br /></td>
     <td align="center"><a href="https://github.com/Sarvesh-Somasundaram"><img src="https://avatars.githubusercontent.com/Sarvesh-Somasundaram" width="100px;" alt=""/><br /><b>Sarvesh Somasundaram</b></a><br /></td>
 
-
+## Iteration 4:
+ <table>
+  <tr>
+    <td align="center"><a href="https://github.com/valorant-dhruv"><img src="https://avatars.githubusercontent.com/valorant-dhruv" width="100px;" alt=""/><br /><b>Dhruv Soni</b></a></td>
+    <td align="center"><a href="https://github.com/sweekar52"><img src="https://avatars.githubusercontent.com/sweekar52" width="100px;" alt=""/><br /><b>Sweekar Burji</b></a><br /></td>
+    <td align="center"><a href="https://github.com/prithishsamanta"><img src="https://avatars.githubusercontent.com/prithishsamanta" width="100px;" alt=""/><br /><b>Prithish Samanta</b></a><br /></td>
    
   </tr>
 </table>
