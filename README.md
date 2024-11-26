@@ -36,11 +36,12 @@ We've expanded the functionality of this project by adding several innovative fe
 
 - **Job Filtering Based on Pay:** Added the ability for users to filter job postings by salary, making it easier to find roles that match their financial expectations.
 
-:**Resume Parsing and Skill Extraction:** Integrated a resume parser that analyzes uploaded resumes and automatically extracts technical and non-technical skills. Utilized AI to categorize skills, providing users and recruiters with deeper insights into candidate capabilities.
+- **Resume Parsing and Skill Extraction:** Integrated a resume parser that analyzes uploaded resumes and automatically extracts technical and non-technical skills. Utilized AI to categorize skills, providing users and recruiters with deeper insights into candidate capabilities.
 
-:**Video Interview Integration:** Incorporated video interview functionality, enabling candidates to record video interviews and recruiters to stream them directly through the platform.
+- **Video Interview Integration:** Incorporated video interview functionality, enabling candidates to record video interviews and recruiters to stream them directly through the platform.
 
-:**Job Recommendations for Students:** Implemented web scraping of university websites to gather relevant job listings and suggest tailored opportunities to students based on their background.
+- **Job Recommendations for Students:** Implemented web scraping of university websites to gather relevant job listings and suggest tailored opportunities to students based on their background.
+  
 These additions aim to improve usability and cater to the diverse needs of both job seekers and recruiters, making the platform more efficient and user-friendly.
 
 
