@@ -20,6 +20,9 @@ import Resume from "./Pages/Resume/Resume";
 import ResumeViewer from "./components/Resume/ResumeViewer";
 import Notifications from "./Pages/Notifications/Notifications";
 import OTPVerification from "./Pages/Auth/OTPVerification";
+import Explore_live_jobs from "./Pages/Explore/Explore_live_jobs";
+import VideoRecorder from "./components/VideoPlayer/VideoRecorder.js";
+import PDFTextExtractor from "./components/Resume/PDFTextExtractor.js";
 
 const App = () => {
   return (
@@ -45,6 +48,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Explore />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/livejobs"
+            element={
+              <ProtectedRoute>
+                <Explore_live_jobs />
               </ProtectedRoute>
             }
           />
@@ -88,6 +99,12 @@ const App = () => {
             }
           />
           <Route
+            path="/resumeanalysis/:applicantId"
+            element={
+               <PDFTextExtractor />
+            }
+          />
+          <Route
             path="/verify-otp"
             element={
                 <OTPVerification />
@@ -98,6 +115,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Resume />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/recordvideo"
+            element={
+              <ProtectedRoute>
+                <VideoRecorder />
               </ProtectedRoute>
             }
           />

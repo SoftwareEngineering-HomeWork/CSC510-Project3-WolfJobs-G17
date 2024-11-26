@@ -25,9 +25,8 @@ const Explore = () => {
   const updateGender = useUserStore((state) => state.updateGender);
   const updateHours = useUserStore((state) => state.updateHours);
   const updateIsLoggedIn = useUserStore((state) => state.updateIsLoggedIn);
-  const updateResume = useUserStore((state) => state.updateResume)
+  const updateResume = useUserStore((state) => state.updateResume);
   const updateResumeId = useUserStore((state) => state.updateResumeId);
-
 
   const updateApplicationList = useApplicationStore(
     (state) => state.updateApplicationList
@@ -45,9 +44,10 @@ const Explore = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredJobList, setFilteredJobList] = useState<Job[]>([]);
   const [sortHighestPay, setSortHighestPay] = useState(false);
+  const [sortSpecificPayValue, setSortSpecificPayValue] = useState('');
   const [sortAlphabeticallyByCity, setSortAlphabeticallyByCity] = useState(false);
   const [sortByEmploymentType, setSortByEmploymentType] = useState(false);
-  const [showOpenJobs, setShowOpenJobs] = useState(true);  // true for open jobs, false for closed jobs
+  const [showOpenJobs, setShowOpenJobs] = useState(true); // true for open jobs, false for closed jobs
 
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -129,27 +129,43 @@ const Explore = () => {
     }
 
     if (sortHighestPay) {
-      updatedList = [...updatedList].sort((a, b) => parseFloat(b.pay) - parseFloat(a.pay));
+      updatedList = [...updatedList].sort(
+        (a, b) => parseFloat(b.pay) - parseFloat(a.pay)
+      );
+    }
+
+    if (sortSpecificPayValue!="") {
+      console.log("Okkay we are here");
+      updatedList = [...updatedList].filter((a)=>
+      {
+        console.log(parseInt((a.pay)));
+        console.log(parseInt(sortSpecificPayValue))
+        if(parseFloat((a.pay))>=parseFloat(sortSpecificPayValue))
+        {
+          return a
+        }
+      })
+      console.log(updatedList);
     }
 
     if (sortAlphabeticallyByCity) {
-
       updatedList = [...updatedList].sort((a, b) => {
-        return a.location.localeCompare(b.location)
+        return a.location.localeCompare(b.location);
       });
     }
 
     if (sortByEmploymentType) {
-
       updatedList = [...updatedList].sort((a, b) => {
-        return a.type.localeCompare(b.type)
+        return a.type.localeCompare(b.type);
       });
     }
 
-    updatedList = updatedList.filter(job => showOpenJobs ? job.status === "open" : job.status === "closed");
+    updatedList = updatedList.filter((job) =>
+      showOpenJobs ? job.status === "open" : job.status === "closed"
+    );
 
     setFilteredJobList(updatedList);
-  }, [searchTerm, jobList, sortHighestPay, sortAlphabeticallyByCity, sortByEmploymentType, showOpenJobs]);
+  },[searchTerm, jobList, sortHighestPay, sortAlphabeticallyByCity, sortByEmploymentType, showOpenJobs,sortSpecificPayValue]);
 
   return (
     <>
@@ -166,17 +182,32 @@ const Explore = () => {
           </div>
           <div>
             <button onClick={handleSortChange} className="p-2 ml-2 border">
-              {sortHighestPay ? "Sort by High Pay : On" : "Sort by Highest Pay : Off"}
+              {sortHighestPay
+                ? "Sort by High Pay : On"
+                : "Sort by Highest Pay : Off"}
             </button>
             <button onClick={handleSortCityChange} className="p-2 ml-2 border">
-              {sortAlphabeticallyByCity ? "Sort by City : On" : "Sort by City : Off"}
+              {sortAlphabeticallyByCity
+                ? "Sort by City : On"
+                : "Sort by City : Off"}
             </button>
-            <button onClick={handleSortEmploymenyTypeChange} className="p-2 ml-2 border">
-              {sortByEmploymentType ? "Sort by Employment Type : On" : "Sort by Employment Type : Off"}
+            <button
+              onClick={handleSortEmploymenyTypeChange}
+              className="p-2 ml-2 border"
+            >
+              {sortByEmploymentType
+                ? "Sort by Employment Type : On"
+                : "Sort by Employment Type : Off"}
             </button>
             <button onClick={toggleJobStatus} className="p-2 ml-2 border">
               {showOpenJobs ? "Show Closed Jobs" : "Show Open Jobs"}
             </button>
+              <input placeholder="Filter by minimum pay..."
+              className="p-2 ml-2 border rounded focus:outline-none focus:border-blue-500" value={sortSpecificPayValue} onChange={(e)=>
+                {
+                  setSortSpecificPayValue(e.target.value)
+                }
+              }></input>
           </div>
         </div>
         <div className="flex flex-row" style={{ height: "calc(100vh - 72px)" }}>

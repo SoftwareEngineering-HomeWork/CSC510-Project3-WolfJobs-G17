@@ -84,6 +84,22 @@ const JobScreening = (props: any) => {
                     View Resume
                   </a>
                 </div>
+                <div className="flex justify-center px-2 py-1 ml-2 border border-gray-300 rounded-md">
+                  <a
+                    href={`/resumeanalysis/${item.applicantid}`}
+                    className="text-red-500"
+                  >
+                    View AI Analysis of Resume
+                  </a>
+                </div>
+                <div className="flex justify-center px-2 py-1 ml-2 border border-gray-300 rounded-md">
+                  <a
+                    href={`/resumeviewer/${item.applicantid}`}
+                    className="text-red-500"
+                  >
+                    View Video Interview of Candidate
+                  </a>
+                </div>
               </div>
               <div className="flex flex-row">
                 <Button
