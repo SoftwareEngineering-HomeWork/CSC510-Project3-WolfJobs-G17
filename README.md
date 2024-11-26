@@ -169,17 +169,11 @@ Your app is ready to be deployed!
 
 **2. Interview Video Summarization** - Managers can ask for a video transcript to summarize the candidate's video interview.
 
-**3. Job Analysis🔍** – WolfJobs will provide the functionality of analysing various aspects of a job. Job Analysis based on various parameters using graphical representation will help in making prediction on which jobs are more preferred and for which jobs applicants have more inclination. Hiring managers can then decide what rewards and salary to be given to the applicants of that job. Even applicants will get to know, which job is being preferred among other applicants.
+**3. Chatbot Integration🤖** – Our platform WolfJobs will also provide the functionality of Chatbot integrated with our website so that user can easily interact with the bot and get to know about various features of our web application and have a nice interactive experience.
 
-**4. Chatbot Integration🤖** – Our platform WolfJobs will also provide the functionality of Chatbot integrated with our website so that user can easily interact with the bot and get to know about various features of our web application and have a nice interactive experience.
+**4. Database Security and Hashing** – WolfJobs currently does not securely store the password and user information in the database. This data needs to be protected and hashed to ensure security.
 
-**5. Interview Appointment Scheduling📆** – WolfJobs will also provide the facility for the hiring manager to organize an interview appointment for the job based on applicant’s availability and convenient time uploaded by the hiring manager. Either of the users can upload their availability time in the G-sheet and using google calendar appointments can be organised.
-
-**6. Candidate Matching Percentage** – WolfJobs applicant skill matching feature will include a percentage to how fit a candidate's skills are based on the job's required skills. Applicants will see a match percentage indicating how likely they are to get accepted and recieve an interview. 
-
-**7. Matching based on Resume** – WolfJobs applicants will be able to parse their resume and WolfJobs will extract key skills from the resume and compare it with required job skills to give candidates job matching status.
-
-**8. Database Security and Hashing** – WolfJobs currently does not securely store the password and user information in the database. This data needs to be protected and hashed to ensure security.
+**5. Expand Network** - Right now wolfjobs is focused on providing on campus opportunities within NC State. There is a potential to expand to more university networks. 
 
 
 # Contributors
