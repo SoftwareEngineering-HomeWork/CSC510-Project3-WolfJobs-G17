@@ -13,11 +13,6 @@ describe('Tasks API', () => {
     describe("GET /api/v1/users/fetchapplications" , () => {
 
         it("IT SHOULD RETURN ALL THE APPLICATIONS" , (done) => {
-            // const task = {
-            //     email:'shaangzb@gmail.com',
-            //     password:'123',
-                
-            // };
 
             chai.request('http://localhost:8000')
                 .get("/api/v1/users/fetchapplications")
@@ -39,11 +34,6 @@ describe('Tasks API', () => {
     describe("GET /api/v1/users/" , () => {
 
         it("IT SHOULD RETURN ALL THE JOBS" , (done) => {
-            // const task = {
-            //     email:'shaangzb@gmail.com',
-            //     password:'123',
-                
-            // };
 
             chai.request('http://localhost:8000')
                 .get("/api/v1/users/")
@@ -65,11 +55,6 @@ describe('Tasks API', () => {
     describe("GET /api/v1/users/" , () => {
 
         it("IT SHOULD RETURN ALL THE JOBS" , (done) => {
-            // const task = {
-            //     email:'shaangzb@gmail.com',
-            //     password:'123',
-                
-            // };
 
             chai.request('http://localhost:8000')
                 .get("/api/v1/users/")
@@ -144,7 +129,6 @@ describe('Tasks API', () => {
 
             chai.request('http://localhost:8000')
                 .get("/api/v1/users/search/TA")
-                // .send(body)
                 .end((err,response) => {
                     
                     response.body.should.be.a('object');
@@ -239,11 +223,10 @@ describe('Tasks API', () => {
         });
 
         it("should reject expired OTP", (done) => {
-            // First create an expired OTP record
             const expiredOtp = new autoOtp({
                 userId: '12345',
                 otp: '123456',
-                createdAt: new Date(Date.now() - 11 * 60 * 1000) // 11 minutes ago
+                createdAt: new Date(Date.now() - 11 * 60 * 1000) 
             });
 
             expiredOtp.save().then(() => {
@@ -305,10 +288,10 @@ describe('Tasks API', () => {
         it("should include all required template elements", (done) => {
             const html = generateOTPEmailTemplate('John', '123456');
             
-            html.should.include('wolfjobs.jpg'); // Logo
-            html.should.include('Team WolfJobs'); // Company name
-            html.should.include('One Time Password'); // OTP heading
-            html.should.include('expire in 10 mins'); // Expiry message
+            html.should.include('wolfjobs.jpg'); 
+            html.should.include('Team WolfJobs'); 
+            html.should.include('One Time Password'); 
+            html.should.include('expire in 10 mins'); 
             done();
         });
 
@@ -316,7 +299,7 @@ describe('Tasks API', () => {
             const html = generateOTPEmailTemplate('', null);
             
             html.should.be.a('string');
-            html.should.include('User'); // Default fallback
+            html.should.include('User'); 
             html.should.not.include('null');
             html.should.not.include('undefined');
             done();
@@ -335,7 +318,6 @@ describe('Tasks API', () => {
 
     describe("Integration Tests: Login with 2FA", () => {
         it("should complete full login flow with 2FA", (done) => {
-            // Step 1: Login
             const loginData = {
                 email: 'test@example.com',
                 password: 'password123'
@@ -348,14 +330,12 @@ describe('Tasks API', () => {
                     loginResponse.should.have.status(200);
                     const userId = loginResponse.body.data.user._id;
 
-                    // Step 2: Generate OTP
                     chai.request('http://localhost:8000')
                         .post("/api/auth/generate-otp")
                         .send({ email: loginData.email, userId })
                         .end((err, otpResponse) => {
                             otpResponse.should.have.status(200);
 
-                            // Step 3: Verify OTP (using the most recent OTP from database)
                             autoOtp.findOne({ userId })
                                 .sort({ createdAt: -1 })
                                 .then(otpRecord => {
@@ -377,7 +357,6 @@ describe('Tasks API', () => {
     });
 
     describe("Advanced OTP and Email Template Tests", () => {
-        // OTP Security Tests
         it("should not expose OTP hash in response", (done) => {
             chai.request('http://localhost:8000')
                 .post("/api/auth/generate-otp")
@@ -425,7 +404,6 @@ describe('Tasks API', () => {
                 .eq('Too many failed attempts. Please request a new OTP');
         });
 
-        // OTP Format Tests
         it("should reject non-numeric OTP", (done) => {
             chai.request('http://localhost:8000')
                 .post("/api/auth/verify-otp")
@@ -454,7 +432,6 @@ describe('Tasks API', () => {
                 });
         });
 
-        // Email Template Accessibility Tests
         it("should include alt text for images in email template", (done) => {
             const html = generateOTPEmailTemplate('John', '123456');
             html.should.include('alt=');
@@ -468,7 +445,6 @@ describe('Tasks API', () => {
             done();
         });
 
-        // Email Template Responsiveness Tests
         it("should include mobile-friendly meta tags", (done) => {
             const html = generateOTPEmailTemplate('John', '123456');
             html.should.include('viewport');
@@ -483,7 +459,6 @@ describe('Tasks API', () => {
             done();
         });
 
-        // Email Template Content Tests
         it("should include company contact information", (done) => {
             const html = generateOTPEmailTemplate('John', '123456');
             html.should.include('contact');
@@ -497,9 +472,7 @@ describe('Tasks API', () => {
             done();
         });
 
-        // OTP Expiration Tests
         it("should handle timezone differences in OTP expiration", async () => {
-            // Create OTP with specific timezone
             const otpDoc = new autoOtp({
                 userId: '12345',
                 otp: '123456',
@@ -507,7 +480,6 @@ describe('Tasks API', () => {
             });
             await otpDoc.save();
 
-            // Verify expiration check works across timezones
             const response = await chai.request('http://localhost:8000')
                 .post("/api/auth/verify-otp")
                 .send({ 
@@ -519,7 +491,6 @@ describe('Tasks API', () => {
             response.body.should.have.property('message').eq('OTP has expired');
         });
 
-        // Edge Cases
         it("should handle unicode characters in email template", (done) => {
             const html = generateOTPEmailTemplate('José 🌟', '123456');
             html.should.include('José');
@@ -535,7 +506,6 @@ describe('Tasks API', () => {
         });
 
         it("should handle very long OTP verification sessions", async () => {
-            // Generate multiple OTPs over time
             const otps = [];
             for(let i = 0; i < 5; i++) {
                 const response = await chai.request('http://localhost:8000')
@@ -545,10 +515,9 @@ describe('Tasks API', () => {
                         userId: '12345'
                     });
                 otps.push(response);
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
+                await new Promise(resolve => setTimeout(resolve, 1000)); 
             }
 
-            // Verify only latest OTP is valid
             const validOtps = await autoOtp.find({ 
                 userId: '12345',
                 createdAt: { $gt: new Date(Date.now() - 10 * 60 * 1000) }
@@ -578,19 +547,16 @@ describe('Tasks API', () => {
             }
             
             const responses = await Promise.all(operations);
-            // Verify system remained stable
             responses.forEach(response => {
                 response.should.have.status(response.status);
             });
         });
 
-        // Email Template Performance Tests
         it("should generate email template quickly", (done) => {
             const start = process.hrtime();
             const html = generateOTPEmailTemplate('John', '123456');
             const [seconds, nanoseconds] = process.hrtime(start);
-            
-            // Template generation should take less than 50ms
+        
             (seconds * 1000 + nanoseconds / 1000000).should.be.below(50);
             done();
         });
@@ -600,14 +566,13 @@ describe('Tasks API', () => {
             const html = generateOTPEmailTemplate(longName, '123456');
             
             html.should.be.a('string');
-            html.length.should.be.below(20000); // Reasonable size limit
+            html.length.should.be.below(20000); 
             done();
         });
 
         it("should maintain consistent styling across email clients", (done) => {
             const html = generateOTPEmailTemplate('John', '123456');
             
-            // Check for email client compatibility
             html.should.include('<!--[if mso]>');
             html.should.include('<![endif]-->');
             html.should.include('-webkit-');
