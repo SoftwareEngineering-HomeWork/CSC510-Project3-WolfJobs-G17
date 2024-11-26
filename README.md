@@ -14,7 +14,7 @@
 [![Top Language](https://img.shields.io/github/languages/top/deepr41/wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
 [![DOI](https://zenodo.org/badge/429097663.svg)](https://zenodo.org/badge/latestdoi/429097663)
 [![Release](https://img.shields.io/github/v/release/deepr41/wolfjobs)](https://gitHub.com/deepr41/Wolfjobs)
-[![codecov](https://codecov.io/gh/deepr41/WolfJobs/graph/badge.svg?token=RH472ZM4PT)](https://codecov.io/gh/deepr41/WolfJobs)
+[![codecov](https://codecov.io/gh/deepr41/WolfJobs/graph/badge.svg?token=RH472ZM4PT)](https://app.codecov.io/gh/SoftwareEngineering-HomeWork/CSC510-Project3-WolfJobs-G17)
 
 <!-- ![Static Badge](https://img.shields.io/badge/any_text-i_like-blue) -->
 
