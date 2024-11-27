@@ -54,7 +54,7 @@ These additions aim to improve usability and cater to the diverse needs of both 
 
 # Presentation Video
 
-[![Watch the video](https://github.com/deepr41/WolfJobs/blob/master/GIFs/Video%20Thumbnail.png)](http://www.youtube.com/watch?v=kMgLUrDiYEw)
+[![Watch the video](https://github.com/deepr41/WolfJobs/blob/master/GIFs/Video%20Thumbnail.png)](https://youtu.be/5j1pGLjN7uM)
 
 # About Us
 
